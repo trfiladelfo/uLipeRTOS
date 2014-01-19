@@ -86,18 +86,8 @@ main(void)
 
 	TestTCB->TaskAction(NULL); //executa a task
 
-	//aqui vai trocar o contexto
-	asm volatile
-	(
-			"LDR R4, =TestTCB 	 \n	" //carrega o TCB Desejado
-			"LDR R5, =AnotherTCB \n "
-			"LDR R0, [R4] \n"
-			"LDR R1, [R5] \n"
-			"BL  Asm_ContextChange"
-	);
 
-
-
+	Asm_TaskLevelContextChange(); //vamos testar?
 
 	while (1);
 

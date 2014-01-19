@@ -15,8 +15,16 @@
 .text 				@execution stuff begins here
 .syntax unified		@ual assembly standart
 
+
+.extern CurrentTaskBlock   @the current task TCB in execution
+.extern HighReadyTaskBlock @the high priority ready task
+
 .global Asm_LowLevelTickInit
-.global Asm_ContextChange
+.global Asm_CriticalIn
+.global Asm_CriticalOut
+.global Asm_IntLevelContextChange
+.global Asm_TaskLevelContextChange
+.global PendSV_Handler
 
 
 
@@ -62,10 +70,87 @@ Asm_LowLevelTickInit:
 		POP	{R4,R5 - R11}		@;
 		BX	LR					@;Return from sub
 
+@************************************************************************
+@ 	 function:	Asm_CriticalIn()
+@
+@	 description: Disables all interrupts
+@
+@ 	 parameters: TODO
+@
+@ 	 return:	N/A
+@
+@
+@************************************************************************
+Asm_CriticalIn:
 
+		CPSID	I					@disables all interrupts
+		BX		LR					@Return from sub
+
+@************************************************************************
+@ 	 function:	Asm_CriticalIn()
+@
+@	 description: Enables all interrupts
+@
+@ 	 parameters: TODO
+@
+@ 	 return:	N/A
+@
+@
+@************************************************************************
+Asm_CriticalOut:
+
+		CPSIE	I					@enables all interrupts
+		BX		LR					@Return from sub
+
+@************************************************************************
+@ 	 function:	Asm_IntLevelContextChange()
+@
+@	 description: This function performs a request to PEND SV
+@				  in order tochange a context
+@
+@ 	 parameters: TODO
+@
+@ 	 return:	N/A
+@
+@
+@************************************************************************
+Asm_IntLevelContextChange:
+
+
+		BX LR 					@Return from sub
+
+@************************************************************************
+@ 	 function:	Asm_TaskLevelContextChange()
+@
+@	 description: This function performs a request to PEND SV
+@				  in order tochange a context
+@
+@ 	 parameters: TODO
+@
+@ 	 return:	N/A
+@
+@
+@************************************************************************
+Asm_TaskLevelContextChange:
+		PUSH {R0 - R3}			@save using registers
+
+		LDR  R0, = 0xE000ED22  @PENDSV Priority
+		LDR  R1, [R0]
+		ORR  R1,0x0FF			@lowest priority
+		STR  R1,[R0]
+
+		LDR  R0, = 0xE000ED04   @SCB->ICSR register
+		LDR  R1, [R0]			@load current value
+		ORR  R1, #0x10000000	@set SV handler
+		STR  R1, [R0]			@write it back
+
+
+		POP  {R0 - R3}
+
+		BX LR 					@Return from sub
 
 @;************************************************************************
-@; 	 function:	Asm_ContextChange()
+@; 	 function:	PendSV_Handler()
 @;
 @;	 description: performs a context switch
 @;
@@ -76,24 +161,21 @@ Asm_LowLevelTickInit:
 @;
 @;
 @;************************************************************************
-Asm_ContextChange:
+PendSV_Handler:
+		LDR 	R0, =CurrentTaskBlock	@Get the current TCB
+		MRS		R1, PSP					@;Get the current SP
+		STMDB	R1!,{R4 - R11}			@;save R4 - R11 on the current stack
+										@;
+		STR		R1,[R0,#0x00000014] 	@;Save the current stack pointer
 
-		MRS		R2, PSP				@;Get the current SP
-		STMDB	R2!,{R4 - R11}		@;save R4 - R11 on the current stack
-									@;
-		STR		R2,[R0,#0x00000014] @;Save the current stack pointer
-									@;
-		LDR		R2,[R1,#0x00000014]	@;Get the new stack pointer
-									@;
-		LDMIA	R2!,{R4 - R11}		@;Change the context
-		MSR		PSP , R2			@;write the new stackpointer
+		LDR		R0,=HighReadyTaskBlock  @Get the first task from de queue
+		LDR		R0,[R0,#0x00000014]		@;Get the new stack pointer
+		LDR     R1,[R0]					@
+									    @
+		LDMIA	R1!,{R4 - R11}			@;Change the context
+		MSR		PSP , R1				@;write the new stackpointer
 
-		BX		LR					@;Return from sub
-
-
-
-
-
+		BX		LR						@;Return from sub
 
 .end @;execution stuff ends here
 

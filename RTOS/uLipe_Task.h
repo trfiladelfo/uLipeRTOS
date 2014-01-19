@@ -64,9 +64,20 @@ typedef struct os_taskTCB_t
 
 }taskTCB_t;							//well, the task control block
 
+
+/***********************************************************************
+ 	 	 	 	 	 Externs
+ ***********************************************************************/
+
+//WARNING! Your application MUST NOT use this variables
+
+extern taskTCB_t *CurrentTaskBlock;   //auxiliar task pointers
+extern taskTCB_t *HighReadyTaskBlock;
+
 /************************************************************************
  	 	 	 	 	 Function Prototypes
  ************************************************************************/
+
 extern  void		Task_InitBlocks(void);
 
 extern	os_error_t 	Task_Create(taskptr_t (*TaskAction), os_stack_t *TaskStack,

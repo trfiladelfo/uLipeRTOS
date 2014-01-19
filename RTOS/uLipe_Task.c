@@ -41,12 +41,16 @@
 
 
 /************************************************************************
+ 	 	 	 	 	 Public variables
+ ************************************************************************/
+taskTCB_t *CurrentTaskBlock 	= NULL	, //auxiliar task pointers
+  		  *HighReadyTaskBlock   = NULL	;
+
+/************************************************************************
  	 	 	 	 	 Module local variables
  ************************************************************************/
 taskTCB_t TaskBlockList[NUMBER_OF_TASK + 1]; //Task list memory stattcally allocated
 
-//taskTCB_t *CurrentTaskBlock = NULL	, //auxiliar task pointers
-//  		  *OtherTaskBlock   = NULL	;
 os_stack_t 			IdleTaskStack[64];      		//reserves some words for idle task stack
 const os_taskname_t IdleName[8] = {"TaskIdle"};	//reserves a name for idle task
 
