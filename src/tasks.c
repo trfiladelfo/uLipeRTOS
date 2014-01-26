@@ -43,11 +43,12 @@ taskptr_t TaskTry(void *TaskArgs)
 					counter2 = 0,
 					counter3 = 0;
 
-
-	counter1++;
-	counter2--;
-	counter3++;
-
+	while(1)
+	{
+		counter1 = 250;
+		counter2 = 225;
+		counter3 = 350;
+	}
 
 }
 
@@ -57,10 +58,12 @@ taskptr_t TaskTry2(void *TaskArgs)
 					counter2 = 0,
 					counter3 = 0;
 
-
-	counter1++;
-	counter2--;
-	counter3++;
+	while(1)
+	{
+		counter1 = 100;
+		counter2 = 150;
+		counter3 = 175;
+	}
 }
 
 

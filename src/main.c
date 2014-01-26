@@ -66,28 +66,67 @@ int
 main(void)
 {
 
-	Asm_LowLevelTickInit(16800); //vamos testar!
+
 
 	Task_InitBlocks();
 
-	Task_Create(&TaskTry, &TaskTryStack, 0 , &Try, sizeof(Try));
-	Task_Create(&TaskTry2, &TaskTryStack2, 1 , &Try2, sizeof(Try2));
-	Task_Create(&TaskTry3, &TaskTryStack3, 3 , &Try3, sizeof(Try2));
-	Task_Create(&TaskTry4, &TaskTryStack4, 9 , &Try4, sizeof(Try2));
-	Task_Create(&TaskTry5, &TaskTryStack5, 7 , &Try5, sizeof(Try2));
-	Task_Create(&TaskTry6, &TaskTryStack6, 2 , &Try6, sizeof(Try2));
-	Task_Create(&TaskTry7, &TaskTryStack7, 12 , &Try7, sizeof(Try2));
-
-	TestTCB	   = Task_Query(Task_GetID(&Try, sizeof(Try)));
-	AnotherTCB = Task_Query(Task_GetID(&Try2, sizeof(Try2)));
+	Task_Create(&TaskTry, &TaskTryStack, 0 , &Try, sizeof(Try),sizeof(TaskTryStack));
+	Task_Create(&TaskTry2, &TaskTryStack2, 1 , &Try2, sizeof(Try2),sizeof(TaskTryStack));
+	Task_Create(&TaskTry3, &TaskTryStack3, 3 , &Try3, sizeof(Try2),sizeof(TaskTryStack));
+	Task_Create(&TaskTry4, &TaskTryStack4, 9 , &Try4, sizeof(Try2),sizeof(TaskTryStack));
+	Task_Create(&TaskTry5, &TaskTryStack5, 7 , &Try5, sizeof(Try2),sizeof(TaskTryStack));
+	Task_Create(&TaskTry6, &TaskTryStack6, 2 , &Try6, sizeof(Try2),sizeof(TaskTryStack));
+	Task_Create(&TaskTry7, &TaskTryStack7, 12 , &Try7, sizeof(Try2),sizeof(TaskTryStack));
 
 
 
 
-	TestTCB->TaskAction(NULL); //executa a task
 
+	CurrentTaskBlock = Task_Query(Task_GetID(&Try2, sizeof(Try2)));
+	HighReadyTaskBlock = Task_Query(Task_GetID(&Try, sizeof(Try)));
 
-	Asm_TaskLevelContextChange(); //vamos testar?
+	TestTCB = HighReadyTaskBlock;
+
+	//os_stack_t *TempStack = (os_stack_t *)HighReadyTaskBlock->TaskStack;
+
+	//cria um stack frame para HighReady:
+	*--HighReadyTaskBlock->TaskStack = 0x01000000; //status registers
+	*--HighReadyTaskBlock->TaskStack = (taskptr_t *)HighReadyTaskBlock->TaskAction;//PC
+	*--HighReadyTaskBlock->TaskStack = 0xFFFFFFFD;
+	*--HighReadyTaskBlock->TaskStack = 0x00;
+	*--HighReadyTaskBlock->TaskStack = 0x00;
+	*--HighReadyTaskBlock->TaskStack = 0x00;
+	*--HighReadyTaskBlock->TaskStack = 0x00;
+	*--HighReadyTaskBlock->TaskStack = 0x00;
+/*	*--HighReadyTaskBlock->TaskStack = 0x00;
+	*--HighReadyTaskBlock->TaskStack = 0x00;
+	*--HighReadyTaskBlock->TaskStack = 0x00;
+	*--HighReadyTaskBlock->TaskStack = 0x00;
+	*--HighReadyTaskBlock->TaskStack = 0x00;
+	*--HighReadyTaskBlock->TaskStack = 0x00;
+	*--HighReadyTaskBlock->TaskStack = 0x00;
+	*--HighReadyTaskBlock->TaskStack = 0x12345678;
+*/
+
+    //outro stack frame
+	*--CurrentTaskBlock->TaskStack = 0x01000000; //status registers
+	*--CurrentTaskBlock->TaskStack = (taskptr_t *)CurrentTaskBlock->TaskAction;//PC
+	*--CurrentTaskBlock->TaskStack = 0xFFFFFFFD;
+	*--CurrentTaskBlock->TaskStack = 0x00;
+	*--CurrentTaskBlock->TaskStack = 0x00;
+	*--CurrentTaskBlock->TaskStack = 0x00;
+	*--CurrentTaskBlock->TaskStack = 0x00;
+	*--CurrentTaskBlock->TaskStack = 0x00;
+/*	*--CurrentTaskBlock->TaskStack = 0x00;
+	*--CurrentTaskBlock->TaskStack = 0x00;
+	*--CurrentTaskBlock->TaskStack = 0x00;
+	*--CurrentTaskBlock->TaskStack = 0x00;
+	*--CurrentTaskBlock->TaskStack = 0x00;
+	*--CurrentTaskBlock->TaskStack = 0x00;
+	*--CurrentTaskBlock->TaskStack = 0x00;
+	*--CurrentTaskBlock->TaskStack = 0x12345678;
+*/
+	Asm_LowLevelTickInit(16800); //vamos testar!
 
 	while (1);
 
@@ -135,7 +174,12 @@ TimingDelay_Decrement(void)
 void
 SysTick_Handler(void)
 {
-  TimingDelay_Decrement();
+	//simple round robin scheduling
+	TestTCB = HighReadyTaskBlock;
+	HighReadyTaskBlock = CurrentTaskBlock;
+	CurrentTaskBlock = TestTCB;
+
+	Asm_TaskLevelContextChange(); //vamos testar?
 }
 
 

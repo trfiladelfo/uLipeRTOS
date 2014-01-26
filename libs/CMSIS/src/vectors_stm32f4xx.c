@@ -3,6 +3,7 @@
 // Copyright (c) 2013 Liviu Ionescu
 //
 
+
 #if defined (__cplusplus)
 extern "C"
 {
@@ -450,8 +451,15 @@ NMI_Handler(void)
 void __attribute__ ((section(".after_vectors")))
 HardFault_Handler(void)
 {
-  while (1)
+  //debuggers:
+
+ unsigned long  FaultStack[64];
+ unsigned long *StackPointer;
+ unsigned long  i= 0;
+
+ while (1)
     {
+
     }
 }
 

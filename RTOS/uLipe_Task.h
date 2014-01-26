@@ -30,9 +30,9 @@
  							Defines
  ************************************************************************/
 
-#define NUMBER_OF_TASK  7 					//numero de tarefas usadas no RTOS
-#define UNDEFINED_ID    NUMBER_OF_TASK + 2 	//undefined task ID
-
+#define NUMBER_OF_TASK  7 						//numero de tarefas usadas no RTOS
+#define UNDEFINED_ID    NUMBER_OF_TASK + 2 		//undefined task ID
+#define TASK_FLAG_IS_FIRST_TIME       (1 << 0)	//first time task
 
 /************************************************************************
  	 	 	 	 	 	 	Typedefs
@@ -49,6 +49,7 @@ typedef enum
 
 typedef struct os_taskTCB_t
 {
+	uint32_t		TaskFlags;		   //taskFlags
 	uint32_t 		TaskTime;			//task time slot
 	uint32_t 		TaskElapsedTime;	//task time elapsed after last slot
 	uint8_t  		TaskID;				//task unique ID
@@ -80,8 +81,10 @@ extern taskTCB_t *HighReadyTaskBlock;
 
 extern  void		Task_InitBlocks(void);
 
-extern	os_error_t 	Task_Create(taskptr_t (*TaskAction), os_stack_t *TaskStack,
-						uint8_t TaskPriority, os_taskname_t *TaskName, uint8_t NameSize);
+extern  os_error_t 	Task_Create
+						(taskptr_t (*TaskAction), os_stack_t *TaskStack,
+						uint8_t TaskPriority, os_taskname_t *TaskName,
+						uint8_t NameSize,os_stack_t StackSize);
 
 extern  os_error_t 	Task_Delete(os_taskID_t TaskID);
 

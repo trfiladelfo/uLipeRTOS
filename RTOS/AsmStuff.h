@@ -27,7 +27,7 @@ extern void       Asm_CriticalIn(void);
 extern void       Asm_CriticalOut(void);
 extern void       Asm_IntLevelContextChange(void);
 extern void       Asm_TaskLevelContextChange(void);
-extern void 	  PendSV_Handler(void);
+void 	  		  PendSV_Handler(void);
 
 /************************************************************************
  	 	 	 	 	 End of File

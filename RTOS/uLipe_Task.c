@@ -94,7 +94,8 @@ void Task_InitBlocks(void)
 
  ************************************************************************/
 os_error_t 	Task_Create(taskptr_t (*TaskAction), os_stack_t *TaskStack,
-						uint8_t TaskPriority, os_taskname_t *TaskName, uint8_t NameSize)
+						uint8_t TaskPriority, os_taskname_t *TaskName, uint8_t NameSize,
+						os_stack_t StackSize)
 {
 	taskTCB_t *TaskList 		= &TaskBlockList,
 			  *TaskToBeLinked	= &TaskBlockList; //points to tasklist
@@ -114,8 +115,9 @@ os_error_t 	Task_Create(taskptr_t (*TaskAction), os_stack_t *TaskStack,
 		if(EMPTY == TaskList->EmptyTCB)
 		{
 			//fill te task TCB
-			TaskList->TaskAction = TaskAction; //the task method
-			TaskList->TaskStack  = TaskStack; //the task stack
+			TaskList->TaskAction =(taskptr_t *)TaskAction; //the task method
+			TaskList->TaskStack  =(os_stack_t* )(TaskStack +
+								  (StackSize>>2) - 1); //the task stack
 
 			//check for priority given
 			if(TaskPriority < MAX_PRIORITY || TaskPriority > LESS_PRIORITY)
@@ -132,6 +134,7 @@ os_error_t 	Task_Create(taskptr_t (*TaskAction), os_stack_t *TaskStack,
 			TaskList->TaskState   = TASK_READY;			  //task initial state
 
 			TaskList->EmptyTCB    =  FILLED;				  //occupies the TCB
+			TaskList->TaskFlags  |= TASK_FLAG_IS_FIRST_TIME;  //task has never executed
 
 
 
@@ -157,7 +160,7 @@ os_error_t 	Task_Create(taskptr_t (*TaskAction), os_stack_t *TaskStack,
 	{
 		//if not, initialize it.
 		TaskList->TaskAction = (taskptr_t *)& Task_Idle; //assign the idle task
-		TaskList->TaskStack  = &IdleTaskStack;			//assign a stack
+		TaskList->TaskStack  = &IdleTaskStack + 64;			//assign a stack
 		TaskList->TaskPriority = LESS_PRIORITY + 1; 	// Idletask has the least priority
 		TaskList->TaskName = (os_taskname_t *) &IdleName;//gives name for task
 		TaskList->TaskID   = NUMBER_OF_TASK + 1;		 //gives an ID for Task
@@ -175,6 +178,9 @@ os_error_t 	Task_Create(taskptr_t (*TaskAction), os_stack_t *TaskStack,
 		TaskList->PrevTask = &TaskBlockList[NUMBER_OF_TASK];
 
 		TaskList->NextTask = END_LIST; //marks the end of list
+
+		//Declare that task has never executed
+		TaskList->TaskFlags |= TASK_FLAG_IS_FIRST_TIME;
 
 	}
 	else	//else only uses it as a start of the linked list
