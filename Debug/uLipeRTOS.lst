@@ -22,15 +22,15 @@ Idx Name          Size      VMA       LMA       File off  Algn  Flags
   5 ._check_stack 00000100  20000ab4  08001a3c  00010038  2**0  ALLOC
   6 .comment      00000070  00000000  00000000  00010038  2**0  CONTENTS, READONLY
   7 .ARM.attributes 00000031  00000000  00000000  000100a8  2**0  CONTENTS, READONLY
-  8 .debug_aranges 000001f0  00000000  00000000  000100e0  2**3  CONTENTS, READONLY, DEBUGGING
-  9 .debug_info   0000190d  00000000  00000000  000102d0  2**0  CONTENTS, READONLY, DEBUGGING
- 10 .debug_abbrev 00000793  00000000  00000000  00011bdd  2**0  CONTENTS, READONLY, DEBUGGING
- 11 .debug_line   00001c5d  00000000  00000000  00012370  2**0  CONTENTS, READONLY, DEBUGGING
- 12 .debug_frame  00000498  00000000  00000000  00013fd0  2**2  CONTENTS, READONLY, DEBUGGING
- 13 .debug_str    0005ff79  00000000  00000000  00014468  2**0  CONTENTS, READONLY, DEBUGGING
- 14 .debug_loc    0000077e  00000000  00000000  000743e1  2**0  CONTENTS, READONLY, DEBUGGING
- 15 .debug_ranges 00000160  00000000  00000000  00074b5f  2**0  CONTENTS, READONLY, DEBUGGING
- 16 .debug_macro  0000f4ac  00000000  00000000  00074cbf  2**0  CONTENTS, READONLY, DEBUGGING
+  8 .debug_aranges 00000200  00000000  00000000  000100e0  2**3  CONTENTS, READONLY, DEBUGGING
+  9 .debug_info   000019af  00000000  00000000  000102e0  2**0  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_abbrev 00000793  00000000  00000000  00011c8f  2**0  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_line   00001c9b  00000000  00000000  00012422  2**0  CONTENTS, READONLY, DEBUGGING
+ 12 .debug_frame  000004d8  00000000  00000000  000140c0  2**2  CONTENTS, READONLY, DEBUGGING
+ 13 .debug_str    0005ff93  00000000  00000000  00014598  2**0  CONTENTS, READONLY, DEBUGGING
+ 14 .debug_loc    000007ee  00000000  00000000  0007452b  2**0  CONTENTS, READONLY, DEBUGGING
+ 15 .debug_ranges 00000170  00000000  00000000  00074d19  2**0  CONTENTS, READONLY, DEBUGGING
+ 16 .debug_macro  0000f4ac  00000000  00000000  00074e89  2**0  CONTENTS, READONLY, DEBUGGING
 SYMBOL TABLE:
 08000000 l    d  .isr_vector	00000000 .isr_vector
 08000284 l    d  ._inits	00000000 ._inits
@@ -53,23 +53,23 @@ SYMBOL TABLE:
 00000000 l    df *ABS*	00000000 startup_cm.c
 00000000 l    df *ABS*	00000000 main.c
 00000000 l    df *ABS*	00000000 tasks.c
-2000005c l     O .bss	00000004 counter1.4205
-20000060 l     O .bss	00000004 counter2.4206
-20000064 l     O .bss	00000004 counter3.4207
-20000050 l     O .bss	00000004 counter1.4212
-20000054 l     O .bss	00000004 counter2.4213
-20000058 l     O .bss	00000004 counter3.4214
-2000004c l     O .bss	00000004 counter.4219
-20000048 l     O .bss	00000004 counter.4223
-20000044 l     O .bss	00000004 counter.4227
-20000040 l     O .bss	00000004 counter.4231
-2000003c l     O .bss	00000004 counter.4235
+2000005c l     O .bss	00000004 counter1.4209
+20000060 l     O .bss	00000004 counter2.4210
+20000064 l     O .bss	00000004 counter3.4211
+20000050 l     O .bss	00000004 counter1.4216
+20000054 l     O .bss	00000004 counter2.4217
+20000058 l     O .bss	00000004 counter3.4218
+2000004c l     O .bss	00000004 counter.4223
+20000048 l     O .bss	00000004 counter.4227
+20000044 l     O .bss	00000004 counter.4231
+20000040 l     O .bss	00000004 counter.4235
+2000003c l     O .bss	00000004 counter.4239
 00000000 l    df *ABS*	00000000 startup_stm32f4xx.c
 00000000 l    df *ABS*	00000000 system_stm32f4xx.c
-080008fc l     F .text	00000186 SetSysClock
-08000b0a l       .text	00000000 FIRST_CHANGE
-08000b2a l       .text	00000000 SECOND_CHANGE
-08000b04 l       .text	00000000 NO_SAVE
+080008e8 l     F .text	00000186 SetSysClock
+08000af6 l       .text	00000000 FIRST_CHANGE
+08000b16 l       .text	00000000 SECOND_CHANGE
+08000af0 l       .text	00000000 NO_SAVE
 00000000 l    df *ABS*	00000000 uLipe_Task.c
 00000000 l    df *ABS*	00000000 memset.c
 08000288 l       ._inits	00000000 __fini_array_end
@@ -82,7 +82,7 @@ SYMBOL TABLE:
 0800022c  w    F .isr_vector	00000006 HASH_RNG_IRQHandler
 0800022c  w    F .isr_vector	00000006 EXTI2_IRQHandler
 0800022c  w    F .isr_vector	00000006 TIM8_CC_IRQHandler
-080006a0 g     F .text	0000002a TaskTry3
+0800068c g     F .text	0000002a TaskTry3
 0800026c  w    F .isr_vector	00000006 DebugMon_Handler
 08000284 g     O ._inits	00000004 p_system_init
 20000000 g     O .data	00000007 Try
@@ -93,7 +93,7 @@ SYMBOL TABLE:
 0800022c  w    F .isr_vector	00000006 DMA2_Stream5_IRQHandler
 0800023c  w    F .isr_vector	00000010 HardFault_Handler
 0800022c  w    F .isr_vector	00000006 DMA1_Stream5_IRQHandler
-08000724 g     F .text	0000002a TaskTry6
+08000710 g     F .text	0000002a TaskTry6
 20000068 g     O .bss	00000004 CurrentTaskBlock
 080005dc g     F .text	00000046 SysTick_Handler
 0800022c  w    F .isr_vector	00000006 PVD_IRQHandler
@@ -101,14 +101,14 @@ SYMBOL TABLE:
 0800022c  w    F .isr_vector	00000006 TAMP_STAMP_IRQHandler
 00000400 g       *ABS*	00000000 _Main_Stack_Size
 08000f88 g       *ABS*	00000000 _sidata
-08000ace g     F .text	00000006 PendSV_Handler
+08000aba g     F .text	00000006 PendSV_Handler
 08000234  w    F .isr_vector	00000006 NMI_Handler
 08000f88 g       *ABS*	00000000 __exidx_end
 080001d4 g     F .isr_vector	00000056 system_init
 0800022c  w    F .isr_vector	00000006 CAN2_RX1_IRQHandler
 0800022c  w    F .isr_vector	00000006 EXTI3_IRQHandler
-08000b84 g     F .text	000001e8 Task_Create
-08000aaa g     F .text	00000000 Asm_CriticalIn
+08000b70 g     F .text	000001f0 Task_Create
+08000a96 g     F .text	00000000 Asm_CriticalIn
 20000ab4 g       ._check_stack	00000000 _Heap_Begin
 0800022c  w    F .isr_vector	00000006 TIM8_TRG_COM_TIM14_IRQHandler
 0800022c  w    F .isr_vector	00000006 TIM1_UP_TIM10_IRQHandler
@@ -141,23 +141,23 @@ SYMBOL TABLE:
 0800022c  w    F .isr_vector	00000006 DCMI_IRQHandler
 0800022c  w    F .isr_vector	00000006 CAN2_RX0_IRQHandler
 20000010 g     O .data	00000008 Try3
-08000aae g     F .text	00000000 Asm_CriticalOut
+08000a9a g     F .text	00000000 Asm_CriticalOut
 08000f88 g       *ABS*	00000000 __exidx_start
-080006cc g     F .text	0000002a TaskTry4
+080006b8 g     F .text	0000002a TaskTry4
 0800022c  w    F .isr_vector	00000006 DMA2_Stream3_IRQHandler
-0800077c g     F .text	0000008e __libc_init_array
+08000768 g     F .text	0000008e __libc_init_array
 00000400 g       *ABS*	00000000 __Main_Stack_Size
-08000ab2 g     F .text	00000000 Asm_IntLevelContextChange
+08000a9e g     F .text	00000000 Asm_IntLevelContextChange
 0800022c  w    F .isr_vector	00000006 USART6_IRQHandler
 08000f80 g     O .text	00000008 IdleName
 0800022c  w    F .isr_vector	00000006 USART3_IRQHandler
 20000474 g     O .bss	00000100 TaskTryStack2
 0800022c  w    F .isr_vector	00000006 CRYP_IRQHandler
-0800080c g     F .text	0000004e __libc_fini_array
+080007f8 g     F .text	0000004e __libc_fini_array
 20000ab4 g       .bss	00000000 _ebss
 08000188  w    F .isr_vector	0000004c Reset_Handler
 0800022c  w    F .isr_vector	00000006 CAN1_RX1_IRQHandler
-0800066c g     F .text	00000034 TaskTry2
+08000658 g     F .text	00000034 TaskTry2
 0800022c  w    F .isr_vector	00000006 UART5_IRQHandler
 0800022c  w    F .isr_vector	00000006 DMA2_Stream0_IRQHandler
 0800022c  w    F .isr_vector	00000006 TIM4_IRQHandler
@@ -172,7 +172,7 @@ SYMBOL TABLE:
 0800022c  w    F .isr_vector	00000006 RCC_IRQHandler
 0800022c  w    F .isr_vector	00000006 TIM8_BRK_TIM12_IRQHandler
 0800022c  w    F .isr_vector	00000006 Default_Handler
-08000e0c g     F .text	00000048 Task_Query
+08000e00 g     F .text	00000048 Task_Query
 0800022c  w    F .isr_vector	00000006 EXTI15_10_IRQHandler
 00000100 g       *ABS*	00000000 _Minimum_Stack_Size
 0800022c  w    F .isr_vector	00000006 ADC_IRQHandler
@@ -180,7 +180,7 @@ SYMBOL TABLE:
 20000020 g     O .data	00000008 Try5
 20000ab4 g       ._check_stack	00000000 _end_noinit
 0800022c  w    F .isr_vector	00000006 DMA1_Stream7_IRQHandler
-08000b68 g     F .text	0000001a Task_InitBlocks
+08000b54 g     F .text	0000001a Task_InitBlocks
 0800022c  w    F .isr_vector	00000006 TIM7_IRQHandler
 0800022c  w    F .isr_vector	00000006 CAN2_TX_IRQHandler
 0800022c  w    F .isr_vector	00000006 TIM5_IRQHandler
@@ -197,20 +197,20 @@ SYMBOL TABLE:
 08000288 g     F .text	00000354 main
 0800022c  w    F .isr_vector	00000006 DMA1_Stream0_IRQHandler
 0800022c  w    F .isr_vector	00000006 CAN1_TX_IRQHandler
-08000a84 g     F .text	00000000 Asm_LowLevelTickInit
+08000a70 g     F .text	00000000 Asm_LowLevelTickInit
 08000264  w    F .isr_vector	00000006 SVC_Handler
 20000674 g     O .bss	00000100 TaskTryStack3
 0800022c  w    F .isr_vector	00000006 EXTI4_IRQHandler
-08000750 g     F .text	0000002a TaskTry7
-08000868 g     F .text	00000092 SystemInit
-08000624 g     F .text	00000012 Task_Idle
+0800073c g     F .text	0000002a TaskTry7
+08000854 g     F .text	00000092 SystemInit
+08000e48 g     F .text	0000000a Task_Idle
 0800022c  w    F .isr_vector	00000006 FSMC_IRQHandler
 0800022c  w    F .isr_vector	00000006 ETH_IRQHandler
 2000006c g     O .bss	00000004 HighReadyTaskBlock
 0800022c  w    F .isr_vector	00000006 OTG_HS_EP1_OUT_IRQHandler
 0800022c  w    F .isr_vector	00000006 WWDG_IRQHandler
 20000074 g     O .bss	00000100 TaskTryStack
-08000638 g     F .text	00000034 TaskTry
+08000624 g     F .text	00000034 TaskTry
 0800022c  w    F .isr_vector	00000006 TIM2_IRQHandler
 0800022c  w    F .isr_vector	00000006 OTG_FS_WKUP_IRQHandler
 0800022c  w    F .isr_vector	00000006 TIM1_TRG_COM_TIM11_IRQHandler
@@ -219,8 +219,8 @@ SYMBOL TABLE:
 20020000 g       *ABS*	00000000 __stack
 0800022c  w    F .isr_vector	00000006 EXTI1_IRQHandler
 20000038 g       .data	00000000 _edata
-08000d6c g     F .text	000000a0 Task_GetID
-08000ac0 g     F .text	00000000 Asm_TaskLevelContextChange
+08000d60 g     F .text	000000a0 Task_GetID
+08000aac g     F .text	00000000 Asm_TaskLevelContextChange
 0800022c  w    F .isr_vector	00000006 USART2_IRQHandler
 08000000 g     O .isr_vector	00000188 g_pfnVectors
 0800022c  w    F .isr_vector	00000006 I2C2_ER_IRQHandler
@@ -228,7 +228,7 @@ SYMBOL TABLE:
 0800022c  w    F .isr_vector	00000006 DMA2_Stream1_IRQHandler
 0800022c  w    F .isr_vector	00000006 CAN1_SCE_IRQHandler
 0800022c  w    F .isr_vector	00000006 FLASH_IRQHandler
-0800085c  w    F .text	0000000a _exit
+08000848  w    F .text	0000000a _exit
 0800022c  w    F .isr_vector	00000006 DMA2_Stream4_IRQHandler
 08000254  w    F .isr_vector	00000006 BusFault_Handler
 0800022c  w    F .isr_vector	00000006 USART1_IRQHandler
@@ -238,7 +238,7 @@ SYMBOL TABLE:
 0800022c  w    F .isr_vector	00000006 DMA1_Stream4_IRQHandler
 00000000         *UND*	00000000 TaskQuery
 0800022c  w    F .isr_vector	00000006 I2C1_ER_IRQHandler
-080006f8 g     F .text	0000002a TaskTry5
+080006e4 g     F .text	0000002a TaskTry5
 20000008 g     O .data	00000008 Try2
 0800022c  w    F .isr_vector	00000006 DMA2_Stream6_IRQHandler
 0800022c  w    F .isr_vector	00000006 DMA1_Stream3_IRQHandler
@@ -251,7 +251,7 @@ Disassembly of section .isr_vector:
  8000000:	00 00 02 20 89 01 00 08 35 02 00 08 3d 02 00 08     ... ....5...=...
  8000010:	4d 02 00 08 55 02 00 08 5d 02 00 08 00 00 00 00     M...U...].......
 	...
- 800002c:	65 02 00 08 6d 02 00 08 00 00 00 00 cf 0a 00 08     e...m...........
+ 800002c:	65 02 00 08 6d 02 00 08 00 00 00 00 bb 0a 00 08     e...m...........
  800003c:	dd 05 00 08 2d 02 00 08 2d 02 00 08 2d 02 00 08     ....-...-...-...
  800004c:	2d 02 00 08 2d 02 00 08 2d 02 00 08 2d 02 00 08     -...-...-...-...
  800005c:	2d 02 00 08 2d 02 00 08 2d 02 00 08 2d 02 00 08     -...-...-...-...
@@ -331,7 +331,7 @@ Reset_Handler():
   // Call the standard library initialisation (mandatory, SystemInit()
   // and C++ static constructors are called from here).
   __libc_init_array();
- 80001c0:	f000 fadc 	bl	800077c <__libc_init_array>
+ 80001c0:	f000 fad2 	bl	8000768 <__libc_init_array>
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../libs/CMSIS/src/startup_cm.c:230
 
   // Call the main entry point, and save the exit code.
@@ -342,7 +342,7 @@ Reset_Handler():
 
   // Run the static destructors.
   __libc_fini_array();
- 80001ca:	f000 fb1f 	bl	800080c <__libc_fini_array>
+ 80001ca:	f000 fb15 	bl	80007f8 <__libc_fini_array>
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../libs/CMSIS/src/startup_cm.c:238
 
   // On test platforms, like semihosting, this can be used to inform
@@ -350,7 +350,7 @@ Reset_Handler():
   // On embedded platforms, usually reset the processor.
   _exit(r);
  80001ce:	68f8      	ldr	r0, [r7, #12]
- 80001d0:	f000 fb44 	bl	800085c <_exit>
+ 80001d0:	f000 fb3a 	bl	8000848 <_exit>
 
 080001d4 <system_init>:
 system_init():
@@ -416,7 +416,7 @@ system_init():
 
   // Call the CSMSIS system initialisation routine
   SystemInit();
- 800021e:	f000 fb23 	bl	8000868 <SystemInit>
+ 800021e:	f000 fb19 	bl	8000854 <SystemInit>
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../libs/CMSIS/src/startup_cm.c:257
 }
  8000222:	f107 0710 	add.w	r7, r7, #16
@@ -624,7 +624,7 @@ main(void)
 
 
 	Task_InitBlocks();
- 800028e:	f000 fc6b 	bl	8000b68 <Task_InitBlocks>
+ 800028e:	f000 fc61 	bl	8000b54 <Task_InitBlocks>
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../src/main.c:73
 
 	Task_Create(&TaskTry, &TaskTryStack, 0 , &Try, sizeof(Try),sizeof(TaskTryStack));
@@ -632,98 +632,98 @@ main(void)
  8000296:	9300      	str	r3, [sp, #0]
  8000298:	f44f 7380 	mov.w	r3, #256	; 0x100
  800029c:	9301      	str	r3, [sp, #4]
- 800029e:	f240 6039 	movw	r0, #1593	; 0x639
+ 800029e:	f240 6025 	movw	r0, #1573	; 0x625
  80002a2:	f6c0 0000 	movt	r0, #2048	; 0x800
  80002a6:	f240 0174 	movw	r1, #116	; 0x74
  80002aa:	f2c2 0100 	movt	r1, #8192	; 0x2000
  80002ae:	f04f 0200 	mov.w	r2, #0
  80002b2:	f240 0300 	movw	r3, #0
  80002b6:	f2c2 0300 	movt	r3, #8192	; 0x2000
- 80002ba:	f000 fc63 	bl	8000b84 <Task_Create>
+ 80002ba:	f000 fc59 	bl	8000b70 <Task_Create>
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../src/main.c:74
 	Task_Create(&TaskTry2, &TaskTryStack2, 1 , &Try2, sizeof(Try2),sizeof(TaskTryStack));
  80002be:	f04f 0308 	mov.w	r3, #8
  80002c2:	9300      	str	r3, [sp, #0]
  80002c4:	f44f 7380 	mov.w	r3, #256	; 0x100
  80002c8:	9301      	str	r3, [sp, #4]
- 80002ca:	f240 606d 	movw	r0, #1645	; 0x66d
+ 80002ca:	f240 6059 	movw	r0, #1625	; 0x659
  80002ce:	f6c0 0000 	movt	r0, #2048	; 0x800
  80002d2:	f240 4174 	movw	r1, #1140	; 0x474
  80002d6:	f2c2 0100 	movt	r1, #8192	; 0x2000
  80002da:	f04f 0201 	mov.w	r2, #1
  80002de:	f240 0308 	movw	r3, #8
  80002e2:	f2c2 0300 	movt	r3, #8192	; 0x2000
- 80002e6:	f000 fc4d 	bl	8000b84 <Task_Create>
+ 80002e6:	f000 fc43 	bl	8000b70 <Task_Create>
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../src/main.c:75
 	Task_Create(&TaskTry3, &TaskTryStack3, 3 , &Try3, sizeof(Try2),sizeof(TaskTryStack));
  80002ea:	f04f 0308 	mov.w	r3, #8
  80002ee:	9300      	str	r3, [sp, #0]
  80002f0:	f44f 7380 	mov.w	r3, #256	; 0x100
  80002f4:	9301      	str	r3, [sp, #4]
- 80002f6:	f240 60a1 	movw	r0, #1697	; 0x6a1
+ 80002f6:	f240 608d 	movw	r0, #1677	; 0x68d
  80002fa:	f6c0 0000 	movt	r0, #2048	; 0x800
  80002fe:	f240 6174 	movw	r1, #1652	; 0x674
  8000302:	f2c2 0100 	movt	r1, #8192	; 0x2000
  8000306:	f04f 0203 	mov.w	r2, #3
  800030a:	f240 0310 	movw	r3, #16
  800030e:	f2c2 0300 	movt	r3, #8192	; 0x2000
- 8000312:	f000 fc37 	bl	8000b84 <Task_Create>
+ 8000312:	f000 fc2d 	bl	8000b70 <Task_Create>
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../src/main.c:76
 	Task_Create(&TaskTry4, &TaskTryStack4, 9 , &Try4, sizeof(Try2),sizeof(TaskTryStack));
  8000316:	f04f 0308 	mov.w	r3, #8
  800031a:	9300      	str	r3, [sp, #0]
  800031c:	f44f 7380 	mov.w	r3, #256	; 0x100
  8000320:	9301      	str	r3, [sp, #4]
- 8000322:	f240 60cd 	movw	r0, #1741	; 0x6cd
+ 8000322:	f240 60b9 	movw	r0, #1721	; 0x6b9
  8000326:	f6c0 0000 	movt	r0, #2048	; 0x800
  800032a:	f240 5174 	movw	r1, #1396	; 0x574
  800032e:	f2c2 0100 	movt	r1, #8192	; 0x2000
  8000332:	f04f 0209 	mov.w	r2, #9
  8000336:	f240 0318 	movw	r3, #24
  800033a:	f2c2 0300 	movt	r3, #8192	; 0x2000
- 800033e:	f000 fc21 	bl	8000b84 <Task_Create>
+ 800033e:	f000 fc17 	bl	8000b70 <Task_Create>
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../src/main.c:77
 	Task_Create(&TaskTry5, &TaskTryStack5, 7 , &Try5, sizeof(Try2),sizeof(TaskTryStack));
  8000342:	f04f 0308 	mov.w	r3, #8
  8000346:	9300      	str	r3, [sp, #0]
  8000348:	f44f 7380 	mov.w	r3, #256	; 0x100
  800034c:	9301      	str	r3, [sp, #4]
- 800034e:	f240 60f9 	movw	r0, #1785	; 0x6f9
+ 800034e:	f240 60e5 	movw	r0, #1765	; 0x6e5
  8000352:	f6c0 0000 	movt	r0, #2048	; 0x800
  8000356:	f240 7174 	movw	r1, #1908	; 0x774
  800035a:	f2c2 0100 	movt	r1, #8192	; 0x2000
  800035e:	f04f 0207 	mov.w	r2, #7
  8000362:	f240 0320 	movw	r3, #32
  8000366:	f2c2 0300 	movt	r3, #8192	; 0x2000
- 800036a:	f000 fc0b 	bl	8000b84 <Task_Create>
+ 800036a:	f000 fc01 	bl	8000b70 <Task_Create>
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../src/main.c:78
 	Task_Create(&TaskTry6, &TaskTryStack6, 2 , &Try6, sizeof(Try2),sizeof(TaskTryStack));
  800036e:	f04f 0308 	mov.w	r3, #8
  8000372:	9300      	str	r3, [sp, #0]
  8000374:	f44f 7380 	mov.w	r3, #256	; 0x100
  8000378:	9301      	str	r3, [sp, #4]
- 800037a:	f240 7025 	movw	r0, #1829	; 0x725
+ 800037a:	f240 7011 	movw	r0, #1809	; 0x711
  800037e:	f6c0 0000 	movt	r0, #2048	; 0x800
  8000382:	f240 2174 	movw	r1, #628	; 0x274
  8000386:	f2c2 0100 	movt	r1, #8192	; 0x2000
  800038a:	f04f 0202 	mov.w	r2, #2
  800038e:	f240 0328 	movw	r3, #40	; 0x28
  8000392:	f2c2 0300 	movt	r3, #8192	; 0x2000
- 8000396:	f000 fbf5 	bl	8000b84 <Task_Create>
+ 8000396:	f000 fbeb 	bl	8000b70 <Task_Create>
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../src/main.c:79
 	Task_Create(&TaskTry7, &TaskTryStack7, 12 , &Try7, sizeof(Try2),sizeof(TaskTryStack));
  800039a:	f04f 0308 	mov.w	r3, #8
  800039e:	9300      	str	r3, [sp, #0]
  80003a0:	f44f 7380 	mov.w	r3, #256	; 0x100
  80003a4:	9301      	str	r3, [sp, #4]
- 80003a6:	f240 7051 	movw	r0, #1873	; 0x751
+ 80003a6:	f240 703d 	movw	r0, #1853	; 0x73d
  80003aa:	f6c0 0000 	movt	r0, #2048	; 0x800
  80003ae:	f240 3174 	movw	r1, #884	; 0x374
  80003b2:	f2c2 0100 	movt	r1, #8192	; 0x2000
  80003b6:	f04f 020c 	mov.w	r2, #12
  80003ba:	f240 0330 	movw	r3, #48	; 0x30
  80003be:	f2c2 0300 	movt	r3, #8192	; 0x2000
- 80003c2:	f000 fbdf 	bl	8000b84 <Task_Create>
+ 80003c2:	f000 fbd5 	bl	8000b70 <Task_Create>
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../src/main.c:85
 
 
@@ -734,10 +734,10 @@ main(void)
  80003c6:	f240 0008 	movw	r0, #8
  80003ca:	f2c2 0000 	movt	r0, #8192	; 0x2000
  80003ce:	f04f 0108 	mov.w	r1, #8
- 80003d2:	f000 fccb 	bl	8000d6c <Task_GetID>
+ 80003d2:	f000 fcc5 	bl	8000d60 <Task_GetID>
  80003d6:	4603      	mov	r3, r0
  80003d8:	4618      	mov	r0, r3
- 80003da:	f000 fd17 	bl	8000e0c <Task_Query>
+ 80003da:	f000 fd11 	bl	8000e00 <Task_Query>
  80003de:	4602      	mov	r2, r0
  80003e0:	f240 0368 	movw	r3, #104	; 0x68
  80003e4:	f2c2 0300 	movt	r3, #8192	; 0x2000
@@ -747,10 +747,10 @@ main(void)
  80003ea:	f240 0000 	movw	r0, #0
  80003ee:	f2c2 0000 	movt	r0, #8192	; 0x2000
  80003f2:	f04f 0107 	mov.w	r1, #7
- 80003f6:	f000 fcb9 	bl	8000d6c <Task_GetID>
+ 80003f6:	f000 fcb3 	bl	8000d60 <Task_GetID>
  80003fa:	4603      	mov	r3, r0
  80003fc:	4618      	mov	r0, r3
- 80003fe:	f000 fd05 	bl	8000e0c <Task_Query>
+ 80003fe:	f000 fcff 	bl	8000e00 <Task_Query>
  8000402:	4602      	mov	r2, r0
  8000404:	f240 036c 	movw	r3, #108	; 0x6c
  8000408:	f2c2 0300 	movt	r3, #8192	; 0x2000
@@ -963,7 +963,7 @@ main(void)
 */
 	Asm_LowLevelTickInit(16800); //vamos testar!
  80005d2:	f244 10a0 	movw	r0, #16800	; 0x41a0
- 80005d6:	f000 fa55 	bl	8000a84 <Asm_LowLevelTickInit>
+ 80005d6:	f000 fa4b 	bl	8000a70 <Asm_LowLevelTickInit>
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../src/main.c:131
 
 	while (1);
@@ -1008,33 +1008,13 @@ SysTick_Handler(void)
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../src/main.c:182
 
 	Asm_TaskLevelContextChange(); //vamos testar?
- 800061c:	f000 fa50 	bl	8000ac0 <Asm_TaskLevelContextChange>
+ 800061c:	f000 fa46 	bl	8000aac <Asm_TaskLevelContextChange>
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../src/main.c:183
 }
  8000620:	bd80      	pop	{r7, pc}
  8000622:	bf00      	nop
 
-08000624 <Task_Idle>:
-Task_Idle():
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../src/main.c:187
-
-
-void Task_Idle(void *TaskArgs)
-{
- 8000624:	b480      	push	{r7}
- 8000626:	b083      	sub	sp, #12
- 8000628:	af00      	add	r7, sp, #0
- 800062a:	6078      	str	r0, [r7, #4]
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../src/main.c:189
-
-}
- 800062c:	f107 070c 	add.w	r7, r7, #12
- 8000630:	46bd      	mov	sp, r7
- 8000632:	bc80      	pop	{r7}
- 8000634:	4770      	bx	lr
- 8000636:	bf00      	nop
-
-08000638 <TaskTry>:
+08000624 <TaskTry>:
 TaskTry():
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../src/tasks.c:40
 os_stack_t TaskTryStack8[64];
@@ -1043,10 +1023,10 @@ os_taskname_t Try8[8] = {"TaskTry8"};
 
 taskptr_t TaskTry(void *TaskArgs)
 {
- 8000638:	b480      	push	{r7}
- 800063a:	b083      	sub	sp, #12
- 800063c:	af00      	add	r7, sp, #0
- 800063e:	6078      	str	r0, [r7, #4]
+ 8000624:	b480      	push	{r7}
+ 8000626:	b083      	sub	sp, #12
+ 8000628:	af00      	add	r7, sp, #0
+ 800062a:	6078      	str	r0, [r7, #4]
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../src/tasks.c:48
 					counter2 = 0,
 					counter3 = 0;
@@ -1054,27 +1034,27 @@ taskptr_t TaskTry(void *TaskArgs)
 	while(1)
 	{
 		counter1 = 250;
- 8000640:	f240 035c 	movw	r3, #92	; 0x5c
- 8000644:	f2c2 0300 	movt	r3, #8192	; 0x2000
- 8000648:	f04f 02fa 	mov.w	r2, #250	; 0xfa
- 800064c:	601a      	str	r2, [r3, #0]
+ 800062c:	f240 035c 	movw	r3, #92	; 0x5c
+ 8000630:	f2c2 0300 	movt	r3, #8192	; 0x2000
+ 8000634:	f04f 02fa 	mov.w	r2, #250	; 0xfa
+ 8000638:	601a      	str	r2, [r3, #0]
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../src/tasks.c:49
 		counter2 = 225;
- 800064e:	f240 0360 	movw	r3, #96	; 0x60
- 8000652:	f2c2 0300 	movt	r3, #8192	; 0x2000
- 8000656:	f04f 02e1 	mov.w	r2, #225	; 0xe1
- 800065a:	601a      	str	r2, [r3, #0]
+ 800063a:	f240 0360 	movw	r3, #96	; 0x60
+ 800063e:	f2c2 0300 	movt	r3, #8192	; 0x2000
+ 8000642:	f04f 02e1 	mov.w	r2, #225	; 0xe1
+ 8000646:	601a      	str	r2, [r3, #0]
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../src/tasks.c:50
 		counter3 = 350;
- 800065c:	f240 0364 	movw	r3, #100	; 0x64
- 8000660:	f2c2 0300 	movt	r3, #8192	; 0x2000
- 8000664:	f44f 72af 	mov.w	r2, #350	; 0x15e
- 8000668:	601a      	str	r2, [r3, #0]
+ 8000648:	f240 0364 	movw	r3, #100	; 0x64
+ 800064c:	f2c2 0300 	movt	r3, #8192	; 0x2000
+ 8000650:	f44f 72af 	mov.w	r2, #350	; 0x15e
+ 8000654:	601a      	str	r2, [r3, #0]
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../src/tasks.c:51
 	}
- 800066a:	e7e9      	b.n	8000640 <TaskTry+0x8>
+ 8000656:	e7e9      	b.n	800062c <TaskTry+0x8>
 
-0800066c <TaskTry2>:
+08000658 <TaskTry2>:
 TaskTry2():
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../src/tasks.c:56
 
@@ -1082,10 +1062,10 @@ TaskTry2():
 
 taskptr_t TaskTry2(void *TaskArgs)
 {
- 800066c:	b480      	push	{r7}
- 800066e:	b083      	sub	sp, #12
- 8000670:	af00      	add	r7, sp, #0
- 8000672:	6078      	str	r0, [r7, #4]
+ 8000658:	b480      	push	{r7}
+ 800065a:	b083      	sub	sp, #12
+ 800065c:	af00      	add	r7, sp, #0
+ 800065e:	6078      	str	r0, [r7, #4]
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../src/tasks.c:63
 					counter2 = 0,
 					counter3 = 0;
@@ -1093,27 +1073,27 @@ taskptr_t TaskTry2(void *TaskArgs)
 	while(1)
 	{
 		counter1 = 100;
- 8000674:	f240 0350 	movw	r3, #80	; 0x50
- 8000678:	f2c2 0300 	movt	r3, #8192	; 0x2000
- 800067c:	f04f 0264 	mov.w	r2, #100	; 0x64
- 8000680:	601a      	str	r2, [r3, #0]
+ 8000660:	f240 0350 	movw	r3, #80	; 0x50
+ 8000664:	f2c2 0300 	movt	r3, #8192	; 0x2000
+ 8000668:	f04f 0264 	mov.w	r2, #100	; 0x64
+ 800066c:	601a      	str	r2, [r3, #0]
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../src/tasks.c:64
 		counter2 = 150;
- 8000682:	f240 0354 	movw	r3, #84	; 0x54
- 8000686:	f2c2 0300 	movt	r3, #8192	; 0x2000
- 800068a:	f04f 0296 	mov.w	r2, #150	; 0x96
- 800068e:	601a      	str	r2, [r3, #0]
+ 800066e:	f240 0354 	movw	r3, #84	; 0x54
+ 8000672:	f2c2 0300 	movt	r3, #8192	; 0x2000
+ 8000676:	f04f 0296 	mov.w	r2, #150	; 0x96
+ 800067a:	601a      	str	r2, [r3, #0]
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../src/tasks.c:65
 		counter3 = 175;
- 8000690:	f240 0358 	movw	r3, #88	; 0x58
- 8000694:	f2c2 0300 	movt	r3, #8192	; 0x2000
- 8000698:	f04f 02af 	mov.w	r2, #175	; 0xaf
- 800069c:	601a      	str	r2, [r3, #0]
+ 800067c:	f240 0358 	movw	r3, #88	; 0x58
+ 8000680:	f2c2 0300 	movt	r3, #8192	; 0x2000
+ 8000684:	f04f 02af 	mov.w	r2, #175	; 0xaf
+ 8000688:	601a      	str	r2, [r3, #0]
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../src/tasks.c:66
 	}
- 800069e:	e7e9      	b.n	8000674 <TaskTry2+0x8>
+ 800068a:	e7e9      	b.n	8000660 <TaskTry2+0x8>
 
-080006a0 <TaskTry3>:
+0800068c <TaskTry3>:
 TaskTry3():
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../src/tasks.c:71
 }
@@ -1121,153 +1101,153 @@ TaskTry3():
 
 taskptr_t TaskTry3(void *TaskArgs)
 {
- 80006a0:	b480      	push	{r7}
- 80006a2:	b083      	sub	sp, #12
- 80006a4:	af00      	add	r7, sp, #0
- 80006a6:	6078      	str	r0, [r7, #4]
+ 800068c:	b480      	push	{r7}
+ 800068e:	b083      	sub	sp, #12
+ 8000690:	af00      	add	r7, sp, #0
+ 8000692:	6078      	str	r0, [r7, #4]
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../src/tasks.c:75
 
 	static uint32_t counter = 0;
 
 	counter++;
- 80006a8:	f240 034c 	movw	r3, #76	; 0x4c
- 80006ac:	f2c2 0300 	movt	r3, #8192	; 0x2000
- 80006b0:	681b      	ldr	r3, [r3, #0]
- 80006b2:	f103 0201 	add.w	r2, r3, #1
- 80006b6:	f240 034c 	movw	r3, #76	; 0x4c
- 80006ba:	f2c2 0300 	movt	r3, #8192	; 0x2000
- 80006be:	601a      	str	r2, [r3, #0]
+ 8000694:	f240 034c 	movw	r3, #76	; 0x4c
+ 8000698:	f2c2 0300 	movt	r3, #8192	; 0x2000
+ 800069c:	681b      	ldr	r3, [r3, #0]
+ 800069e:	f103 0201 	add.w	r2, r3, #1
+ 80006a2:	f240 034c 	movw	r3, #76	; 0x4c
+ 80006a6:	f2c2 0300 	movt	r3, #8192	; 0x2000
+ 80006aa:	601a      	str	r2, [r3, #0]
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../src/tasks.c:76
 }
- 80006c0:	f107 070c 	add.w	r7, r7, #12
- 80006c4:	46bd      	mov	sp, r7
- 80006c6:	bc80      	pop	{r7}
- 80006c8:	4770      	bx	lr
- 80006ca:	bf00      	nop
+ 80006ac:	f107 070c 	add.w	r7, r7, #12
+ 80006b0:	46bd      	mov	sp, r7
+ 80006b2:	bc80      	pop	{r7}
+ 80006b4:	4770      	bx	lr
+ 80006b6:	bf00      	nop
 
-080006cc <TaskTry4>:
+080006b8 <TaskTry4>:
 TaskTry4():
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../src/tasks.c:79
 
 taskptr_t TaskTry4(void *TaskArgs)
 {
- 80006cc:	b480      	push	{r7}
- 80006ce:	b083      	sub	sp, #12
- 80006d0:	af00      	add	r7, sp, #0
- 80006d2:	6078      	str	r0, [r7, #4]
+ 80006b8:	b480      	push	{r7}
+ 80006ba:	b083      	sub	sp, #12
+ 80006bc:	af00      	add	r7, sp, #0
+ 80006be:	6078      	str	r0, [r7, #4]
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../src/tasks.c:83
 
 	static uint32_t counter = 0;
 
 	counter++;
- 80006d4:	f240 0348 	movw	r3, #72	; 0x48
- 80006d8:	f2c2 0300 	movt	r3, #8192	; 0x2000
- 80006dc:	681b      	ldr	r3, [r3, #0]
- 80006de:	f103 0201 	add.w	r2, r3, #1
- 80006e2:	f240 0348 	movw	r3, #72	; 0x48
- 80006e6:	f2c2 0300 	movt	r3, #8192	; 0x2000
- 80006ea:	601a      	str	r2, [r3, #0]
+ 80006c0:	f240 0348 	movw	r3, #72	; 0x48
+ 80006c4:	f2c2 0300 	movt	r3, #8192	; 0x2000
+ 80006c8:	681b      	ldr	r3, [r3, #0]
+ 80006ca:	f103 0201 	add.w	r2, r3, #1
+ 80006ce:	f240 0348 	movw	r3, #72	; 0x48
+ 80006d2:	f2c2 0300 	movt	r3, #8192	; 0x2000
+ 80006d6:	601a      	str	r2, [r3, #0]
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../src/tasks.c:84
 }
- 80006ec:	f107 070c 	add.w	r7, r7, #12
- 80006f0:	46bd      	mov	sp, r7
- 80006f2:	bc80      	pop	{r7}
- 80006f4:	4770      	bx	lr
- 80006f6:	bf00      	nop
+ 80006d8:	f107 070c 	add.w	r7, r7, #12
+ 80006dc:	46bd      	mov	sp, r7
+ 80006de:	bc80      	pop	{r7}
+ 80006e0:	4770      	bx	lr
+ 80006e2:	bf00      	nop
 
-080006f8 <TaskTry5>:
+080006e4 <TaskTry5>:
 TaskTry5():
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../src/tasks.c:88
 
 
 taskptr_t TaskTry5(void *TaskArgs)
 {
- 80006f8:	b480      	push	{r7}
- 80006fa:	b083      	sub	sp, #12
- 80006fc:	af00      	add	r7, sp, #0
- 80006fe:	6078      	str	r0, [r7, #4]
+ 80006e4:	b480      	push	{r7}
+ 80006e6:	b083      	sub	sp, #12
+ 80006e8:	af00      	add	r7, sp, #0
+ 80006ea:	6078      	str	r0, [r7, #4]
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../src/tasks.c:92
 
 	static uint32_t counter = 0;
 
 	counter++;
- 8000700:	f240 0344 	movw	r3, #68	; 0x44
- 8000704:	f2c2 0300 	movt	r3, #8192	; 0x2000
- 8000708:	681b      	ldr	r3, [r3, #0]
- 800070a:	f103 0201 	add.w	r2, r3, #1
- 800070e:	f240 0344 	movw	r3, #68	; 0x44
- 8000712:	f2c2 0300 	movt	r3, #8192	; 0x2000
- 8000716:	601a      	str	r2, [r3, #0]
+ 80006ec:	f240 0344 	movw	r3, #68	; 0x44
+ 80006f0:	f2c2 0300 	movt	r3, #8192	; 0x2000
+ 80006f4:	681b      	ldr	r3, [r3, #0]
+ 80006f6:	f103 0201 	add.w	r2, r3, #1
+ 80006fa:	f240 0344 	movw	r3, #68	; 0x44
+ 80006fe:	f2c2 0300 	movt	r3, #8192	; 0x2000
+ 8000702:	601a      	str	r2, [r3, #0]
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../src/tasks.c:93
 }
- 8000718:	f107 070c 	add.w	r7, r7, #12
- 800071c:	46bd      	mov	sp, r7
- 800071e:	bc80      	pop	{r7}
- 8000720:	4770      	bx	lr
- 8000722:	bf00      	nop
+ 8000704:	f107 070c 	add.w	r7, r7, #12
+ 8000708:	46bd      	mov	sp, r7
+ 800070a:	bc80      	pop	{r7}
+ 800070c:	4770      	bx	lr
+ 800070e:	bf00      	nop
 
-08000724 <TaskTry6>:
+08000710 <TaskTry6>:
 TaskTry6():
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../src/tasks.c:96
 
 taskptr_t TaskTry6(void *TaskArgs)
 {
- 8000724:	b480      	push	{r7}
- 8000726:	b083      	sub	sp, #12
- 8000728:	af00      	add	r7, sp, #0
- 800072a:	6078      	str	r0, [r7, #4]
+ 8000710:	b480      	push	{r7}
+ 8000712:	b083      	sub	sp, #12
+ 8000714:	af00      	add	r7, sp, #0
+ 8000716:	6078      	str	r0, [r7, #4]
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../src/tasks.c:100
 
 	static uint32_t counter = 0;
 
 	counter++;
- 800072c:	f240 0340 	movw	r3, #64	; 0x40
- 8000730:	f2c2 0300 	movt	r3, #8192	; 0x2000
- 8000734:	681b      	ldr	r3, [r3, #0]
- 8000736:	f103 0201 	add.w	r2, r3, #1
- 800073a:	f240 0340 	movw	r3, #64	; 0x40
- 800073e:	f2c2 0300 	movt	r3, #8192	; 0x2000
- 8000742:	601a      	str	r2, [r3, #0]
+ 8000718:	f240 0340 	movw	r3, #64	; 0x40
+ 800071c:	f2c2 0300 	movt	r3, #8192	; 0x2000
+ 8000720:	681b      	ldr	r3, [r3, #0]
+ 8000722:	f103 0201 	add.w	r2, r3, #1
+ 8000726:	f240 0340 	movw	r3, #64	; 0x40
+ 800072a:	f2c2 0300 	movt	r3, #8192	; 0x2000
+ 800072e:	601a      	str	r2, [r3, #0]
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../src/tasks.c:101
 }
- 8000744:	f107 070c 	add.w	r7, r7, #12
- 8000748:	46bd      	mov	sp, r7
- 800074a:	bc80      	pop	{r7}
- 800074c:	4770      	bx	lr
- 800074e:	bf00      	nop
+ 8000730:	f107 070c 	add.w	r7, r7, #12
+ 8000734:	46bd      	mov	sp, r7
+ 8000736:	bc80      	pop	{r7}
+ 8000738:	4770      	bx	lr
+ 800073a:	bf00      	nop
 
-08000750 <TaskTry7>:
+0800073c <TaskTry7>:
 TaskTry7():
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../src/tasks.c:105
 
 
 taskptr_t TaskTry7(void *TaskArgs)
 {
- 8000750:	b480      	push	{r7}
- 8000752:	b083      	sub	sp, #12
- 8000754:	af00      	add	r7, sp, #0
- 8000756:	6078      	str	r0, [r7, #4]
+ 800073c:	b480      	push	{r7}
+ 800073e:	b083      	sub	sp, #12
+ 8000740:	af00      	add	r7, sp, #0
+ 8000742:	6078      	str	r0, [r7, #4]
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../src/tasks.c:109
 
 	static uint32_t counter = 0;
 
 	counter++;
- 8000758:	f240 033c 	movw	r3, #60	; 0x3c
- 800075c:	f2c2 0300 	movt	r3, #8192	; 0x2000
- 8000760:	681b      	ldr	r3, [r3, #0]
- 8000762:	f103 0201 	add.w	r2, r3, #1
- 8000766:	f240 033c 	movw	r3, #60	; 0x3c
- 800076a:	f2c2 0300 	movt	r3, #8192	; 0x2000
- 800076e:	601a      	str	r2, [r3, #0]
+ 8000744:	f240 033c 	movw	r3, #60	; 0x3c
+ 8000748:	f2c2 0300 	movt	r3, #8192	; 0x2000
+ 800074c:	681b      	ldr	r3, [r3, #0]
+ 800074e:	f103 0201 	add.w	r2, r3, #1
+ 8000752:	f240 033c 	movw	r3, #60	; 0x3c
+ 8000756:	f2c2 0300 	movt	r3, #8192	; 0x2000
+ 800075a:	601a      	str	r2, [r3, #0]
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../src/tasks.c:110
 }
- 8000770:	f107 070c 	add.w	r7, r7, #12
- 8000774:	46bd      	mov	sp, r7
- 8000776:	bc80      	pop	{r7}
- 8000778:	4770      	bx	lr
- 800077a:	bf00      	nop
+ 800075c:	f107 070c 	add.w	r7, r7, #12
+ 8000760:	46bd      	mov	sp, r7
+ 8000762:	bc80      	pop	{r7}
+ 8000764:	4770      	bx	lr
+ 8000766:	bf00      	nop
 
-0800077c <__libc_init_array>:
+08000768 <__libc_init_array>:
 __libc_init_array():
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../libs/CMSIS/src/startup_cm.c:179
 (*__fini_array_end[])(void) __attribute__((weak));
@@ -1276,33 +1256,33 @@ __libc_init_array():
 inline void
 __libc_init_array(void)
 {
- 800077c:	b580      	push	{r7, lr}
- 800077e:	b082      	sub	sp, #8
- 8000780:	af00      	add	r7, sp, #0
+ 8000768:	b580      	push	{r7, lr}
+ 800076a:	b082      	sub	sp, #8
+ 800076c:	af00      	add	r7, sp, #0
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../libs/CMSIS/src/startup_cm.c:183
   size_t count;
   size_t i;
 
   count = __preinit_array_end - __preinit_array_start;
- 8000782:	f240 2288 	movw	r2, #648	; 0x288
- 8000786:	f6c0 0200 	movt	r2, #2048	; 0x800
- 800078a:	f240 2384 	movw	r3, #644	; 0x284
- 800078e:	f6c0 0300 	movt	r3, #2048	; 0x800
- 8000792:	1ad3      	subs	r3, r2, r3
- 8000794:	ea4f 03a3 	mov.w	r3, r3, asr #2
- 8000798:	603b      	str	r3, [r7, #0]
+ 800076e:	f240 2288 	movw	r2, #648	; 0x288
+ 8000772:	f6c0 0200 	movt	r2, #2048	; 0x800
+ 8000776:	f240 2384 	movw	r3, #644	; 0x284
+ 800077a:	f6c0 0300 	movt	r3, #2048	; 0x800
+ 800077e:	1ad3      	subs	r3, r2, r3
+ 8000780:	ea4f 03a3 	mov.w	r3, r3, asr #2
+ 8000784:	603b      	str	r3, [r7, #0]
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../libs/CMSIS/src/startup_cm.c:184
   for (i = 0; i < count; i++)
- 800079a:	f04f 0300 	mov.w	r3, #0
- 800079e:	607b      	str	r3, [r7, #4]
- 80007a0:	e00b      	b.n	80007ba <__libc_init_array+0x3e>
+ 8000786:	f04f 0300 	mov.w	r3, #0
+ 800078a:	607b      	str	r3, [r7, #4]
+ 800078c:	e00b      	b.n	80007a6 <__libc_init_array+0x3e>
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../libs/CMSIS/src/startup_cm.c:185
     __preinit_array_start[i]();
- 80007a2:	f240 2384 	movw	r3, #644	; 0x284
- 80007a6:	f6c0 0300 	movt	r3, #2048	; 0x800
- 80007aa:	687a      	ldr	r2, [r7, #4]
- 80007ac:	f853 3022 	ldr.w	r3, [r3, r2, lsl #2]
- 80007b0:	4798      	blx	r3
+ 800078e:	f240 2384 	movw	r3, #644	; 0x284
+ 8000792:	f6c0 0300 	movt	r3, #2048	; 0x800
+ 8000796:	687a      	ldr	r2, [r7, #4]
+ 8000798:	f853 3022 	ldr.w	r3, [r3, r2, lsl #2]
+ 800079c:	4798      	blx	r3
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../libs/CMSIS/src/startup_cm.c:184
 {
   size_t count;
@@ -1310,13 +1290,13 @@ __libc_init_array(void)
 
   count = __preinit_array_end - __preinit_array_start;
   for (i = 0; i < count; i++)
- 80007b2:	687b      	ldr	r3, [r7, #4]
- 80007b4:	f103 0301 	add.w	r3, r3, #1
- 80007b8:	607b      	str	r3, [r7, #4]
- 80007ba:	687a      	ldr	r2, [r7, #4]
- 80007bc:	683b      	ldr	r3, [r7, #0]
- 80007be:	429a      	cmp	r2, r3
- 80007c0:	d3ef      	bcc.n	80007a2 <__libc_init_array+0x26>
+ 800079e:	687b      	ldr	r3, [r7, #4]
+ 80007a0:	f103 0301 	add.w	r3, r3, #1
+ 80007a4:	607b      	str	r3, [r7, #4]
+ 80007a6:	687a      	ldr	r2, [r7, #4]
+ 80007a8:	683b      	ldr	r3, [r7, #0]
+ 80007aa:	429a      	cmp	r2, r3
+ 80007ac:	d3ef      	bcc.n	800078e <__libc_init_array+0x26>
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../libs/CMSIS/src/startup_cm.c:192
   // If you need to run the code in the .init section, please use
   // the startup files, since this requires the code in crti.o and crtn.o
@@ -1324,25 +1304,25 @@ __libc_init_array(void)
   //_init();
 
   count = __init_array_end - __init_array_start;
- 80007c2:	f240 2288 	movw	r2, #648	; 0x288
- 80007c6:	f6c0 0200 	movt	r2, #2048	; 0x800
- 80007ca:	f240 2388 	movw	r3, #648	; 0x288
- 80007ce:	f6c0 0300 	movt	r3, #2048	; 0x800
- 80007d2:	1ad3      	subs	r3, r2, r3
- 80007d4:	ea4f 03a3 	mov.w	r3, r3, asr #2
- 80007d8:	603b      	str	r3, [r7, #0]
+ 80007ae:	f240 2288 	movw	r2, #648	; 0x288
+ 80007b2:	f6c0 0200 	movt	r2, #2048	; 0x800
+ 80007b6:	f240 2388 	movw	r3, #648	; 0x288
+ 80007ba:	f6c0 0300 	movt	r3, #2048	; 0x800
+ 80007be:	1ad3      	subs	r3, r2, r3
+ 80007c0:	ea4f 03a3 	mov.w	r3, r3, asr #2
+ 80007c4:	603b      	str	r3, [r7, #0]
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../libs/CMSIS/src/startup_cm.c:193
   for (i = 0; i < count; i++)
- 80007da:	f04f 0300 	mov.w	r3, #0
- 80007de:	607b      	str	r3, [r7, #4]
- 80007e0:	e00b      	b.n	80007fa <__libc_init_array+0x7e>
+ 80007c6:	f04f 0300 	mov.w	r3, #0
+ 80007ca:	607b      	str	r3, [r7, #4]
+ 80007cc:	e00b      	b.n	80007e6 <__libc_init_array+0x7e>
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../libs/CMSIS/src/startup_cm.c:194
     __init_array_start[i]();
- 80007e2:	f240 2388 	movw	r3, #648	; 0x288
- 80007e6:	f6c0 0300 	movt	r3, #2048	; 0x800
- 80007ea:	687a      	ldr	r2, [r7, #4]
- 80007ec:	f853 3022 	ldr.w	r3, [r3, r2, lsl #2]
- 80007f0:	4798      	blx	r3
+ 80007ce:	f240 2388 	movw	r3, #648	; 0x288
+ 80007d2:	f6c0 0300 	movt	r3, #2048	; 0x800
+ 80007d6:	687a      	ldr	r2, [r7, #4]
+ 80007d8:	f853 3022 	ldr.w	r3, [r3, r2, lsl #2]
+ 80007dc:	4798      	blx	r3
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../libs/CMSIS/src/startup_cm.c:193
   // the startup files, since this requires the code in crti.o and crtn.o
   // to add the function prologue/epilogue.
@@ -1350,22 +1330,22 @@ __libc_init_array(void)
 
   count = __init_array_end - __init_array_start;
   for (i = 0; i < count; i++)
- 80007f2:	687b      	ldr	r3, [r7, #4]
- 80007f4:	f103 0301 	add.w	r3, r3, #1
- 80007f8:	607b      	str	r3, [r7, #4]
- 80007fa:	687a      	ldr	r2, [r7, #4]
- 80007fc:	683b      	ldr	r3, [r7, #0]
- 80007fe:	429a      	cmp	r2, r3
- 8000800:	d3ef      	bcc.n	80007e2 <__libc_init_array+0x66>
+ 80007de:	687b      	ldr	r3, [r7, #4]
+ 80007e0:	f103 0301 	add.w	r3, r3, #1
+ 80007e4:	607b      	str	r3, [r7, #4]
+ 80007e6:	687a      	ldr	r2, [r7, #4]
+ 80007e8:	683b      	ldr	r3, [r7, #0]
+ 80007ea:	429a      	cmp	r2, r3
+ 80007ec:	d3ef      	bcc.n	80007ce <__libc_init_array+0x66>
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../libs/CMSIS/src/startup_cm.c:195
     __init_array_start[i]();
 }
- 8000802:	f107 0708 	add.w	r7, r7, #8
- 8000806:	46bd      	mov	sp, r7
- 8000808:	bd80      	pop	{r7, pc}
- 800080a:	bf00      	nop
+ 80007ee:	f107 0708 	add.w	r7, r7, #8
+ 80007f2:	46bd      	mov	sp, r7
+ 80007f4:	bd80      	pop	{r7, pc}
+ 80007f6:	bf00      	nop
 
-0800080c <__libc_fini_array>:
+080007f8 <__libc_fini_array>:
 __libc_fini_array():
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../libs/CMSIS/src/startup_cm.c:200
 
@@ -1373,34 +1353,34 @@ __libc_fini_array():
 inline void
 __libc_fini_array(void)
 {
- 800080c:	b580      	push	{r7, lr}
- 800080e:	b082      	sub	sp, #8
- 8000810:	af00      	add	r7, sp, #0
+ 80007f8:	b580      	push	{r7, lr}
+ 80007fa:	b082      	sub	sp, #8
+ 80007fc:	af00      	add	r7, sp, #0
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../libs/CMSIS/src/startup_cm.c:204
   size_t count;
   size_t i;
 
   count = __fini_array_end - __fini_array_start;
- 8000812:	f240 2288 	movw	r2, #648	; 0x288
- 8000816:	f6c0 0200 	movt	r2, #2048	; 0x800
- 800081a:	f240 2388 	movw	r3, #648	; 0x288
- 800081e:	f6c0 0300 	movt	r3, #2048	; 0x800
- 8000822:	1ad3      	subs	r3, r2, r3
- 8000824:	ea4f 03a3 	mov.w	r3, r3, asr #2
- 8000828:	603b      	str	r3, [r7, #0]
+ 80007fe:	f240 2288 	movw	r2, #648	; 0x288
+ 8000802:	f6c0 0200 	movt	r2, #2048	; 0x800
+ 8000806:	f240 2388 	movw	r3, #648	; 0x288
+ 800080a:	f6c0 0300 	movt	r3, #2048	; 0x800
+ 800080e:	1ad3      	subs	r3, r2, r3
+ 8000810:	ea4f 03a3 	mov.w	r3, r3, asr #2
+ 8000814:	603b      	str	r3, [r7, #0]
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../libs/CMSIS/src/startup_cm.c:205
   for (i = count; i > 0; i--)
- 800082a:	683b      	ldr	r3, [r7, #0]
- 800082c:	607b      	str	r3, [r7, #4]
- 800082e:	e00d      	b.n	800084c <__libc_fini_array+0x40>
+ 8000816:	683b      	ldr	r3, [r7, #0]
+ 8000818:	607b      	str	r3, [r7, #4]
+ 800081a:	e00d      	b.n	8000838 <__libc_fini_array+0x40>
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../libs/CMSIS/src/startup_cm.c:206
     __fini_array_start[i - 1]();
- 8000830:	687b      	ldr	r3, [r7, #4]
- 8000832:	f103 32ff 	add.w	r2, r3, #4294967295	; 0xffffffff
- 8000836:	f240 2388 	movw	r3, #648	; 0x288
- 800083a:	f6c0 0300 	movt	r3, #2048	; 0x800
- 800083e:	f853 3022 	ldr.w	r3, [r3, r2, lsl #2]
- 8000842:	4798      	blx	r3
+ 800081c:	687b      	ldr	r3, [r7, #4]
+ 800081e:	f103 32ff 	add.w	r2, r3, #4294967295	; 0xffffffff
+ 8000822:	f240 2388 	movw	r3, #648	; 0x288
+ 8000826:	f6c0 0300 	movt	r3, #2048	; 0x800
+ 800082a:	f853 3022 	ldr.w	r3, [r3, r2, lsl #2]
+ 800082e:	4798      	blx	r3
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../libs/CMSIS/src/startup_cm.c:205
 {
   size_t count;
@@ -1408,12 +1388,12 @@ __libc_fini_array(void)
 
   count = __fini_array_end - __fini_array_start;
   for (i = count; i > 0; i--)
- 8000844:	687b      	ldr	r3, [r7, #4]
- 8000846:	f103 33ff 	add.w	r3, r3, #4294967295	; 0xffffffff
- 800084a:	607b      	str	r3, [r7, #4]
- 800084c:	687b      	ldr	r3, [r7, #4]
- 800084e:	2b00      	cmp	r3, #0
- 8000850:	d1ee      	bne.n	8000830 <__libc_fini_array+0x24>
+ 8000830:	687b      	ldr	r3, [r7, #4]
+ 8000832:	f103 33ff 	add.w	r3, r3, #4294967295	; 0xffffffff
+ 8000836:	607b      	str	r3, [r7, #4]
+ 8000838:	687b      	ldr	r3, [r7, #4]
+ 800083a:	2b00      	cmp	r3, #0
+ 800083c:	d1ee      	bne.n	800081c <__libc_fini_array+0x24>
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../libs/CMSIS/src/startup_cm.c:212
 
   // If you need to run the code in the .fini section, please use
@@ -1421,12 +1401,12 @@ __libc_fini_array(void)
   // to add the function prologue/epilogue.
   //_fini();
 }
- 8000852:	f107 0708 	add.w	r7, r7, #8
- 8000856:	46bd      	mov	sp, r7
- 8000858:	bd80      	pop	{r7, pc}
- 800085a:	bf00      	nop
+ 800083e:	f107 0708 	add.w	r7, r7, #8
+ 8000842:	46bd      	mov	sp, r7
+ 8000844:	bd80      	pop	{r7, pc}
+ 8000846:	bf00      	nop
 
-0800085c <_exit>:
+08000848 <_exit>:
 _exit():
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../libs/CMSIS/src/startup_stm32f4xx.c:44
 // You can redefine it in the application, if more functionality
@@ -1435,18 +1415,18 @@ void
 __attribute__((weak))
 _exit(int r)
 {
- 800085c:	b480      	push	{r7}
- 800085e:	b083      	sub	sp, #12
- 8000860:	af00      	add	r7, sp, #0
- 8000862:	6078      	str	r0, [r7, #4]
+ 8000848:	b480      	push	{r7}
+ 800084a:	b083      	sub	sp, #12
+ 800084c:	af00      	add	r7, sp, #0
+ 800084e:	6078      	str	r0, [r7, #4]
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../libs/CMSIS/src/startup_stm32f4xx.c:47
 #if defined(DEBUG)
   while(1)
   ;
- 8000864:	e7fe      	b.n	8000864 <_exit+0x8>
- 8000866:	bf00      	nop
+ 8000850:	e7fe      	b.n	8000850 <_exit+0x8>
+ 8000852:	bf00      	nop
 
-08000868 <SystemInit>:
+08000854 <SystemInit>:
 SystemInit():
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../libs/CMSIS/src/system_stm32f4xx.c:338
   *         SystemFrequency variable.
@@ -1455,8 +1435,8 @@ SystemInit():
   */
 void SystemInit(void)
 {
- 8000868:	b580      	push	{r7, lr}
- 800086a:	af00      	add	r7, sp, #0
+ 8000854:	b580      	push	{r7, lr}
+ 8000856:	af00      	add	r7, sp, #0
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../libs/CMSIS/src/system_stm32f4xx.c:345
   #if (__FPU_PRESENT == 1) && (__FPU_USED == 1)
     SCB->CPACR |= ((3UL << 10*2)|(3UL << 11*2));  /* set CP10 and CP11 Full Access */
@@ -1464,61 +1444,61 @@ void SystemInit(void)
   /* Reset the RCC clock configuration to the default reset state ------------*/
   /* Set HSION bit */
   RCC->CR |= (uint32_t)0x00000001;
- 800086c:	f44f 5360 	mov.w	r3, #14336	; 0x3800
- 8000870:	f2c4 0302 	movt	r3, #16386	; 0x4002
- 8000874:	f44f 5260 	mov.w	r2, #14336	; 0x3800
- 8000878:	f2c4 0202 	movt	r2, #16386	; 0x4002
- 800087c:	6812      	ldr	r2, [r2, #0]
- 800087e:	f042 0201 	orr.w	r2, r2, #1
- 8000882:	601a      	str	r2, [r3, #0]
+ 8000858:	f44f 5360 	mov.w	r3, #14336	; 0x3800
+ 800085c:	f2c4 0302 	movt	r3, #16386	; 0x4002
+ 8000860:	f44f 5260 	mov.w	r2, #14336	; 0x3800
+ 8000864:	f2c4 0202 	movt	r2, #16386	; 0x4002
+ 8000868:	6812      	ldr	r2, [r2, #0]
+ 800086a:	f042 0201 	orr.w	r2, r2, #1
+ 800086e:	601a      	str	r2, [r3, #0]
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../libs/CMSIS/src/system_stm32f4xx.c:348
 
   /* Reset CFGR register */
   RCC->CFGR = 0x00000000;
- 8000884:	f44f 5360 	mov.w	r3, #14336	; 0x3800
- 8000888:	f2c4 0302 	movt	r3, #16386	; 0x4002
- 800088c:	f04f 0200 	mov.w	r2, #0
- 8000890:	609a      	str	r2, [r3, #8]
+ 8000870:	f44f 5360 	mov.w	r3, #14336	; 0x3800
+ 8000874:	f2c4 0302 	movt	r3, #16386	; 0x4002
+ 8000878:	f04f 0200 	mov.w	r2, #0
+ 800087c:	609a      	str	r2, [r3, #8]
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../libs/CMSIS/src/system_stm32f4xx.c:351
 
   /* Reset HSEON, CSSON and PLLON bits */
   RCC->CR &= (uint32_t)0xFEF6FFFF;
- 8000892:	f44f 5360 	mov.w	r3, #14336	; 0x3800
- 8000896:	f2c4 0302 	movt	r3, #16386	; 0x4002
- 800089a:	f44f 5260 	mov.w	r2, #14336	; 0x3800
- 800089e:	f2c4 0202 	movt	r2, #16386	; 0x4002
- 80008a2:	6812      	ldr	r2, [r2, #0]
- 80008a4:	f022 7284 	bic.w	r2, r2, #17301504	; 0x1080000
- 80008a8:	f422 3280 	bic.w	r2, r2, #65536	; 0x10000
- 80008ac:	601a      	str	r2, [r3, #0]
+ 800087e:	f44f 5360 	mov.w	r3, #14336	; 0x3800
+ 8000882:	f2c4 0302 	movt	r3, #16386	; 0x4002
+ 8000886:	f44f 5260 	mov.w	r2, #14336	; 0x3800
+ 800088a:	f2c4 0202 	movt	r2, #16386	; 0x4002
+ 800088e:	6812      	ldr	r2, [r2, #0]
+ 8000890:	f022 7284 	bic.w	r2, r2, #17301504	; 0x1080000
+ 8000894:	f422 3280 	bic.w	r2, r2, #65536	; 0x10000
+ 8000898:	601a      	str	r2, [r3, #0]
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../libs/CMSIS/src/system_stm32f4xx.c:354
 
   /* Reset PLLCFGR register */
   RCC->PLLCFGR = 0x24003010;
- 80008ae:	f44f 5360 	mov.w	r3, #14336	; 0x3800
- 80008b2:	f2c4 0302 	movt	r3, #16386	; 0x4002
- 80008b6:	f243 0210 	movw	r2, #12304	; 0x3010
- 80008ba:	f2c2 4200 	movt	r2, #9216	; 0x2400
- 80008be:	605a      	str	r2, [r3, #4]
+ 800089a:	f44f 5360 	mov.w	r3, #14336	; 0x3800
+ 800089e:	f2c4 0302 	movt	r3, #16386	; 0x4002
+ 80008a2:	f243 0210 	movw	r2, #12304	; 0x3010
+ 80008a6:	f2c2 4200 	movt	r2, #9216	; 0x2400
+ 80008aa:	605a      	str	r2, [r3, #4]
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../libs/CMSIS/src/system_stm32f4xx.c:357
 
   /* Reset HSEBYP bit */
   RCC->CR &= (uint32_t)0xFFFBFFFF;
- 80008c0:	f44f 5360 	mov.w	r3, #14336	; 0x3800
- 80008c4:	f2c4 0302 	movt	r3, #16386	; 0x4002
- 80008c8:	f44f 5260 	mov.w	r2, #14336	; 0x3800
- 80008cc:	f2c4 0202 	movt	r2, #16386	; 0x4002
- 80008d0:	6812      	ldr	r2, [r2, #0]
- 80008d2:	f422 2280 	bic.w	r2, r2, #262144	; 0x40000
- 80008d6:	601a      	str	r2, [r3, #0]
+ 80008ac:	f44f 5360 	mov.w	r3, #14336	; 0x3800
+ 80008b0:	f2c4 0302 	movt	r3, #16386	; 0x4002
+ 80008b4:	f44f 5260 	mov.w	r2, #14336	; 0x3800
+ 80008b8:	f2c4 0202 	movt	r2, #16386	; 0x4002
+ 80008bc:	6812      	ldr	r2, [r2, #0]
+ 80008be:	f422 2280 	bic.w	r2, r2, #262144	; 0x40000
+ 80008c2:	601a      	str	r2, [r3, #0]
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../libs/CMSIS/src/system_stm32f4xx.c:360
 
   /* Disable all interrupts */
   RCC->CIR = 0x00000000;
- 80008d8:	f44f 5360 	mov.w	r3, #14336	; 0x3800
- 80008dc:	f2c4 0302 	movt	r3, #16386	; 0x4002
- 80008e0:	f04f 0200 	mov.w	r2, #0
- 80008e4:	60da      	str	r2, [r3, #12]
+ 80008c4:	f44f 5360 	mov.w	r3, #14336	; 0x3800
+ 80008c8:	f2c4 0302 	movt	r3, #16386	; 0x4002
+ 80008cc:	f04f 0200 	mov.w	r2, #0
+ 80008d0:	60da      	str	r2, [r3, #12]
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../libs/CMSIS/src/system_stm32f4xx.c:368
   SystemInit_ExtMemCtl(); 
 #endif /* DATA_IN_ExtSRAM || DATA_IN_ExtSDRAM */
@@ -1526,7 +1506,7 @@ void SystemInit(void)
   /* Configure the System clock source, PLL Multiplier and Divider factors, 
      AHB/APBx prescalers and Flash settings ----------------------------------*/
   SetSysClock();
- 80008e6:	f000 f809 	bl	80008fc <SetSysClock>
+ 80008d2:	f000 f809 	bl	80008e8 <SetSysClock>
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../libs/CMSIS/src/system_stm32f4xx.c:374
 
   /* Configure the Vector Table location add offset address ------------------*/
@@ -1534,17 +1514,17 @@ void SystemInit(void)
   SCB->VTOR = SRAM_BASE | VECT_TAB_OFFSET; /* Vector Table Relocation in Internal SRAM */
 #else
   SCB->VTOR = FLASH_BASE | VECT_TAB_OFFSET; /* Vector Table Relocation in Internal FLASH */
- 80008ea:	f44f 436d 	mov.w	r3, #60672	; 0xed00
- 80008ee:	f2ce 0300 	movt	r3, #57344	; 0xe000
- 80008f2:	f04f 6200 	mov.w	r2, #134217728	; 0x8000000
- 80008f6:	609a      	str	r2, [r3, #8]
+ 80008d6:	f44f 436d 	mov.w	r3, #60672	; 0xed00
+ 80008da:	f2ce 0300 	movt	r3, #57344	; 0xe000
+ 80008de:	f04f 6200 	mov.w	r2, #134217728	; 0x8000000
+ 80008e2:	609a      	str	r2, [r3, #8]
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../libs/CMSIS/src/system_stm32f4xx.c:376
 #endif
 }
- 80008f8:	bd80      	pop	{r7, pc}
- 80008fa:	bf00      	nop
+ 80008e4:	bd80      	pop	{r7, pc}
+ 80008e6:	bf00      	nop
 
-080008fc <SetSysClock>:
+080008e8 <SetSysClock>:
 SetSysClock():
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../libs/CMSIS/src/system_stm32f4xx.c:471
   *         is reset to the default reset state (done in SystemInit() function).   
@@ -1553,135 +1533,135 @@ SetSysClock():
   */
 static void SetSysClock(void)
 {
- 80008fc:	b480      	push	{r7}
- 80008fe:	b083      	sub	sp, #12
- 8000900:	af00      	add	r7, sp, #0
+ 80008e8:	b480      	push	{r7}
+ 80008ea:	b083      	sub	sp, #12
+ 80008ec:	af00      	add	r7, sp, #0
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../libs/CMSIS/src/system_stm32f4xx.c:475
 /******************************************************************************/
 /*            PLL (clocked by HSE) used as System clock source                */
 /******************************************************************************/
   __IO uint32_t StartUpCounter = 0, HSEStatus = 0;
- 8000902:	f04f 0300 	mov.w	r3, #0
- 8000906:	607b      	str	r3, [r7, #4]
- 8000908:	f04f 0300 	mov.w	r3, #0
- 800090c:	603b      	str	r3, [r7, #0]
+ 80008ee:	f04f 0300 	mov.w	r3, #0
+ 80008f2:	607b      	str	r3, [r7, #4]
+ 80008f4:	f04f 0300 	mov.w	r3, #0
+ 80008f8:	603b      	str	r3, [r7, #0]
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../libs/CMSIS/src/system_stm32f4xx.c:478
   
   /* Enable HSE */
   RCC->CR |= ((uint32_t)RCC_CR_HSEON);
- 800090e:	f44f 5360 	mov.w	r3, #14336	; 0x3800
- 8000912:	f2c4 0302 	movt	r3, #16386	; 0x4002
- 8000916:	f44f 5260 	mov.w	r2, #14336	; 0x3800
- 800091a:	f2c4 0202 	movt	r2, #16386	; 0x4002
- 800091e:	6812      	ldr	r2, [r2, #0]
- 8000920:	f442 3280 	orr.w	r2, r2, #65536	; 0x10000
- 8000924:	601a      	str	r2, [r3, #0]
+ 80008fa:	f44f 5360 	mov.w	r3, #14336	; 0x3800
+ 80008fe:	f2c4 0302 	movt	r3, #16386	; 0x4002
+ 8000902:	f44f 5260 	mov.w	r2, #14336	; 0x3800
+ 8000906:	f2c4 0202 	movt	r2, #16386	; 0x4002
+ 800090a:	6812      	ldr	r2, [r2, #0]
+ 800090c:	f442 3280 	orr.w	r2, r2, #65536	; 0x10000
+ 8000910:	601a      	str	r2, [r3, #0]
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../libs/CMSIS/src/system_stm32f4xx.c:483
  
   /* Wait till HSE is ready and if Time out is reached exit */
   do
   {
     HSEStatus = RCC->CR & RCC_CR_HSERDY;
- 8000926:	f44f 5360 	mov.w	r3, #14336	; 0x3800
- 800092a:	f2c4 0302 	movt	r3, #16386	; 0x4002
- 800092e:	681b      	ldr	r3, [r3, #0]
- 8000930:	f403 3300 	and.w	r3, r3, #131072	; 0x20000
- 8000934:	603b      	str	r3, [r7, #0]
+ 8000912:	f44f 5360 	mov.w	r3, #14336	; 0x3800
+ 8000916:	f2c4 0302 	movt	r3, #16386	; 0x4002
+ 800091a:	681b      	ldr	r3, [r3, #0]
+ 800091c:	f403 3300 	and.w	r3, r3, #131072	; 0x20000
+ 8000920:	603b      	str	r3, [r7, #0]
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../libs/CMSIS/src/system_stm32f4xx.c:484
     StartUpCounter++;
- 8000936:	687b      	ldr	r3, [r7, #4]
- 8000938:	f103 0301 	add.w	r3, r3, #1
- 800093c:	607b      	str	r3, [r7, #4]
+ 8000922:	687b      	ldr	r3, [r7, #4]
+ 8000924:	f103 0301 	add.w	r3, r3, #1
+ 8000928:	607b      	str	r3, [r7, #4]
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../libs/CMSIS/src/system_stm32f4xx.c:485
   } while((HSEStatus == 0) && (StartUpCounter != HSE_STARTUP_TIMEOUT));
- 800093e:	683b      	ldr	r3, [r7, #0]
- 8000940:	2b00      	cmp	r3, #0
- 8000942:	d103      	bne.n	800094c <SetSysClock+0x50>
- 8000944:	687b      	ldr	r3, [r7, #4]
- 8000946:	f5b3 4fa0 	cmp.w	r3, #20480	; 0x5000
- 800094a:	d1ec      	bne.n	8000926 <SetSysClock+0x2a>
+ 800092a:	683b      	ldr	r3, [r7, #0]
+ 800092c:	2b00      	cmp	r3, #0
+ 800092e:	d103      	bne.n	8000938 <SetSysClock+0x50>
+ 8000930:	687b      	ldr	r3, [r7, #4]
+ 8000932:	f5b3 4fa0 	cmp.w	r3, #20480	; 0x5000
+ 8000936:	d1ec      	bne.n	8000912 <SetSysClock+0x2a>
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../libs/CMSIS/src/system_stm32f4xx.c:487
 
   if ((RCC->CR & RCC_CR_HSERDY) != RESET)
- 800094c:	f44f 5360 	mov.w	r3, #14336	; 0x3800
- 8000950:	f2c4 0302 	movt	r3, #16386	; 0x4002
- 8000954:	681b      	ldr	r3, [r3, #0]
- 8000956:	f403 3300 	and.w	r3, r3, #131072	; 0x20000
- 800095a:	2b00      	cmp	r3, #0
- 800095c:	d003      	beq.n	8000966 <SetSysClock+0x6a>
+ 8000938:	f44f 5360 	mov.w	r3, #14336	; 0x3800
+ 800093c:	f2c4 0302 	movt	r3, #16386	; 0x4002
+ 8000940:	681b      	ldr	r3, [r3, #0]
+ 8000942:	f403 3300 	and.w	r3, r3, #131072	; 0x20000
+ 8000946:	2b00      	cmp	r3, #0
+ 8000948:	d003      	beq.n	8000952 <SetSysClock+0x6a>
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../libs/CMSIS/src/system_stm32f4xx.c:489
   {
     HSEStatus = (uint32_t)0x01;
- 800095e:	f04f 0301 	mov.w	r3, #1
- 8000962:	603b      	str	r3, [r7, #0]
- 8000964:	e002      	b.n	800096c <SetSysClock+0x70>
+ 800094a:	f04f 0301 	mov.w	r3, #1
+ 800094e:	603b      	str	r3, [r7, #0]
+ 8000950:	e002      	b.n	8000958 <SetSysClock+0x70>
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../libs/CMSIS/src/system_stm32f4xx.c:493
   }
   else
   {
     HSEStatus = (uint32_t)0x00;
- 8000966:	f04f 0300 	mov.w	r3, #0
- 800096a:	603b      	str	r3, [r7, #0]
+ 8000952:	f04f 0300 	mov.w	r3, #0
+ 8000956:	603b      	str	r3, [r7, #0]
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../libs/CMSIS/src/system_stm32f4xx.c:496
   }
 
   if (HSEStatus == (uint32_t)0x01)
- 800096c:	683b      	ldr	r3, [r7, #0]
- 800096e:	2b01      	cmp	r3, #1
- 8000970:	f040 8082 	bne.w	8000a78 <SetSysClock+0x17c>
+ 8000958:	683b      	ldr	r3, [r7, #0]
+ 800095a:	2b01      	cmp	r3, #1
+ 800095c:	f040 8082 	bne.w	8000a64 <SetSysClock+0x17c>
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../libs/CMSIS/src/system_stm32f4xx.c:499
   {
     /* Select regulator voltage output Scale 1 mode */
     RCC->APB1ENR |= RCC_APB1ENR_PWREN;
- 8000974:	f44f 5360 	mov.w	r3, #14336	; 0x3800
- 8000978:	f2c4 0302 	movt	r3, #16386	; 0x4002
- 800097c:	f44f 5260 	mov.w	r2, #14336	; 0x3800
- 8000980:	f2c4 0202 	movt	r2, #16386	; 0x4002
- 8000984:	6c12      	ldr	r2, [r2, #64]	; 0x40
- 8000986:	f042 5280 	orr.w	r2, r2, #268435456	; 0x10000000
- 800098a:	641a      	str	r2, [r3, #64]	; 0x40
+ 8000960:	f44f 5360 	mov.w	r3, #14336	; 0x3800
+ 8000964:	f2c4 0302 	movt	r3, #16386	; 0x4002
+ 8000968:	f44f 5260 	mov.w	r2, #14336	; 0x3800
+ 800096c:	f2c4 0202 	movt	r2, #16386	; 0x4002
+ 8000970:	6c12      	ldr	r2, [r2, #64]	; 0x40
+ 8000972:	f042 5280 	orr.w	r2, r2, #268435456	; 0x10000000
+ 8000976:	641a      	str	r2, [r3, #64]	; 0x40
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../libs/CMSIS/src/system_stm32f4xx.c:500
     PWR->CR |= PWR_CR_VOS;
- 800098c:	f44f 43e0 	mov.w	r3, #28672	; 0x7000
- 8000990:	f2c4 0300 	movt	r3, #16384	; 0x4000
- 8000994:	f44f 42e0 	mov.w	r2, #28672	; 0x7000
- 8000998:	f2c4 0200 	movt	r2, #16384	; 0x4000
- 800099c:	6812      	ldr	r2, [r2, #0]
- 800099e:	f442 4240 	orr.w	r2, r2, #49152	; 0xc000
- 80009a2:	601a      	str	r2, [r3, #0]
+ 8000978:	f44f 43e0 	mov.w	r3, #28672	; 0x7000
+ 800097c:	f2c4 0300 	movt	r3, #16384	; 0x4000
+ 8000980:	f44f 42e0 	mov.w	r2, #28672	; 0x7000
+ 8000984:	f2c4 0200 	movt	r2, #16384	; 0x4000
+ 8000988:	6812      	ldr	r2, [r2, #0]
+ 800098a:	f442 4240 	orr.w	r2, r2, #49152	; 0xc000
+ 800098e:	601a      	str	r2, [r3, #0]
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../libs/CMSIS/src/system_stm32f4xx.c:503
 
     /* HCLK = SYSCLK / 1*/
     RCC->CFGR |= RCC_CFGR_HPRE_DIV1;
- 80009a4:	f44f 5360 	mov.w	r3, #14336	; 0x3800
- 80009a8:	f2c4 0302 	movt	r3, #16386	; 0x4002
- 80009ac:	f44f 5260 	mov.w	r2, #14336	; 0x3800
- 80009b0:	f2c4 0202 	movt	r2, #16386	; 0x4002
- 80009b4:	6892      	ldr	r2, [r2, #8]
- 80009b6:	609a      	str	r2, [r3, #8]
+ 8000990:	f44f 5360 	mov.w	r3, #14336	; 0x3800
+ 8000994:	f2c4 0302 	movt	r3, #16386	; 0x4002
+ 8000998:	f44f 5260 	mov.w	r2, #14336	; 0x3800
+ 800099c:	f2c4 0202 	movt	r2, #16386	; 0x4002
+ 80009a0:	6892      	ldr	r2, [r2, #8]
+ 80009a2:	609a      	str	r2, [r3, #8]
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../libs/CMSIS/src/system_stm32f4xx.c:507
 
 #if defined (STM32F40_41xxx) || defined (STM32F427_437xx) || defined (STM32F429_439xx)      
     /* PCLK2 = HCLK / 2*/
     RCC->CFGR |= RCC_CFGR_PPRE2_DIV2;
- 80009b8:	f44f 5360 	mov.w	r3, #14336	; 0x3800
- 80009bc:	f2c4 0302 	movt	r3, #16386	; 0x4002
- 80009c0:	f44f 5260 	mov.w	r2, #14336	; 0x3800
- 80009c4:	f2c4 0202 	movt	r2, #16386	; 0x4002
- 80009c8:	6892      	ldr	r2, [r2, #8]
- 80009ca:	f442 4200 	orr.w	r2, r2, #32768	; 0x8000
- 80009ce:	609a      	str	r2, [r3, #8]
+ 80009a4:	f44f 5360 	mov.w	r3, #14336	; 0x3800
+ 80009a8:	f2c4 0302 	movt	r3, #16386	; 0x4002
+ 80009ac:	f44f 5260 	mov.w	r2, #14336	; 0x3800
+ 80009b0:	f2c4 0202 	movt	r2, #16386	; 0x4002
+ 80009b4:	6892      	ldr	r2, [r2, #8]
+ 80009b6:	f442 4200 	orr.w	r2, r2, #32768	; 0x8000
+ 80009ba:	609a      	str	r2, [r3, #8]
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../libs/CMSIS/src/system_stm32f4xx.c:510
     
     /* PCLK1 = HCLK / 4*/
     RCC->CFGR |= RCC_CFGR_PPRE1_DIV4;
- 80009d0:	f44f 5360 	mov.w	r3, #14336	; 0x3800
- 80009d4:	f2c4 0302 	movt	r3, #16386	; 0x4002
- 80009d8:	f44f 5260 	mov.w	r2, #14336	; 0x3800
- 80009dc:	f2c4 0202 	movt	r2, #16386	; 0x4002
- 80009e0:	6892      	ldr	r2, [r2, #8]
- 80009e2:	f442 52a0 	orr.w	r2, r2, #5120	; 0x1400
- 80009e6:	609a      	str	r2, [r3, #8]
+ 80009bc:	f44f 5360 	mov.w	r3, #14336	; 0x3800
+ 80009c0:	f2c4 0302 	movt	r3, #16386	; 0x4002
+ 80009c4:	f44f 5260 	mov.w	r2, #14336	; 0x3800
+ 80009c8:	f2c4 0202 	movt	r2, #16386	; 0x4002
+ 80009cc:	6892      	ldr	r2, [r2, #8]
+ 80009ce:	f442 52a0 	orr.w	r2, r2, #5120	; 0x1400
+ 80009d2:	609a      	str	r2, [r3, #8]
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../libs/CMSIS/src/system_stm32f4xx.c:522
     /* PCLK1 = HCLK / 4*/
     RCC->CFGR |= RCC_CFGR_PPRE1_DIV2;
@@ -1689,34 +1669,34 @@ static void SetSysClock(void)
    
     /* Configure the main PLL */
     RCC->PLLCFGR = PLL_M | (PLL_N << 6) | (((PLL_P >> 1) -1) << 16) |
- 80009e8:	f44f 5360 	mov.w	r3, #14336	; 0x3800
- 80009ec:	f2c4 0302 	movt	r3, #16386	; 0x4002
- 80009f0:	f245 4219 	movw	r2, #21529	; 0x5419
- 80009f4:	f2c0 7240 	movt	r2, #1856	; 0x740
- 80009f8:	605a      	str	r2, [r3, #4]
+ 80009d4:	f44f 5360 	mov.w	r3, #14336	; 0x3800
+ 80009d8:	f2c4 0302 	movt	r3, #16386	; 0x4002
+ 80009dc:	f245 4219 	movw	r2, #21529	; 0x5419
+ 80009e0:	f2c0 7240 	movt	r2, #1856	; 0x740
+ 80009e4:	605a      	str	r2, [r3, #4]
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../libs/CMSIS/src/system_stm32f4xx.c:526
                    (RCC_PLLCFGR_PLLSRC_HSE) | (PLL_Q << 24);
 
     /* Enable the main PLL */
     RCC->CR |= RCC_CR_PLLON;
- 80009fa:	f44f 5360 	mov.w	r3, #14336	; 0x3800
- 80009fe:	f2c4 0302 	movt	r3, #16386	; 0x4002
- 8000a02:	f44f 5260 	mov.w	r2, #14336	; 0x3800
- 8000a06:	f2c4 0202 	movt	r2, #16386	; 0x4002
- 8000a0a:	6812      	ldr	r2, [r2, #0]
- 8000a0c:	f042 7280 	orr.w	r2, r2, #16777216	; 0x1000000
- 8000a10:	601a      	str	r2, [r3, #0]
+ 80009e6:	f44f 5360 	mov.w	r3, #14336	; 0x3800
+ 80009ea:	f2c4 0302 	movt	r3, #16386	; 0x4002
+ 80009ee:	f44f 5260 	mov.w	r2, #14336	; 0x3800
+ 80009f2:	f2c4 0202 	movt	r2, #16386	; 0x4002
+ 80009f6:	6812      	ldr	r2, [r2, #0]
+ 80009f8:	f042 7280 	orr.w	r2, r2, #16777216	; 0x1000000
+ 80009fc:	601a      	str	r2, [r3, #0]
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../libs/CMSIS/src/system_stm32f4xx.c:529
 
     /* Wait till the main PLL is ready */
     while((RCC->CR & RCC_CR_PLLRDY) == 0)
- 8000a12:	bf00      	nop
- 8000a14:	f44f 5360 	mov.w	r3, #14336	; 0x3800
- 8000a18:	f2c4 0302 	movt	r3, #16386	; 0x4002
- 8000a1c:	681b      	ldr	r3, [r3, #0]
- 8000a1e:	f003 7300 	and.w	r3, r3, #33554432	; 0x2000000
- 8000a22:	2b00      	cmp	r3, #0
- 8000a24:	d0f6      	beq.n	8000a14 <SetSysClock+0x118>
+ 80009fe:	bf00      	nop
+ 8000a00:	f44f 5360 	mov.w	r3, #14336	; 0x3800
+ 8000a04:	f2c4 0302 	movt	r3, #16386	; 0x4002
+ 8000a08:	681b      	ldr	r3, [r3, #0]
+ 8000a0a:	f003 7300 	and.w	r3, r3, #33554432	; 0x2000000
+ 8000a0e:	2b00      	cmp	r3, #0
+ 8000a10:	d0f6      	beq.n	8000a00 <SetSysClock+0x118>
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../libs/CMSIS/src/system_stm32f4xx.c:549
     FLASH->ACR = FLASH_ACR_PRFTEN | FLASH_ACR_ICEN |FLASH_ACR_DCEN |FLASH_ACR_LATENCY_5WS;
 #endif /* STM32F427_437x || STM32F429_439xx  */
@@ -1724,10 +1704,10 @@ static void SetSysClock(void)
 #if defined (STM32F40_41xxx)     
     /* Configure Flash prefetch, Instruction cache, Data cache and wait state */
     FLASH->ACR = FLASH_ACR_PRFTEN | FLASH_ACR_ICEN |FLASH_ACR_DCEN |FLASH_ACR_LATENCY_5WS;
- 8000a26:	f44f 5370 	mov.w	r3, #15360	; 0x3c00
- 8000a2a:	f2c4 0302 	movt	r3, #16386	; 0x4002
- 8000a2e:	f240 7205 	movw	r2, #1797	; 0x705
- 8000a32:	601a      	str	r2, [r3, #0]
+ 8000a12:	f44f 5370 	mov.w	r3, #15360	; 0x3c00
+ 8000a16:	f2c4 0302 	movt	r3, #16386	; 0x4002
+ 8000a1a:	f240 7205 	movw	r2, #1797	; 0x705
+ 8000a1e:	601a      	str	r2, [r3, #0]
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../libs/CMSIS/src/system_stm32f4xx.c:558
     /* Configure Flash prefetch, Instruction cache, Data cache and wait state */
     FLASH->ACR = FLASH_ACR_PRFTEN | FLASH_ACR_ICEN |FLASH_ACR_DCEN |FLASH_ACR_LATENCY_2WS;
@@ -1735,33 +1715,33 @@ static void SetSysClock(void)
 
     /* Select the main PLL as system clock source */
     RCC->CFGR &= (uint32_t)((uint32_t)~(RCC_CFGR_SW));
- 8000a34:	f44f 5360 	mov.w	r3, #14336	; 0x3800
- 8000a38:	f2c4 0302 	movt	r3, #16386	; 0x4002
- 8000a3c:	f44f 5260 	mov.w	r2, #14336	; 0x3800
- 8000a40:	f2c4 0202 	movt	r2, #16386	; 0x4002
- 8000a44:	6892      	ldr	r2, [r2, #8]
- 8000a46:	f022 0203 	bic.w	r2, r2, #3
- 8000a4a:	609a      	str	r2, [r3, #8]
+ 8000a20:	f44f 5360 	mov.w	r3, #14336	; 0x3800
+ 8000a24:	f2c4 0302 	movt	r3, #16386	; 0x4002
+ 8000a28:	f44f 5260 	mov.w	r2, #14336	; 0x3800
+ 8000a2c:	f2c4 0202 	movt	r2, #16386	; 0x4002
+ 8000a30:	6892      	ldr	r2, [r2, #8]
+ 8000a32:	f022 0203 	bic.w	r2, r2, #3
+ 8000a36:	609a      	str	r2, [r3, #8]
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../libs/CMSIS/src/system_stm32f4xx.c:559
     RCC->CFGR |= RCC_CFGR_SW_PLL;
- 8000a4c:	f44f 5360 	mov.w	r3, #14336	; 0x3800
- 8000a50:	f2c4 0302 	movt	r3, #16386	; 0x4002
- 8000a54:	f44f 5260 	mov.w	r2, #14336	; 0x3800
- 8000a58:	f2c4 0202 	movt	r2, #16386	; 0x4002
- 8000a5c:	6892      	ldr	r2, [r2, #8]
- 8000a5e:	f042 0202 	orr.w	r2, r2, #2
- 8000a62:	609a      	str	r2, [r3, #8]
+ 8000a38:	f44f 5360 	mov.w	r3, #14336	; 0x3800
+ 8000a3c:	f2c4 0302 	movt	r3, #16386	; 0x4002
+ 8000a40:	f44f 5260 	mov.w	r2, #14336	; 0x3800
+ 8000a44:	f2c4 0202 	movt	r2, #16386	; 0x4002
+ 8000a48:	6892      	ldr	r2, [r2, #8]
+ 8000a4a:	f042 0202 	orr.w	r2, r2, #2
+ 8000a4e:	609a      	str	r2, [r3, #8]
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../libs/CMSIS/src/system_stm32f4xx.c:562
 
     /* Wait till the main PLL is used as system clock source */
     while ((RCC->CFGR & (uint32_t)RCC_CFGR_SWS ) != RCC_CFGR_SWS_PLL);
- 8000a64:	bf00      	nop
- 8000a66:	f44f 5360 	mov.w	r3, #14336	; 0x3800
- 8000a6a:	f2c4 0302 	movt	r3, #16386	; 0x4002
- 8000a6e:	689b      	ldr	r3, [r3, #8]
- 8000a70:	f003 030c 	and.w	r3, r3, #12
- 8000a74:	2b08      	cmp	r3, #8
- 8000a76:	d1f6      	bne.n	8000a66 <SetSysClock+0x16a>
+ 8000a50:	bf00      	nop
+ 8000a52:	f44f 5360 	mov.w	r3, #14336	; 0x3800
+ 8000a56:	f2c4 0302 	movt	r3, #16386	; 0x4002
+ 8000a5a:	689b      	ldr	r3, [r3, #8]
+ 8000a5c:	f003 030c 	and.w	r3, r3, #12
+ 8000a60:	2b08      	cmp	r3, #8
+ 8000a62:	d1f6      	bne.n	8000a52 <SetSysClock+0x16a>
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../libs/CMSIS/src/system_stm32f4xx.c:571
   else
   { /* If HSE fails to start-up, the application will have wrong clock
@@ -1769,13 +1749,13 @@ static void SetSysClock(void)
   }
 
 }
- 8000a78:	f107 070c 	add.w	r7, r7, #12
- 8000a7c:	46bd      	mov	sp, r7
- 8000a7e:	bc80      	pop	{r7}
- 8000a80:	4770      	bx	lr
- 8000a82:	bf00      	nop
+ 8000a64:	f107 070c 	add.w	r7, r7, #12
+ 8000a68:	46bd      	mov	sp, r7
+ 8000a6a:	bc80      	pop	{r7}
+ 8000a6c:	4770      	bx	lr
+ 8000a6e:	bf00      	nop
 
-08000a84 <Asm_LowLevelTickInit>:
+08000a70 <Asm_LowLevelTickInit>:
 Asm_LowLevelTickInit():
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/AsmStuff.S:47
 @************************************************************************
@@ -1784,327 +1764,329 @@ Asm_LowLevelTickInit:
 
 
 		CPSID 	I				@Disable interrupts
- 8000a84:	b672      	cpsid	i
+ 8000a70:	b672      	cpsid	i
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/AsmStuff.S:49
-
-		LDR  R1, =0xE000ED14	@
- 8000a86:	4932      	ldr	r1, [pc, #200]	; (8000b50 <SECOND_CHANGE+0x26>)
+								@
+		LDR  R1, =0xE000ED14	@SCB->CCR
+ 8000a72:	4932      	ldr	r1, [pc, #200]	; (8000b3c <SECOND_CHANGE+0x26>)
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/AsmStuff.S:50
 		LDR  R2, [R1]			@
- 8000a88:	680a      	ldr	r2, [r1, #0]
+ 8000a74:	680a      	ldr	r2, [r1, #0]
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/AsmStuff.S:51
-		ORR  R2,R2,#0x200		@
- 8000a8a:	f442 7200 	orr.w	r2, r2, #512	; 0x200
+		ORR  R2,R2,#0x200		@Enable double word aling
+ 8000a76:	f442 7200 	orr.w	r2, r2, #512	; 0x200
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/AsmStuff.S:52
 		STR	 R2,[R1]			@
- 8000a8e:	600a      	str	r2, [r1, #0]
+ 8000a7a:	600a      	str	r2, [r1, #0]
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/AsmStuff.S:54
-
+								@
 		LDR  R1, =0xE000E010    @Load the systick control register contents
- 8000a90:	4930      	ldr	r1, [pc, #192]	; (8000b54 <SECOND_CHANGE+0x2a>)
+ 8000a7c:	4930      	ldr	r1, [pc, #192]	; (8000b40 <SECOND_CHANGE+0x2a>)
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/AsmStuff.S:55
 		MOVS R2, #0x00000000	@
- 8000a92:	2200      	movs	r2, #0
+ 8000a7e:	2200      	movs	r2, #0
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/AsmStuff.S:56
 		STR	 R2, [R1], #0x04	@
- 8000a94:	f841 2b04 	str.w	r2, [r1], #4
+ 8000a80:	f841 2b04 	str.w	r2, [r1], #4
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/AsmStuff.S:57
 		STR  R0, [R1]			@Write the new value for load count
- 8000a98:	6008      	str	r0, [r1, #0]
+ 8000a84:	6008      	str	r0, [r1, #0]
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/AsmStuff.S:58
 		SUBS R1, #0x04			@Points again to systick control gerister
- 8000a9a:	3904      	subs	r1, #4
+ 8000a86:	3904      	subs	r1, #4
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/AsmStuff.S:61
 								@
 								@
 		MOVS R2, #0x00000003    @Enable systick timer and its interrupt
- 8000a9c:	2203      	movs	r2, #3
+ 8000a88:	2203      	movs	r2, #3
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/AsmStuff.S:62
 		STR  R2, [R1]		 	@Write back on the systick register, and points to
- 8000a9e:	600a      	str	r2, [r1, #0]
+ 8000a8a:	600a      	str	r2, [r1, #0]
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/AsmStuff.S:65
 							    @Load register
 								@
 		LDR   R1, =0xE000ED22  	@PENDSV Priority
- 8000aa0:	492d      	ldr	r1, [pc, #180]	; (8000b58 <SECOND_CHANGE+0x2e>)
+ 8000a8c:	492d      	ldr	r1, [pc, #180]	; (8000b44 <SECOND_CHANGE+0x2e>)
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/AsmStuff.S:66
 		MOVS  R0, #0xFF			@
- 8000aa2:	20ff      	movs	r0, #255	; 0xff
+ 8000a8e:	20ff      	movs	r0, #255	; 0xff
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/AsmStuff.S:67
 		STRB  R0,[R1]			@set pend sv priority
- 8000aa4:	7008      	strb	r0, [r1, #0]
+ 8000a90:	7008      	strb	r0, [r1, #0]
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/AsmStuff.S:69
 								@
 		CPSIE  I				@Enable global interrupts
- 8000aa6:	b662      	cpsie	i
+ 8000a92:	b662      	cpsie	i
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/AsmStuff.S:70
 		BX	LR					@Return from sub
- 8000aa8:	4770      	bx	lr
+ 8000a94:	4770      	bx	lr
 
-08000aaa <Asm_CriticalIn>:
+08000a96 <Asm_CriticalIn>:
 Asm_CriticalIn():
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/AsmStuff.S:86
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/AsmStuff.S:85
+@
 @
 @************************************************************************
 .thumb_func
 Asm_CriticalIn:
-
 		CPSID	I					@disables all interrupts
- 8000aaa:	b672      	cpsid	i
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/AsmStuff.S:87
+ 8000a96:	b672      	cpsid	i
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/AsmStuff.S:86
 		BX		LR					@Return from sub
- 8000aac:	4770      	bx	lr
+ 8000a98:	4770      	bx	lr
 
-08000aae <Asm_CriticalOut>:
+08000a9a <Asm_CriticalOut>:
 Asm_CriticalOut():
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/AsmStuff.S:103
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/AsmStuff.S:102
 @
 @************************************************************************
 .thumb_func
 Asm_CriticalOut:
 
 		CPSIE	I					@enables all interrupts
- 8000aae:	b662      	cpsie	i
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/AsmStuff.S:104
+ 8000a9a:	b662      	cpsie	i
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/AsmStuff.S:103
 		BX		LR					@Return from sub
- 8000ab0:	4770      	bx	lr
+ 8000a9c:	4770      	bx	lr
 
-08000ab2 <Asm_IntLevelContextChange>:
+08000a9e <Asm_IntLevelContextChange>:
 Asm_IntLevelContextChange():
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/AsmStuff.S:121
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/AsmStuff.S:120
 @
 @************************************************************************
 .thumb_func
 Asm_IntLevelContextChange:
 
 		CPSID 	I					@Disables interrrupts
- 8000ab2:	b672      	cpsid	i
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/AsmStuff.S:122
+ 8000a9e:	b672      	cpsid	i
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/AsmStuff.S:121
 		LDR  	R0, =0xE000ED04   	@SCB->ICSR register
- 8000ab4:	4829      	ldr	r0, [pc, #164]	; (8000b5c <SECOND_CHANGE+0x32>)
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/AsmStuff.S:123
+ 8000aa0:	4829      	ldr	r0, [pc, #164]	; (8000b48 <SECOND_CHANGE+0x32>)
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/AsmStuff.S:122
 		MOVS	R1,#0x10000000	  	@Requests a PENDSV
- 8000ab6:	f05f 5180 	movs.w	r1, #268435456	; 0x10000000
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/AsmStuff.S:126
+ 8000aa2:	f05f 5180 	movs.w	r1, #268435456	; 0x10000000
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/AsmStuff.S:125
 									@exception
 									@
 		STR		R1,[R0]				@
- 8000aba:	6001      	str	r1, [r0, #0]
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/AsmStuff.S:127
+ 8000aa6:	6001      	str	r1, [r0, #0]
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/AsmStuff.S:126
 		CPSIE	I					@Enable interrupts
- 8000abc:	b662      	cpsie	i
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/AsmStuff.S:129
+ 8000aa8:	b662      	cpsie	i
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/AsmStuff.S:128
 									@
 		BX LR 					  	@Return from sub
- 8000abe:	4770      	bx	lr
+ 8000aaa:	4770      	bx	lr
 
-08000ac0 <Asm_TaskLevelContextChange>:
+08000aac <Asm_TaskLevelContextChange>:
 Asm_TaskLevelContextChange():
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/AsmStuff.S:146
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/AsmStuff.S:145
 @
 @************************************************************************
 .thumb_func
 Asm_TaskLevelContextChange:
 
 		CPSID 	I					@Disables interrrupts
- 8000ac0:	b672      	cpsid	i
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/AsmStuff.S:147
+ 8000aac:	b672      	cpsid	i
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/AsmStuff.S:146
 		LDR  	R0, =0xE000ED04   	@SCB->ICSR register
- 8000ac2:	4826      	ldr	r0, [pc, #152]	; (8000b5c <SECOND_CHANGE+0x32>)
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/AsmStuff.S:148
+ 8000aae:	4826      	ldr	r0, [pc, #152]	; (8000b48 <SECOND_CHANGE+0x32>)
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/AsmStuff.S:147
 		MOVS	R1,#0x10000000	  	@Requests a PENDSV
- 8000ac4:	f05f 5180 	movs.w	r1, #268435456	; 0x10000000
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/AsmStuff.S:151
+ 8000ab0:	f05f 5180 	movs.w	r1, #268435456	; 0x10000000
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/AsmStuff.S:150
 									@exception
 									@
 		STR		R1,[R0]				@
- 8000ac8:	6001      	str	r1, [r0, #0]
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/AsmStuff.S:152
+ 8000ab4:	6001      	str	r1, [r0, #0]
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/AsmStuff.S:151
 		CPSIE	I					@Enable interrupts
- 8000aca:	b662      	cpsie	i
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/AsmStuff.S:155
+ 8000ab6:	b662      	cpsie	i
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/AsmStuff.S:154
 									@
+									@
+		BX 		LR 					@Return from sub
+ 8000ab8:	4770      	bx	lr
 
-		BX 		LR 					@Should not get here
- 8000acc:	4770      	bx	lr
-
-08000ace <PendSV_Handler>:
+08000aba <PendSV_Handler>:
 PendSV_Handler():
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/AsmStuff.S:171
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/AsmStuff.S:170
 @
 @
 @************************************************************************
 .thumb_func
 PendSV_Handler:
 		TST		LR,#4					@check the origin of interrupt
- 8000ace:	f01e 0f04 	tst.w	lr, #4
+ 8000aba:	f01e 0f04 	tst.w	lr, #4
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/AsmStuff.S:171
+		IT		EQ						@if, it from a MSP usage
+ 8000abe:	bf08      	it	eq
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/AsmStuff.S:172
-		IT		EQ						@
- 8000ad2:	bf08      	it	eq
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/AsmStuff.S:173
-		BEQ		FIRST_CHANGE			@fisrt change
- 8000ad4:	f000 b819 	beq.w	8000b0a <FIRST_CHANGE>
+		BEQ		FIRST_CHANGE			@
+ 8000ac0:	f000 b819 	beq.w	8000af6 <FIRST_CHANGE>
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/AsmStuff.S:174
-		LDR		R0, =HighReadyTaskBlock @if not, check for second change
- 8000ad8:	4821      	ldr	r0, [pc, #132]	; (8000b60 <SECOND_CHANGE+0x36>)
+										@
+		LDR		R0, =HighReadyTaskBlock @if not,
+ 8000ac4:	4821      	ldr	r0, [pc, #132]	; (8000b4c <SECOND_CHANGE+0x36>)
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/AsmStuff.S:175
 		LDR		R0,[R0]					@
- 8000ada:	6800      	ldr	r0, [r0, #0]
+ 8000ac6:	6800      	ldr	r0, [r0, #0]
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/AsmStuff.S:176
 		LDR		R1,[R0]					@Check the current taskFLag
- 8000adc:	6801      	ldr	r1, [r0, #0]
+ 8000ac8:	6801      	ldr	r1, [r0, #0]
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/AsmStuff.S:177
 		TST		R1,#1					@Check if first time flag is set
- 8000ade:	f011 0f01 	tst.w	r1, #1
+ 8000aca:	f011 0f01 	tst.w	r1, #1
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/AsmStuff.S:178
 		IT		NE						@
- 8000ae2:	bf18      	it	ne
+ 8000ace:	bf18      	it	ne
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/AsmStuff.S:179
 		BNE 	SECOND_CHANGE			@Jump for first context switch
- 8000ae4:	f000 b821 	bne.w	8000b2a <SECOND_CHANGE>
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/AsmStuff.S:181
-										@
-		LDR 	R0, =CurrentTaskBlock	@Get the current TCB
- 8000ae8:	481e      	ldr	r0, [pc, #120]	; (8000b64 <SECOND_CHANGE+0x3a>)
+ 8000ad0:	f000 b821 	bne.w	8000b16 <SECOND_CHANGE>
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/AsmStuff.S:182
-		LDR		R0,[R0]					@
- 8000aea:	6800      	ldr	r0, [r0, #0]
+										@
+										@if, not, runs context switch normally
+		LDR 	R0, =CurrentTaskBlock	@Get the current TCB
+ 8000ad4:	481e      	ldr	r0, [pc, #120]	; (8000b50 <SECOND_CHANGE+0x3a>)
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/AsmStuff.S:183
-		MRS		R1, PSP					@Get the current SP
- 8000aec:	f3ef 8109 	mrs	r1, PSP
+		LDR		R0,[R0]					@
+ 8000ad6:	6800      	ldr	r0, [r0, #0]
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/AsmStuff.S:184
+		MRS		R1, PSP					@Get the current SP
+ 8000ad8:	f3ef 8109 	mrs	r1, PSP
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/AsmStuff.S:185
 		STMDB	R1!,{R4 - R11}			@save R4 - R11 on the current stack
- 8000af0:	e921 0ff0 	stmdb	r1!, {r4, r5, r6, r7, r8, r9, sl, fp}
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/AsmStuff.S:186
+ 8000adc:	e921 0ff0 	stmdb	r1!, {r4, r5, r6, r7, r8, r9, sl, fp}
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/AsmStuff.S:187
 										@
 		STR		R1,[R0,#0x00000018] 	@Save the current stack pointer
- 8000af4:	6181      	str	r1, [r0, #24]
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/AsmStuff.S:188
-										@								@
-		LDR		R0,=HighReadyTaskBlock  @Get the first task from de queue
- 8000af6:	481a      	ldr	r0, [pc, #104]	; (8000b60 <SECOND_CHANGE+0x36>)
+ 8000ae0:	6181      	str	r1, [r0, #24]
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/AsmStuff.S:189
-		LDR		R0,[R0]					@Get the new stack pointer
- 8000af8:	6800      	ldr	r0, [r0, #0]
+										@
+		LDR		R0,=HighReadyTaskBlock  @Get the first task from de queue
+ 8000ae2:	481a      	ldr	r0, [pc, #104]	; (8000b4c <SECOND_CHANGE+0x36>)
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/AsmStuff.S:190
+		LDR		R0,[R0]					@Get the new stack pointer
+ 8000ae4:	6800      	ldr	r0, [r0, #0]
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/AsmStuff.S:191
 		LDR		R1, [R0,#0x00000018]	@
- 8000afa:	6981      	ldr	r1, [r0, #24]
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/AsmStuff.S:192
-									    @
-		LDMIA	R1!,{R4 - R11}			@Change the context
- 8000afc:	e8b1 0ff0 	ldmia.w	r1!, {r4, r5, r6, r7, r8, r9, sl, fp}
+ 8000ae6:	6981      	ldr	r1, [r0, #24]
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/AsmStuff.S:193
+									    @
+		LDMIA	R1!,{R4 - R11}			@Reload R4 -- R11
+ 8000ae8:	e8b1 0ff0 	ldmia.w	r1!, {r4, r5, r6, r7, r8, r9, sl, fp}
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/AsmStuff.S:194
 		MSR		PSP , R1				@write the new stackpointer
- 8000b00:	f381 8809 	msr	PSP, r1
+ 8000aec:	f381 8809 	msr	PSP, r1
 
-08000b04 <NO_SAVE>:
+08000af0 <NO_SAVE>:
 NO_SAVE():
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/AsmStuff.S:195
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/AsmStuff.S:196
 NO_SAVE:								@
 		ORR     LR,LR,#0x00000004		@ensures that return in PSP
- 8000b04:	f04e 0e04 	orr.w	lr, lr, #4
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/AsmStuff.S:196
+ 8000af0:	f04e 0e04 	orr.w	lr, lr, #4
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/AsmStuff.S:197
 		BX		LR						@Return from sub
- 8000b08:	4770      	bx	lr
+ 8000af4:	4770      	bx	lr
 
-08000b0a <FIRST_CHANGE>:
+08000af6 <FIRST_CHANGE>:
 FIRST_CHANGE():
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/AsmStuff.S:199
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/AsmStuff.S:200
 										@
 FIRST_CHANGE:							@
 		MOVS    R4, #0x02				@if the first run
- 8000b0a:	2402      	movs	r4, #2
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/AsmStuff.S:200
-		MSR	    CONTROL, R4				@uses PSP always
- 8000b0c:	f384 8814 	msr	CONTROL, r4
+ 8000af6:	2402      	movs	r4, #2
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/AsmStuff.S:201
-		ISB								@recommended after write control
- 8000b10:	f3bf 8f6f 	isb	sy
+		MSR	    CONTROL, R4				@uses PSP always
+ 8000af8:	f384 8814 	msr	CONTROL, r4
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/AsmStuff.S:202
-		LDR		R0,=HighReadyTaskBlock  @Get the newTCB
- 8000b14:	4812      	ldr	r0, [pc, #72]	; (8000b60 <SECOND_CHANGE+0x36>)
+		ISB								@recommended after write control
+ 8000afc:	f3bf 8f6f 	isb	sy
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/AsmStuff.S:203
-		LDR		R0,[R0]					@Get the new stack pointer
- 8000b16:	6800      	ldr	r0, [r0, #0]
+		LDR		R0,=HighReadyTaskBlock  @Get the newTCB
+ 8000b00:	4812      	ldr	r0, [pc, #72]	; (8000b4c <SECOND_CHANGE+0x36>)
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/AsmStuff.S:204
-		LDR		R1,[R0]					@Get task flags
- 8000b18:	6801      	ldr	r1, [r0, #0]
+		LDR		R0,[R0]					@Get the new stack pointer
+ 8000b02:	6800      	ldr	r0, [r0, #0]
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/AsmStuff.S:205
-		BIC		R1,R1,#1				@clear first time flag
- 8000b1a:	f021 0101 	bic.w	r1, r1, #1
+		LDR		R1,[R0]					@Get task flags
+ 8000b04:	6801      	ldr	r1, [r0, #0]
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/AsmStuff.S:206
-		STR		R1,[R0]					@
- 8000b1e:	6001      	str	r1, [r0, #0]
+		BIC		R1,R1,#1				@clear first time flag
+ 8000b06:	f021 0101 	bic.w	r1, r1, #1
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/AsmStuff.S:207
-		LDR		R1, [R0,#0x00000018]	@
- 8000b20:	6981      	ldr	r1, [r0, #24]
+		STR		R1,[R0]					@
+ 8000b0a:	6001      	str	r1, [r0, #0]
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/AsmStuff.S:208
-		MSR     PSP,R1					@Load the first stack pointer
- 8000b22:	f381 8809 	msr	PSP, r1
+		LDR		R1, [R0,#0x00000018]	@
+ 8000b0c:	6981      	ldr	r1, [r0, #24]
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/AsmStuff.S:209
+		MSR     PSP,R1					@Load the first stack pointer
+ 8000b0e:	f381 8809 	msr	PSP, r1
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/AsmStuff.S:210
 		B		NO_SAVE					@
- 8000b26:	f7ff bfed 	b.w	8000b04 <NO_SAVE>
+ 8000b12:	f7ff bfed 	b.w	8000af0 <NO_SAVE>
 
-08000b2a <SECOND_CHANGE>:
+08000b16 <SECOND_CHANGE>:
 SECOND_CHANGE():
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/AsmStuff.S:212
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/AsmStuff.S:213
 
 SECOND_CHANGE:
 		LDR 	R0, =CurrentTaskBlock	@Get the current TCB
- 8000b2a:	480e      	ldr	r0, [pc, #56]	; (8000b64 <SECOND_CHANGE+0x3a>)
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/AsmStuff.S:213
-		LDR		R0,[R0]					@
- 8000b2c:	6800      	ldr	r0, [r0, #0]
+ 8000b16:	480e      	ldr	r0, [pc, #56]	; (8000b50 <SECOND_CHANGE+0x3a>)
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/AsmStuff.S:214
-		MRS		R1, PSP					@Get the current SP
- 8000b2e:	f3ef 8109 	mrs	r1, PSP
+		LDR		R0,[R0]					@
+ 8000b18:	6800      	ldr	r0, [r0, #0]
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/AsmStuff.S:215
-		STMDB	R1!,{R4 - R11}			@save R4 - R11 on the current stack									@
- 8000b32:	e921 0ff0 	stmdb	r1!, {r4, r5, r6, r7, r8, r9, sl, fp}
+		MRS		R1, PSP					@Get the current SP
+ 8000b1a:	f3ef 8109 	mrs	r1, PSP
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/AsmStuff.S:216
+		STMDB	R1!,{R4 - R11}			@save R4 - R11 on the current stack
+ 8000b1e:	e921 0ff0 	stmdb	r1!, {r4, r5, r6, r7, r8, r9, sl, fp}
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/AsmStuff.S:217
 		STR		R1,[R0,#0x00000018] 	@Save the current stack pointer
- 8000b36:	6181      	str	r1, [r0, #24]
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/AsmStuff.S:218
-
-		LDR		R0,=HighReadyTaskBlock  @Get the newTCB
- 8000b38:	4809      	ldr	r0, [pc, #36]	; (8000b60 <SECOND_CHANGE+0x36>)
+ 8000b22:	6181      	str	r1, [r0, #24]
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/AsmStuff.S:219
-		LDR		R0,[R0]					@Get the new stack pointer
- 8000b3a:	6800      	ldr	r0, [r0, #0]
+										@
+		LDR		R0,=HighReadyTaskBlock  @Get the newTCB
+ 8000b24:	4809      	ldr	r0, [pc, #36]	; (8000b4c <SECOND_CHANGE+0x36>)
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/AsmStuff.S:220
-		LDR		R1,[R0]					@Get task flags
- 8000b3c:	6801      	ldr	r1, [r0, #0]
+		LDR		R0,[R0]					@Get the new stack pointer
+ 8000b26:	6800      	ldr	r0, [r0, #0]
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/AsmStuff.S:221
-		BIC		R1,R1,#1				@clear first time flag
- 8000b3e:	f021 0101 	bic.w	r1, r1, #1
+		LDR		R1,[R0]					@Get task flags
+ 8000b28:	6801      	ldr	r1, [r0, #0]
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/AsmStuff.S:222
-		STR		R1,[R0]					@
- 8000b42:	6001      	str	r1, [r0, #0]
+		BIC		R1,R1,#1				@clear first time flag
+ 8000b2a:	f021 0101 	bic.w	r1, r1, #1
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/AsmStuff.S:223
-		LDR		R1, [R0,#0x00000018]	@
- 8000b44:	6981      	ldr	r1, [r0, #24]
+		STR		R1,[R0]					@
+ 8000b2e:	6001      	str	r1, [r0, #0]
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/AsmStuff.S:224
-		MSR     PSP,R1					@Load the first stack pointer
- 8000b46:	f381 8809 	msr	PSP, r1
+		LDR		R1, [R0,#0x00000018]	@
+ 8000b30:	6981      	ldr	r1, [r0, #24]
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/AsmStuff.S:225
+		MSR     PSP,R1					@Load the first stack pointer
+ 8000b32:	f381 8809 	msr	PSP, r1
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/AsmStuff.S:226
 		B		NO_SAVE					@
- 8000b4a:	f7ff bfdb 	b.w	8000b04 <NO_SAVE>
- 8000b4e:	0000      	.short	0x0000
+ 8000b36:	f7ff bfdb 	b.w	8000af0 <NO_SAVE>
+ 8000b3a:	0000      	.short	0x0000
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/AsmStuff.S:49
 Asm_LowLevelTickInit:
 
 
 		CPSID 	I				@Disable interrupts
-
-		LDR  R1, =0xE000ED14	@
- 8000b50:	e000ed14 	.word	0xe000ed14
+								@
+		LDR  R1, =0xE000ED14	@SCB->CCR
+ 8000b3c:	e000ed14 	.word	0xe000ed14
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/AsmStuff.S:54
 		LDR  R2, [R1]			@
-		ORR  R2,R2,#0x200		@
+		ORR  R2,R2,#0x200		@Enable double word aling
 		STR	 R2,[R1]			@
-
+								@
 		LDR  R1, =0xE000E010    @Load the systick control register contents
- 8000b54:	e000e010 	.word	0xe000e010
+ 8000b40:	e000e010 	.word	0xe000e010
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/AsmStuff.S:65
 								@
 		MOVS R2, #0x00000003    @Enable systick timer and its interrupt
@@ -2112,687 +2094,786 @@ Asm_LowLevelTickInit:
 							    @Load register
 								@
 		LDR   R1, =0xE000ED22  	@PENDSV Priority
- 8000b58:	e000ed22 	.word	0xe000ed22
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/AsmStuff.S:122
+ 8000b44:	e000ed22 	.word	0xe000ed22
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/AsmStuff.S:121
 @************************************************************************
 .thumb_func
 Asm_IntLevelContextChange:
 
 		CPSID 	I					@Disables interrrupts
 		LDR  	R0, =0xE000ED04   	@SCB->ICSR register
- 8000b5c:	e000ed04 	.word	0xe000ed04
+ 8000b48:	e000ed04 	.word	0xe000ed04
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/AsmStuff.S:174
-.thumb_func
 PendSV_Handler:
 		TST		LR,#4					@check the origin of interrupt
-		IT		EQ						@
-		BEQ		FIRST_CHANGE			@fisrt change
-		LDR		R0, =HighReadyTaskBlock @if not, check for second change
- 8000b60:	2000006c 	.word	0x2000006c
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/AsmStuff.S:181
-		LDR		R1,[R0]					@Check the current taskFLag
+		IT		EQ						@if, it from a MSP usage
+		BEQ		FIRST_CHANGE			@
+										@
+		LDR		R0, =HighReadyTaskBlock @if not,
+ 8000b4c:	2000006c 	.word	0x2000006c
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/AsmStuff.S:182
 		TST		R1,#1					@Check if first time flag is set
 		IT		NE						@
 		BNE 	SECOND_CHANGE			@Jump for first context switch
 										@
+										@if, not, runs context switch normally
 		LDR 	R0, =CurrentTaskBlock	@Get the current TCB
- 8000b64:	20000068 	.word	0x20000068
+ 8000b50:	20000068 	.word	0x20000068
 
-08000b68 <Task_InitBlocks>:
+08000b54 <Task_InitBlocks>:
 Task_InitBlocks():
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:79
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:99
  	 return:	TODO
 
 
  ************************************************************************/
 void Task_InitBlocks(void)
 {
- 8000b68:	b580      	push	{r7, lr}
- 8000b6a:	af00      	add	r7, sp, #0
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:81
+ 8000b54:	b580      	push	{r7, lr}
+ 8000b56:	af00      	add	r7, sp, #0
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:101
 	//fill with zeros all TCBS!
 	memset(&TaskBlockList, NULL, sizeof(TaskBlockList));
- 8000b6c:	f640 1074 	movw	r0, #2420	; 0x974
- 8000b70:	f2c2 0000 	movt	r0, #8192	; 0x2000
- 8000b74:	f04f 0100 	mov.w	r1, #0
- 8000b78:	f44f 72a0 	mov.w	r2, #320	; 0x140
- 8000b7c:	f000 f96a 	bl	8000e54 <memset>
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:82
+ 8000b58:	f640 1074 	movw	r0, #2420	; 0x974
+ 8000b5c:	f2c2 0000 	movt	r0, #8192	; 0x2000
+ 8000b60:	f04f 0100 	mov.w	r1, #0
+ 8000b64:	f44f 72a0 	mov.w	r2, #320	; 0x140
+ 8000b68:	f000 f974 	bl	8000e54 <memset>
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:102
 }
- 8000b80:	bd80      	pop	{r7, pc}
- 8000b82:	bf00      	nop
+ 8000b6c:	bd80      	pop	{r7, pc}
+ 8000b6e:	bf00      	nop
 
-08000b84 <Task_Create>:
+08000b70 <Task_Create>:
 Task_Create():
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:99
-
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:120
  ************************************************************************/
-os_error_t 	Task_Create(taskptr_t (*TaskAction), os_stack_t *TaskStack,
-						uint8_t TaskPriority, os_taskname_t *TaskName, uint8_t NameSize,
-						os_stack_t StackSize)
+os_error_t 	Task_Create
+			(taskptr_t (*TaskAction), os_stack_t *TaskStack,
+			uint8_t TaskPriority, os_taskname_t *TaskName,
+			uint8_t NameSize,os_stack_t StackSize)
 {
- 8000b84:	b480      	push	{r7}
- 8000b86:	b089      	sub	sp, #36	; 0x24
- 8000b88:	af00      	add	r7, sp, #0
- 8000b8a:	60f8      	str	r0, [r7, #12]
- 8000b8c:	60b9      	str	r1, [r7, #8]
- 8000b8e:	603b      	str	r3, [r7, #0]
- 8000b90:	4613      	mov	r3, r2
- 8000b92:	71fb      	strb	r3, [r7, #7]
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:100
+ 8000b70:	b480      	push	{r7}
+ 8000b72:	b089      	sub	sp, #36	; 0x24
+ 8000b74:	af00      	add	r7, sp, #0
+ 8000b76:	60f8      	str	r0, [r7, #12]
+ 8000b78:	60b9      	str	r1, [r7, #8]
+ 8000b7a:	603b      	str	r3, [r7, #0]
+ 8000b7c:	4613      	mov	r3, r2
+ 8000b7e:	71fb      	strb	r3, [r7, #7]
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:121
 	taskTCB_t *TaskList 		= &TaskBlockList,
- 8000b94:	f640 1374 	movw	r3, #2420	; 0x974
- 8000b98:	f2c2 0300 	movt	r3, #8192	; 0x2000
- 8000b9c:	61fb      	str	r3, [r7, #28]
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:101
-			  *TaskToBeLinked	= &TaskBlockList; //points to tasklist
- 8000b9e:	f640 1374 	movw	r3, #2420	; 0x974
- 8000ba2:	f2c2 0300 	movt	r3, #8192	; 0x2000
- 8000ba6:	617b      	str	r3, [r7, #20]
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:103
+ 8000b80:	f640 1374 	movw	r3, #2420	; 0x974
+ 8000b84:	f2c2 0300 	movt	r3, #8192	; 0x2000
+ 8000b88:	61fb      	str	r3, [r7, #28]
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:122
+			  *TaskToBeLinked	= &TaskBlockList;
+ 8000b8a:	f640 1374 	movw	r3, #2420	; 0x974
+ 8000b8e:	f2c2 0300 	movt	r3, #8192	; 0x2000
+ 8000b92:	617b      	str	r3, [r7, #20]
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:124
 
-	uint8_t    LoopCntr = 0; //simple loop coounter
- 8000ba8:	f04f 0300 	mov.w	r3, #0
- 8000bac:	76fb      	strb	r3, [r7, #27]
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:106
+	uint8_t    LoopCntr = 0;
+ 8000b94:	f04f 0300 	mov.w	r3, #0
+ 8000b98:	76fb      	strb	r3, [r7, #27]
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:127
 
 	//check for size of taskname:
 	if(NameSize > 32)
- 8000bae:	f897 3028 	ldrb.w	r3, [r7, #40]	; 0x28
- 8000bb2:	2b20      	cmp	r3, #32
- 8000bb4:	d902      	bls.n	8000bbc <Task_Create+0x38>
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:108
+ 8000b9a:	f897 3028 	ldrb.w	r3, [r7, #40]	; 0x28
+ 8000b9e:	2b20      	cmp	r3, #32
+ 8000ba0:	d902      	bls.n	8000ba8 <Task_Create+0x38>
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:130
 	{
+		//return error if too long
 		return(OS_NAME_TOO_LONG);
- 8000bb6:	f04f 0305 	mov.w	r3, #5
- 8000bba:	e0cc      	b.n	8000d56 <Task_Create+0x1d2>
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:112
+ 8000ba2:	f04f 0305 	mov.w	r3, #5
+ 8000ba6:	e0d1      	b.n	8000d4c <Task_Create+0x1dc>
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:134
 	}
 
 	//first check for a empty task block
 	for(LoopCntr = 0; LoopCntr <= NUMBER_OF_TASK ; LoopCntr++)
- 8000bbc:	f04f 0300 	mov.w	r3, #0
- 8000bc0:	76fb      	strb	r3, [r7, #27]
- 8000bc2:	e051      	b.n	8000c68 <Task_Create+0xe4>
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:115
+ 8000ba8:	f04f 0300 	mov.w	r3, #0
+ 8000bac:	76fb      	strb	r3, [r7, #27]
+ 8000bae:	e053      	b.n	8000c58 <Task_Create+0xe8>
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:137
 	{
 		//check if current TCB is empty
 		if(EMPTY == TaskList->EmptyTCB)
- 8000bc4:	69fb      	ldr	r3, [r7, #28]
- 8000bc6:	691b      	ldr	r3, [r3, #16]
- 8000bc8:	2b00      	cmp	r3, #0
- 8000bca:	d136      	bne.n	8000c3a <Task_Create+0xb6>
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:118
+ 8000bb0:	69fb      	ldr	r3, [r7, #28]
+ 8000bb2:	691b      	ldr	r3, [r3, #16]
+ 8000bb4:	2b00      	cmp	r3, #0
+ 8000bb6:	d138      	bne.n	8000c2a <Task_Create+0xba>
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:142
 		{
-			//fill te task TCB
-			TaskList->TaskAction =(taskptr_t *)TaskAction; //the task method
- 8000bcc:	68fa      	ldr	r2, [r7, #12]
- 8000bce:	69fb      	ldr	r3, [r7, #28]
- 8000bd0:	61da      	str	r2, [r3, #28]
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:120
+			//if yes,fill the task TCB
+
+			//put the task function
+			TaskList->TaskAction =(taskptr_t *)TaskAction;
+ 8000bb8:	68fa      	ldr	r2, [r7, #12]
+ 8000bba:	69fb      	ldr	r3, [r7, #28]
+ 8000bbc:	61da      	str	r2, [r3, #28]
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:146
+
+			//put the task stack, and points to its top.
 			TaskList->TaskStack  =(os_stack_t* )(TaskStack +
-								  (StackSize>>2) - 1); //the task stack
- 8000bd2:	6afb      	ldr	r3, [r7, #44]	; 0x2c
- 8000bd4:	ea4f 0393 	mov.w	r3, r3, lsr #2
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:119
-		//check if current TCB is empty
-		if(EMPTY == TaskList->EmptyTCB)
-		{
-			//fill te task TCB
-			TaskList->TaskAction =(taskptr_t *)TaskAction; //the task method
+								  (StackSize>>2) - 1);
+ 8000bbe:	6afb      	ldr	r3, [r7, #44]	; 0x2c
+ 8000bc0:	ea4f 0393 	mov.w	r3, r3, lsr #2
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:145
+
+			//put the task function
+			TaskList->TaskAction =(taskptr_t *)TaskAction;
+
+			//put the task stack, and points to its top.
 			TaskList->TaskStack  =(os_stack_t* )(TaskStack +
- 8000bd8:	f103 33ff 	add.w	r3, r3, #4294967295	; 0xffffffff
- 8000bdc:	ea4f 0383 	mov.w	r3, r3, lsl #2
- 8000be0:	68ba      	ldr	r2, [r7, #8]
- 8000be2:	18d2      	adds	r2, r2, r3
- 8000be4:	69fb      	ldr	r3, [r7, #28]
- 8000be6:	619a      	str	r2, [r3, #24]
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:123
-								  (StackSize>>2) - 1); //the task stack
+ 8000bc4:	f103 33ff 	add.w	r3, r3, #4294967295	; 0xffffffff
+ 8000bc8:	ea4f 0383 	mov.w	r3, r3, lsl #2
+ 8000bcc:	68ba      	ldr	r2, [r7, #8]
+ 8000bce:	18d2      	adds	r2, r2, r3
+ 8000bd0:	69fb      	ldr	r3, [r7, #28]
+ 8000bd2:	619a      	str	r2, [r3, #24]
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:149
+								  (StackSize>>2) - 1);
 
 			//check for priority given
 			if(TaskPriority < MAX_PRIORITY || TaskPriority > LESS_PRIORITY)
- 8000be8:	79fb      	ldrb	r3, [r7, #7]
- 8000bea:	2b1f      	cmp	r3, #31
- 8000bec:	d902      	bls.n	8000bf4 <Task_Create+0x70>
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:126
+ 8000bd4:	79fb      	ldrb	r3, [r7, #7]
+ 8000bd6:	2b1f      	cmp	r3, #31
+ 8000bd8:	d902      	bls.n	8000be0 <Task_Create+0x70>
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:152
 			{
-				//return the system error
+				//return if the priority is invalid
 				return(OS_PRIORITY_OUT_OF_RANGE);
- 8000bee:	f04f 0303 	mov.w	r3, #3
- 8000bf2:	e0b0      	b.n	8000d56 <Task_Create+0x1d2>
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:128
-			}
-			TaskList->TaskPriority = TaskPriority & 0x1F; //the task priority
- 8000bf4:	79fb      	ldrb	r3, [r7, #7]
- 8000bf6:	f003 031f 	and.w	r3, r3, #31
- 8000bfa:	b2da      	uxtb	r2, r3
- 8000bfc:	69fb      	ldr	r3, [r7, #28]
- 8000bfe:	735a      	strb	r2, [r3, #13]
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:129
-			TaskList->TaskName = TaskName; 				  //gives name for task
- 8000c00:	69fb      	ldr	r3, [r7, #28]
- 8000c02:	683a      	ldr	r2, [r7, #0]
- 8000c04:	615a      	str	r2, [r3, #20]
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:130
-			TaskList->TaskID   = LoopCntr;				  //gives an ID for Task
- 8000c06:	69fb      	ldr	r3, [r7, #28]
- 8000c08:	7efa      	ldrb	r2, [r7, #27]
- 8000c0a:	731a      	strb	r2, [r3, #12]
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:131
-			TaskList->TaskElapsedTime = 0;                //zero the elapsed time
+ 8000bda:	f04f 0303 	mov.w	r3, #3
+ 8000bde:	e0b5      	b.n	8000d4c <Task_Create+0x1dc>
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:159
+
+			//if priority is ok, continues to fill
+			//the TCB
+
+			//mask, and put the priority
+			TaskList->TaskPriority = TaskPriority & 0x1F;
+ 8000be0:	79fb      	ldrb	r3, [r7, #7]
+ 8000be2:	f003 031f 	and.w	r3, r3, #31
+ 8000be6:	b2da      	uxtb	r2, r3
+ 8000be8:	69fb      	ldr	r3, [r7, #28]
+ 8000bea:	735a      	strb	r2, [r3, #13]
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:162
+
+			//Points to the task name
+			TaskList->TaskName = TaskName;
+ 8000bec:	69fb      	ldr	r3, [r7, #28]
+ 8000bee:	683a      	ldr	r2, [r7, #0]
+ 8000bf0:	615a      	str	r2, [r3, #20]
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:165
+
+			//puts the calculated ID
+			TaskList->TaskID   = LoopCntr;
+ 8000bf2:	69fb      	ldr	r3, [r7, #28]
+ 8000bf4:	7efa      	ldrb	r2, [r7, #27]
+ 8000bf6:	731a      	strb	r2, [r3, #12]
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:168
+
+			//reset the time elapsed counter
+			TaskList->TaskElapsedTime = 0;
+ 8000bf8:	69fb      	ldr	r3, [r7, #28]
+ 8000bfa:	f04f 0200 	mov.w	r2, #0
+ 8000bfe:	609a      	str	r2, [r3, #8]
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:172
+
+			//calculate its deadline, based on
+			//its priority
+			TaskList->TaskTime = OS_TICKS +
+ 8000c00:	79fb      	ldrb	r3, [r7, #7]
+ 8000c02:	f503 737a 	add.w	r3, r3, #1000	; 0x3e8
+ 8000c06:	461a      	mov	r2, r3
+ 8000c08:	69fb      	ldr	r3, [r7, #28]
+ 8000c0a:	605a      	str	r2, [r3, #4]
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:176
+								TaskPriority;
+
+			//Put the initial TCB state
+			TaskList->TaskState   = TASK_READY;
  8000c0c:	69fb      	ldr	r3, [r7, #28]
  8000c0e:	f04f 0200 	mov.w	r2, #0
- 8000c12:	609a      	str	r2, [r3, #8]
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:132
-			TaskList->TaskDelayed = OS_TICKS;			  //byDefault the task is executed
+ 8000c12:	73da      	strb	r2, [r3, #15]
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:179
+
+			//if all gone well, occupies the TCB
+			TaskList->EmptyTCB    =  FILLED;
  8000c14:	69fb      	ldr	r3, [r7, #28]
- 8000c16:	f04f 02e8 	mov.w	r2, #232	; 0xe8
- 8000c1a:	739a      	strb	r2, [r3, #14]
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:134
-														  //after 1 OS_TICKS
-			TaskList->TaskState   = TASK_READY;			  //task initial state
+ 8000c16:	f04f 02ff 	mov.w	r2, #255	; 0xff
+ 8000c1a:	611a      	str	r2, [r3, #16]
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:182
+
+			//Set the first time execution flag.
+			TaskList->TaskFlags  |= TASK_FLAG_IS_FIRST_TIME;
  8000c1c:	69fb      	ldr	r3, [r7, #28]
- 8000c1e:	f04f 0200 	mov.w	r2, #0
- 8000c22:	73da      	strb	r2, [r3, #15]
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:136
-
-			TaskList->EmptyTCB    =  FILLED;				  //occupies the TCB
+ 8000c1e:	681b      	ldr	r3, [r3, #0]
+ 8000c20:	f043 0201 	orr.w	r2, r3, #1
  8000c24:	69fb      	ldr	r3, [r7, #28]
- 8000c26:	f04f 02ff 	mov.w	r2, #255	; 0xff
- 8000c2a:	611a      	str	r2, [r3, #16]
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:137
-			TaskList->TaskFlags  |= TASK_FLAG_IS_FIRST_TIME;  //task has never executed
- 8000c2c:	69fb      	ldr	r3, [r7, #28]
- 8000c2e:	681b      	ldr	r3, [r3, #0]
- 8000c30:	f043 0201 	orr.w	r2, r3, #1
- 8000c34:	69fb      	ldr	r3, [r7, #28]
- 8000c36:	601a      	str	r2, [r3, #0]
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:141
+ 8000c26:	601a      	str	r2, [r3, #0]
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:185
 
-
-
-			break; //break the loop
- 8000c38:	e019      	b.n	8000c6e <Task_Create+0xea>
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:146
+			//filled TCB, break this loop
+			break;
+ 8000c28:	e019      	b.n	8000c5e <Task_Create+0xee>
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:191
 
 		}
 		else
 		{
-			TaskList = &TaskBlockList[LoopCntr]; //if not check for next TCB
- 8000c3a:	7efa      	ldrb	r2, [r7, #27]
- 8000c3c:	4613      	mov	r3, r2
- 8000c3e:	ea4f 0383 	mov.w	r3, r3, lsl #2
- 8000c42:	189b      	adds	r3, r3, r2
- 8000c44:	ea4f 03c3 	mov.w	r3, r3, lsl #3
- 8000c48:	f640 1274 	movw	r2, #2420	; 0x974
- 8000c4c:	f2c2 0200 	movt	r2, #8192	; 0x2000
- 8000c50:	189b      	adds	r3, r3, r2
- 8000c52:	61fb      	str	r3, [r7, #28]
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:147
+			//else, try next TCB
+			TaskList = &TaskBlockList[LoopCntr];
+ 8000c2a:	7efa      	ldrb	r2, [r7, #27]
+ 8000c2c:	4613      	mov	r3, r2
+ 8000c2e:	ea4f 0383 	mov.w	r3, r3, lsl #2
+ 8000c32:	189b      	adds	r3, r3, r2
+ 8000c34:	ea4f 03c3 	mov.w	r3, r3, lsl #3
+ 8000c38:	f640 1274 	movw	r2, #2420	; 0x974
+ 8000c3c:	f2c2 0200 	movt	r2, #8192	; 0x2000
+ 8000c40:	189b      	adds	r3, r3, r2
+ 8000c42:	61fb      	str	r3, [r7, #28]
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:194
+
+			//check for tasklist full
 			if(NUMBER_OF_TASK - 1  <  LoopCntr)
- 8000c54:	7efb      	ldrb	r3, [r7, #27]
- 8000c56:	2b06      	cmp	r3, #6
- 8000c58:	d902      	bls.n	8000c60 <Task_Create+0xdc>
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:149
+ 8000c44:	7efb      	ldrb	r3, [r7, #27]
+ 8000c46:	2b06      	cmp	r3, #6
+ 8000c48:	d902      	bls.n	8000c50 <Task_Create+0xe0>
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:197
 			{
+				//if yes, return error
 				return(OS_TASKLIST_FULL);
- 8000c5a:	f04f 0302 	mov.w	r3, #2
- 8000c5e:	e07a      	b.n	8000d56 <Task_Create+0x1d2>
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:112
-	{
+ 8000c4a:	f04f 0302 	mov.w	r3, #2
+ 8000c4e:	e07d      	b.n	8000d4c <Task_Create+0x1dc>
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:134
+		//return error if too long
 		return(OS_NAME_TOO_LONG);
 	}
 
 	//first check for a empty task block
 	for(LoopCntr = 0; LoopCntr <= NUMBER_OF_TASK ; LoopCntr++)
- 8000c60:	7efb      	ldrb	r3, [r7, #27]
- 8000c62:	f103 0301 	add.w	r3, r3, #1
- 8000c66:	76fb      	strb	r3, [r7, #27]
- 8000c68:	7efb      	ldrb	r3, [r7, #27]
- 8000c6a:	2b07      	cmp	r3, #7
- 8000c6c:	d9aa      	bls.n	8000bc4 <Task_Create+0x40>
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:156
-		}
-
+ 8000c50:	7efb      	ldrb	r3, [r7, #27]
+ 8000c52:	f103 0301 	add.w	r3, r3, #1
+ 8000c56:	76fb      	strb	r3, [r7, #27]
+ 8000c58:	7efb      	ldrb	r3, [r7, #27]
+ 8000c5a:	2b07      	cmp	r3, #7
+ 8000c5c:	d9a8      	bls.n	8000bb0 <Task_Create+0x40>
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:206
 	}
 	//after fill the taskblock is time to insert it on the
 	//tasklist linked list
-	TaskList = &TaskBlockList[NUMBER_OF_TASK]; //first points to the TCB Head
- 8000c6e:	4b3d      	ldr	r3, [pc, #244]	; (8000d64 <Task_Create+0x1e0>)
- 8000c70:	61fb      	str	r3, [r7, #28]
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:159
+
+	//Points first to the last TCB in Table(is head)
+	TaskList = &TaskBlockList[NUMBER_OF_TASK];
+ 8000c5e:	4b3e      	ldr	r3, [pc, #248]	; (8000d58 <Task_Create+0x1e8>)
+ 8000c60:	61fb      	str	r3, [r7, #28]
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:209
 
 	//check if Idle TCB was already initialized:
 	if(EMPTY == TaskList->EmptyTCB)
- 8000c72:	69fb      	ldr	r3, [r7, #28]
- 8000c74:	691b      	ldr	r3, [r3, #16]
- 8000c76:	2b00      	cmp	r3, #0
- 8000c78:	d149      	bne.n	8000d0e <Task_Create+0x18a>
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:162
+ 8000c62:	69fb      	ldr	r3, [r7, #28]
+ 8000c64:	691b      	ldr	r3, [r3, #16]
+ 8000c66:	2b00      	cmp	r3, #0
+ 8000c68:	d14c      	bne.n	8000d04 <Task_Create+0x194>
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:214
 	{
 		//if not, initialize it.
-		TaskList->TaskAction = (taskptr_t *)& Task_Idle; //assign the idle task
- 8000c7a:	69fa      	ldr	r2, [r7, #28]
- 8000c7c:	f240 6325 	movw	r3, #1573	; 0x625
- 8000c80:	f6c0 0300 	movt	r3, #2048	; 0x800
- 8000c84:	61d3      	str	r3, [r2, #28]
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:163
-		TaskList->TaskStack  = &IdleTaskStack + 64;			//assign a stack
- 8000c86:	69fb      	ldr	r3, [r7, #28]
- 8000c88:	4a37      	ldr	r2, [pc, #220]	; (8000d68 <Task_Create+0x1e4>)
- 8000c8a:	619a      	str	r2, [r3, #24]
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:164
-		TaskList->TaskPriority = LESS_PRIORITY + 1; 	// Idletask has the least priority
- 8000c8c:	69fb      	ldr	r3, [r7, #28]
- 8000c8e:	f04f 0220 	mov.w	r2, #32
- 8000c92:	735a      	strb	r2, [r3, #13]
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:165
-		TaskList->TaskName = (os_taskname_t *) &IdleName;//gives name for task
- 8000c94:	69fa      	ldr	r2, [r7, #28]
- 8000c96:	f640 7380 	movw	r3, #3968	; 0xf80
- 8000c9a:	f6c0 0300 	movt	r3, #2048	; 0x800
- 8000c9e:	6153      	str	r3, [r2, #20]
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:166
-		TaskList->TaskID   = NUMBER_OF_TASK + 1;		 //gives an ID for Task
+
+		//Put the task function (Task Idle)
+		TaskList->TaskAction = (taskptr_t *)& Task_Idle;
+ 8000c6a:	69fa      	ldr	r2, [r7, #28]
+ 8000c6c:	f640 6349 	movw	r3, #3657	; 0xe49
+ 8000c70:	f6c0 0300 	movt	r3, #2048	; 0x800
+ 8000c74:	61d3      	str	r3, [r2, #28]
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:217
+
+		//Points to task stack
+		TaskList->TaskStack  = (os_stack_t *)(IdleTaskStack +
+ 8000c76:	69fb      	ldr	r3, [r7, #28]
+ 8000c78:	4a38      	ldr	r2, [pc, #224]	; (8000d5c <Task_Create+0x1ec>)
+ 8000c7a:	619a      	str	r2, [r3, #24]
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:221
+							   (sizeof(IdleTaskStack) >> 2) - 1);
+
+		//Assign its priority(is the least)
+		TaskList->TaskPriority = LESS_PRIORITY + 1;
+ 8000c7c:	69fb      	ldr	r3, [r7, #28]
+ 8000c7e:	f04f 0220 	mov.w	r2, #32
+ 8000c82:	735a      	strb	r2, [r3, #13]
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:224
+
+		//Assign its name pointing to it
+		TaskList->TaskName = (os_taskname_t *) &IdleName;
+ 8000c84:	69fa      	ldr	r2, [r7, #28]
+ 8000c86:	f640 7380 	movw	r3, #3968	; 0xf80
+ 8000c8a:	f6c0 0300 	movt	r3, #2048	; 0x800
+ 8000c8e:	6153      	str	r3, [r2, #20]
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:227
+
+		//Its ID is always the greater on tasklist
+		TaskList->TaskID = NUMBER_OF_TASK + 1;
+ 8000c90:	69fb      	ldr	r3, [r7, #28]
+ 8000c92:	f04f 0208 	mov.w	r2, #8
+ 8000c96:	731a      	strb	r2, [r3, #12]
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:230
+
+		//Reset its time counter
+		TaskList->TaskElapsedTime = 0;
+ 8000c98:	69fb      	ldr	r3, [r7, #28]
+ 8000c9a:	f04f 0200 	mov.w	r2, #0
+ 8000c9e:	609a      	str	r2, [r3, #8]
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:234
+
+		//Assign its Deadline based on its priority
+		TaskList->TaskTime = OS_TICKS +
+							TaskList->TaskPriority;
  8000ca0:	69fb      	ldr	r3, [r7, #28]
- 8000ca2:	f04f 0208 	mov.w	r2, #8
- 8000ca6:	731a      	strb	r2, [r3, #12]
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:167
-		TaskList->TaskElapsedTime = 0;                //zero the elapsed time
- 8000ca8:	69fb      	ldr	r3, [r7, #28]
- 8000caa:	f04f 0200 	mov.w	r2, #0
- 8000cae:	609a      	str	r2, [r3, #8]
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:168
-		TaskList->TaskTime 		  = OS_TICKS;		  //byDefault the task time slot offset
- 8000cb0:	69fb      	ldr	r3, [r7, #28]
- 8000cb2:	f44f 727a 	mov.w	r2, #1000	; 0x3e8
- 8000cb6:	605a      	str	r2, [r3, #4]
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:170
-													  // is 1 Tick
-		TaskList->TaskState   = TASK_READY;			  //task initial state
- 8000cb8:	69fb      	ldr	r3, [r7, #28]
- 8000cba:	f04f 0200 	mov.w	r2, #0
- 8000cbe:	73da      	strb	r2, [r3, #15]
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:172
+ 8000ca2:	7b5b      	ldrb	r3, [r3, #13]
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:233
 
-		TaskList->EmptyTCB    =  FILLED;				  //occupies the TCB
- 8000cc0:	69fb      	ldr	r3, [r7, #28]
- 8000cc2:	f04f 02ff 	mov.w	r2, #255	; 0xff
- 8000cc6:	611a      	str	r2, [r3, #16]
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:174
+		//Reset its time counter
+		TaskList->TaskElapsedTime = 0;
 
-		TaskList->NextTask    = &TaskBlockList[LoopCntr]; //aditionally attach the desired task on the linked list
- 8000cc8:	7efa      	ldrb	r2, [r7, #27]
- 8000cca:	4613      	mov	r3, r2
- 8000ccc:	ea4f 0383 	mov.w	r3, r3, lsl #2
- 8000cd0:	189b      	adds	r3, r3, r2
- 8000cd2:	ea4f 03c3 	mov.w	r3, r3, lsl #3
- 8000cd6:	f640 1274 	movw	r2, #2420	; 0x974
- 8000cda:	f2c2 0200 	movt	r2, #8192	; 0x2000
- 8000cde:	189a      	adds	r2, r3, r2
- 8000ce0:	69fb      	ldr	r3, [r7, #28]
- 8000ce2:	621a      	str	r2, [r3, #32]
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:176
+		//Assign its Deadline based on its priority
+		TaskList->TaskTime = OS_TICKS +
+ 8000ca4:	f503 737a 	add.w	r3, r3, #1000	; 0x3e8
+ 8000ca8:	461a      	mov	r2, r3
+ 8000caa:	69fb      	ldr	r3, [r7, #28]
+ 8000cac:	605a      	str	r2, [r3, #4]
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:237
+							TaskList->TaskPriority;
 
+		//Set the initial state
+		TaskList->TaskState   = TASK_READY;
+ 8000cae:	69fb      	ldr	r3, [r7, #28]
+ 8000cb0:	f04f 0200 	mov.w	r2, #0
+ 8000cb4:	73da      	strb	r2, [r3, #15]
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:240
+
+		//Occupie its TCB
+		TaskList->EmptyTCB    =  FILLED;
+ 8000cb6:	69fb      	ldr	r3, [r7, #28]
+ 8000cb8:	f04f 02ff 	mov.w	r2, #255	; 0xff
+ 8000cbc:	611a      	str	r2, [r3, #16]
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:243
+
+		//Additionally, attach its as head of tasklist
+		TaskList->NextTask    = &TaskBlockList[LoopCntr];
+ 8000cbe:	7efa      	ldrb	r2, [r7, #27]
+ 8000cc0:	4613      	mov	r3, r2
+ 8000cc2:	ea4f 0383 	mov.w	r3, r3, lsl #2
+ 8000cc6:	189b      	adds	r3, r3, r2
+ 8000cc8:	ea4f 03c3 	mov.w	r3, r3, lsl #3
+ 8000ccc:	f640 1274 	movw	r2, #2420	; 0x974
+ 8000cd0:	f2c2 0200 	movt	r2, #8192	; 0x2000
+ 8000cd4:	189a      	adds	r2, r3, r2
+ 8000cd6:	69fb      	ldr	r3, [r7, #28]
+ 8000cd8:	621a      	str	r2, [r3, #32]
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:246
+
+		//attach next task...
 		TaskList = TaskList->NextTask;
- 8000ce4:	69fb      	ldr	r3, [r7, #28]
- 8000ce6:	6a1b      	ldr	r3, [r3, #32]
- 8000ce8:	61fb      	str	r3, [r7, #28]
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:178
+ 8000cda:	69fb      	ldr	r3, [r7, #28]
+ 8000cdc:	6a1b      	ldr	r3, [r3, #32]
+ 8000cde:	61fb      	str	r3, [r7, #28]
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:249
 
+		//...and the previous task
 		TaskList->PrevTask = &TaskBlockList[NUMBER_OF_TASK];
- 8000cea:	69fb      	ldr	r3, [r7, #28]
- 8000cec:	4a1d      	ldr	r2, [pc, #116]	; (8000d64 <Task_Create+0x1e0>)
- 8000cee:	625a      	str	r2, [r3, #36]	; 0x24
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:180
+ 8000ce0:	69fb      	ldr	r3, [r7, #28]
+ 8000ce2:	4a1d      	ldr	r2, [pc, #116]	; (8000d58 <Task_Create+0x1e8>)
+ 8000ce4:	625a      	str	r2, [r3, #36]	; 0x24
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:252
 
-		TaskList->NextTask = END_LIST; //marks the end of list
- 8000cf0:	69fb      	ldr	r3, [r7, #28]
- 8000cf2:	f04f 0200 	mov.w	r2, #0
- 8000cf6:	621a      	str	r2, [r3, #32]
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:183
+		//marks the end of list
+		TaskList->NextTask = END_LIST;
+ 8000ce6:	69fb      	ldr	r3, [r7, #28]
+ 8000ce8:	f04f 0200 	mov.w	r2, #0
+ 8000cec:	621a      	str	r2, [r3, #32]
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:255
 
 		//Declare that task has never executed
 		TaskList->TaskFlags |= TASK_FLAG_IS_FIRST_TIME;
- 8000cf8:	69fb      	ldr	r3, [r7, #28]
- 8000cfa:	681b      	ldr	r3, [r3, #0]
- 8000cfc:	f043 0201 	orr.w	r2, r3, #1
- 8000d00:	69fb      	ldr	r3, [r7, #28]
- 8000d02:	601a      	str	r2, [r3, #0]
- 8000d04:	e025      	b.n	8000d52 <Task_Create+0x1ce>
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:191
-	else	//else only uses it as a start of the linked list
+ 8000cee:	69fb      	ldr	r3, [r7, #28]
+ 8000cf0:	681b      	ldr	r3, [r3, #0]
+ 8000cf2:	f043 0201 	orr.w	r2, r3, #1
+ 8000cf6:	69fb      	ldr	r3, [r7, #28]
+ 8000cf8:	601a      	str	r2, [r3, #0]
+ 8000cfa:	e025      	b.n	8000d48 <Task_Create+0x1d8>
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:267
 	{
+
 		while(END_LIST != TaskList->NextTask)
 		{
 			//goes trhough the linked list:
 			TaskList = TaskList->NextTask;
+ 8000cfc:	69fb      	ldr	r3, [r7, #28]
+ 8000cfe:	6a1b      	ldr	r3, [r3, #32]
+ 8000d00:	61fb      	str	r3, [r7, #28]
+ 8000d02:	e000      	b.n	8000d06 <Task_Create+0x196>
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:264
+	//if Head of list exists, then attach the
+	//TCB desired on it.
+	else
+	{
+
+		while(END_LIST != TaskList->NextTask)
+ 8000d04:	bf00      	nop
  8000d06:	69fb      	ldr	r3, [r7, #28]
  8000d08:	6a1b      	ldr	r3, [r3, #32]
- 8000d0a:	61fb      	str	r3, [r7, #28]
- 8000d0c:	e000      	b.n	8000d10 <Task_Create+0x18c>
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:188
-		TaskList->TaskFlags |= TASK_FLAG_IS_FIRST_TIME;
-
-	}
-	else	//else only uses it as a start of the linked list
-	{
-		while(END_LIST != TaskList->NextTask)
- 8000d0e:	bf00      	nop
- 8000d10:	69fb      	ldr	r3, [r7, #28]
- 8000d12:	6a1b      	ldr	r3, [r3, #32]
- 8000d14:	2b00      	cmp	r3, #0
- 8000d16:	d1f6      	bne.n	8000d06 <Task_Create+0x182>
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:194
-		{
-			//goes trhough the linked list:
-			TaskList = TaskList->NextTask;
+ 8000d0a:	2b00      	cmp	r3, #0
+ 8000d0c:	d1f6      	bne.n	8000cfc <Task_Create+0x18c>
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:273
 		}
-		//when the end of list is found
-		TaskList->NextTask = &TaskBlockList[LoopCntr - 1]; //attach the new task in the linked list
- 8000d18:	7efb      	ldrb	r3, [r7, #27]
- 8000d1a:	f103 32ff 	add.w	r2, r3, #4294967295	; 0xffffffff
- 8000d1e:	4613      	mov	r3, r2
- 8000d20:	ea4f 0383 	mov.w	r3, r3, lsl #2
- 8000d24:	189b      	adds	r3, r3, r2
- 8000d26:	ea4f 03c3 	mov.w	r3, r3, lsl #3
- 8000d2a:	f640 1274 	movw	r2, #2420	; 0x974
- 8000d2e:	f2c2 0200 	movt	r2, #8192	; 0x2000
- 8000d32:	189a      	adds	r2, r3, r2
- 8000d34:	69fb      	ldr	r3, [r7, #28]
- 8000d36:	621a      	str	r2, [r3, #32]
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:195
-		TaskToBeLinked     = TaskList->NextTask;
- 8000d38:	69fb      	ldr	r3, [r7, #28]
- 8000d3a:	6a1b      	ldr	r3, [r3, #32]
- 8000d3c:	617b      	str	r3, [r7, #20]
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:198
 
-		//attach the previous task
+		//when the end of list is found
+
+		//The last item of list points to our new TCB
+		TaskList->NextTask = &TaskBlockList[LoopCntr - 1];
+ 8000d0e:	7efb      	ldrb	r3, [r7, #27]
+ 8000d10:	f103 32ff 	add.w	r2, r3, #4294967295	; 0xffffffff
+ 8000d14:	4613      	mov	r3, r2
+ 8000d16:	ea4f 0383 	mov.w	r3, r3, lsl #2
+ 8000d1a:	189b      	adds	r3, r3, r2
+ 8000d1c:	ea4f 03c3 	mov.w	r3, r3, lsl #3
+ 8000d20:	f640 1274 	movw	r2, #2420	; 0x974
+ 8000d24:	f2c2 0200 	movt	r2, #8192	; 0x2000
+ 8000d28:	189a      	adds	r2, r3, r2
+ 8000d2a:	69fb      	ldr	r3, [r7, #28]
+ 8000d2c:	621a      	str	r2, [r3, #32]
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:276
+
+		//and our new TCB...
+		TaskToBeLinked     = TaskList->NextTask;
+ 8000d2e:	69fb      	ldr	r3, [r7, #28]
+ 8000d30:	6a1b      	ldr	r3, [r3, #32]
+ 8000d32:	617b      	str	r3, [r7, #20]
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:279
+
+		//...points to the ex-last item as previous task
 		TaskToBeLinked->PrevTask = TaskList;
- 8000d3e:	697b      	ldr	r3, [r7, #20]
- 8000d40:	69fa      	ldr	r2, [r7, #28]
- 8000d42:	625a      	str	r2, [r3, #36]	; 0x24
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:201
+ 8000d34:	697b      	ldr	r3, [r7, #20]
+ 8000d36:	69fa      	ldr	r2, [r7, #28]
+ 8000d38:	625a      	str	r2, [r3, #36]	; 0x24
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:282
 
 		//marks the new end of list
 		TaskList = TaskList->NextTask;
- 8000d44:	69fb      	ldr	r3, [r7, #28]
- 8000d46:	6a1b      	ldr	r3, [r3, #32]
- 8000d48:	61fb      	str	r3, [r7, #28]
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:203
+ 8000d3a:	69fb      	ldr	r3, [r7, #28]
+ 8000d3c:	6a1b      	ldr	r3, [r3, #32]
+ 8000d3e:	61fb      	str	r3, [r7, #28]
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:285
+
 
 		TaskList->NextTask = END_LIST;
- 8000d4a:	69fb      	ldr	r3, [r7, #28]
- 8000d4c:	f04f 0200 	mov.w	r2, #0
- 8000d50:	621a      	str	r2, [r3, #32]
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:207
+ 8000d40:	69fb      	ldr	r3, [r7, #28]
+ 8000d42:	f04f 0200 	mov.w	r2, #0
+ 8000d46:	621a      	str	r2, [r3, #32]
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:290
 
 	}
 
+	//return a ok, if all gone well :)
 	return(OS_OK);
- 8000d52:	f04f 0300 	mov.w	r3, #0
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:208
+ 8000d48:	f04f 0300 	mov.w	r3, #0
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:291
 }
- 8000d56:	4618      	mov	r0, r3
- 8000d58:	f107 0724 	add.w	r7, r7, #36	; 0x24
- 8000d5c:	46bd      	mov	sp, r7
- 8000d5e:	bc80      	pop	{r7}
- 8000d60:	4770      	bx	lr
- 8000d62:	bf00      	nop
- 8000d64:	20000a8c 	.word	0x20000a8c
- 8000d68:	20004874 	.word	0x20004874
+ 8000d4c:	4618      	mov	r0, r3
+ 8000d4e:	f107 0724 	add.w	r7, r7, #36	; 0x24
+ 8000d52:	46bd      	mov	sp, r7
+ 8000d54:	bc80      	pop	{r7}
+ 8000d56:	4770      	bx	lr
+ 8000d58:	20000a8c 	.word	0x20000a8c
+ 8000d5c:	20000970 	.word	0x20000970
 
-08000d6c <Task_GetID>:
+08000d60 <Task_GetID>:
 Task_GetID():
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:298
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:408
  	 return:	TODO
 
 
  ************************************************************************/
 os_taskID_t Task_GetID(os_taskname_t *TaskName, uint8_t NameSize)
 {
- 8000d6c:	b480      	push	{r7}
- 8000d6e:	b087      	sub	sp, #28
- 8000d70:	af00      	add	r7, sp, #0
- 8000d72:	6078      	str	r0, [r7, #4]
- 8000d74:	460b      	mov	r3, r1
- 8000d76:	70fb      	strb	r3, [r7, #3]
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:299
-	taskTCB_t *TaskList = &TaskBlockList[NUMBER_OF_TASK]; //a pointer to the head of tasklist
- 8000d78:	4b23      	ldr	r3, [pc, #140]	; (8000e08 <Task_GetID+0x9c>)
- 8000d7a:	617b      	str	r3, [r7, #20]
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:301
+ 8000d60:	b480      	push	{r7}
+ 8000d62:	b087      	sub	sp, #28
+ 8000d64:	af00      	add	r7, sp, #0
+ 8000d66:	6078      	str	r0, [r7, #4]
+ 8000d68:	460b      	mov	r3, r1
+ 8000d6a:	70fb      	strb	r3, [r7, #3]
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:409
+	taskTCB_t *TaskList = &TaskBlockList[NUMBER_OF_TASK];
+ 8000d6c:	4b23      	ldr	r3, [pc, #140]	; (8000dfc <Task_GetID+0x9c>)
+ 8000d6e:	617b      	str	r3, [r7, #20]
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:411
 
-	uint8_t LoopCntr = 0;									  //a loop counter
- 8000d7c:	f04f 0300 	mov.w	r3, #0
- 8000d80:	74fb      	strb	r3, [r7, #19]
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:303
+	uint8_t LoopCntr = 0;
+ 8000d70:	f04f 0300 	mov.w	r3, #0
+ 8000d74:	74fb      	strb	r3, [r7, #19]
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:413
 
-	os_taskname_t *ReferenceName = NULL; 				 //Reference Name
- 8000d82:	f04f 0300 	mov.w	r3, #0
- 8000d86:	60fb      	str	r3, [r7, #12]
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:306
+	os_taskname_t *ReferenceName = NULL;
+ 8000d76:	f04f 0300 	mov.w	r3, #0
+ 8000d7a:	60fb      	str	r3, [r7, #12]
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:416
 
 	//check name size:
 	if(NameSize > 32)
- 8000d88:	78fb      	ldrb	r3, [r7, #3]
- 8000d8a:	2b20      	cmp	r3, #32
- 8000d8c:	d902      	bls.n	8000d94 <Task_GetID+0x28>
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:308
+ 8000d7c:	78fb      	ldrb	r3, [r7, #3]
+ 8000d7e:	2b20      	cmp	r3, #32
+ 8000d80:	d902      	bls.n	8000d88 <Task_GetID+0x28>
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:420
 	{
+
+		//if too long, return the error
 		return(OS_NAME_TOO_LONG);
- 8000d8e:	f04f 0305 	mov.w	r3, #5
- 8000d92:	e033      	b.n	8000dfc <Task_GetID+0x90>
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:312
+ 8000d82:	f04f 0305 	mov.w	r3, #5
+ 8000d86:	e033      	b.n	8000df0 <Task_GetID+0x90>
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:425
+
 	}
 
 	//The current TCB is the idle block, well points to next:
 	TaskList = TaskList->NextTask;
- 8000d94:	697b      	ldr	r3, [r7, #20]
- 8000d96:	6a1b      	ldr	r3, [r3, #32]
- 8000d98:	617b      	str	r3, [r7, #20]
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:315
+ 8000d88:	697b      	ldr	r3, [r7, #20]
+ 8000d8a:	6a1b      	ldr	r3, [r3, #32]
+ 8000d8c:	617b      	str	r3, [r7, #20]
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:428
 
 	//start the loopcounter:
 	LoopCntr = 0;
- 8000d9a:	f04f 0300 	mov.w	r3, #0
- 8000d9e:	74fb      	strb	r3, [r7, #19]
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:318
+ 8000d8e:	f04f 0300 	mov.w	r3, #0
+ 8000d92:	74fb      	strb	r3, [r7, #19]
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:431
 
-	//receive the poiter to name:
+	//receive the pointer to name:
 	ReferenceName = TaskList->TaskName;
- 8000da0:	697b      	ldr	r3, [r7, #20]
- 8000da2:	695b      	ldr	r3, [r3, #20]
- 8000da4:	60fb      	str	r3, [r7, #12]
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:325
+ 8000d94:	697b      	ldr	r3, [r7, #20]
+ 8000d96:	695b      	ldr	r3, [r3, #20]
+ 8000d98:	60fb      	str	r3, [r7, #12]
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:438
 	//go through the tasklist:
 	do
 	{
 
 		//compare their names
 		while(NameSize >= LoopCntr)
- 8000da6:	e01a      	b.n	8000dde <Task_GetID+0x72>
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:327
+ 8000d9a:	e01a      	b.n	8000dd2 <Task_GetID+0x72>
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:442
 		{
+			//then, compare with reference
+			//char by char
 			if(TaskName == ReferenceName)
- 8000da8:	687a      	ldr	r2, [r7, #4]
- 8000daa:	68fb      	ldr	r3, [r7, #12]
- 8000dac:	429a      	cmp	r2, r3
- 8000dae:	d10c      	bne.n	8000dca <Task_GetID+0x5e>
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:330
+ 8000d9c:	687a      	ldr	r2, [r7, #4]
+ 8000d9e:	68fb      	ldr	r3, [r7, #12]
+ 8000da0:	429a      	cmp	r2, r3
+ 8000da2:	d10c      	bne.n	8000dbe <Task_GetID+0x5e>
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:445
 			{
-				//test the next character
+				//if matches, goes to next char
 				TaskName++;
- 8000db0:	687b      	ldr	r3, [r7, #4]
- 8000db2:	f103 0301 	add.w	r3, r3, #1
- 8000db6:	607b      	str	r3, [r7, #4]
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:331
+ 8000da4:	687b      	ldr	r3, [r7, #4]
+ 8000da6:	f103 0301 	add.w	r3, r3, #1
+ 8000daa:	607b      	str	r3, [r7, #4]
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:448
+
+				//Reference advances too
 				ReferenceName++;
- 8000db8:	68fb      	ldr	r3, [r7, #12]
- 8000dba:	f103 0301 	add.w	r3, r3, #1
- 8000dbe:	60fb      	str	r3, [r7, #12]
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:334
+ 8000dac:	68fb      	ldr	r3, [r7, #12]
+ 8000dae:	f103 0301 	add.w	r3, r3, #1
+ 8000db2:	60fb      	str	r3, [r7, #12]
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:451
 
 				//increments the loop counter:
 				LoopCntr++;
- 8000dc0:	7cfb      	ldrb	r3, [r7, #19]
- 8000dc2:	f103 0301 	add.w	r3, r3, #1
- 8000dc6:	74fb      	strb	r3, [r7, #19]
- 8000dc8:	e009      	b.n	8000dde <Task_GetID+0x72>
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:340
+ 8000db4:	7cfb      	ldrb	r3, [r7, #19]
+ 8000db6:	f103 0301 	add.w	r3, r3, #1
+ 8000dba:	74fb      	strb	r3, [r7, #19]
+ 8000dbc:	e009      	b.n	8000dd2 <Task_GetID+0x72>
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:457
 
 			}
 			else
 			{
 				//well, try the next task
 				TaskList = TaskList->NextTask;
- 8000dca:	697b      	ldr	r3, [r7, #20]
- 8000dcc:	6a1b      	ldr	r3, [r3, #32]
- 8000dce:	617b      	str	r3, [r7, #20]
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:342
+ 8000dbe:	697b      	ldr	r3, [r7, #20]
+ 8000dc0:	6a1b      	ldr	r3, [r3, #32]
+ 8000dc2:	617b      	str	r3, [r7, #20]
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:460
+
 				//restarts the counter:
 				LoopCntr = 0;
- 8000dd0:	f04f 0300 	mov.w	r3, #0
- 8000dd4:	74fb      	strb	r3, [r7, #19]
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:344
+ 8000dc4:	f04f 0300 	mov.w	r3, #0
+ 8000dc8:	74fb      	strb	r3, [r7, #19]
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:463
+
 				//re-initialize the name pointer:
 				ReferenceName = TaskList->TaskName;
- 8000dd6:	697b      	ldr	r3, [r7, #20]
- 8000dd8:	695b      	ldr	r3, [r3, #20]
- 8000dda:	60fb      	str	r3, [r7, #12]
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:347
+ 8000dca:	697b      	ldr	r3, [r7, #20]
+ 8000dcc:	695b      	ldr	r3, [r3, #20]
+ 8000dce:	60fb      	str	r3, [r7, #12]
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:466
 
 				//breaks the loop
 				break;
- 8000ddc:	e003      	b.n	8000de6 <Task_GetID+0x7a>
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:325
+ 8000dd0:	e003      	b.n	8000dda <Task_GetID+0x7a>
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:438
 	//go through the tasklist:
 	do
 	{
 
 		//compare their names
 		while(NameSize >= LoopCntr)
- 8000dde:	78fa      	ldrb	r2, [r7, #3]
- 8000de0:	7cfb      	ldrb	r3, [r7, #19]
- 8000de2:	429a      	cmp	r2, r3
- 8000de4:	d2e0      	bcs.n	8000da8 <Task_GetID+0x3c>
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:353
+ 8000dd2:	78fa      	ldrb	r2, [r7, #3]
+ 8000dd4:	7cfb      	ldrb	r3, [r7, #19]
+ 8000dd6:	429a      	cmp	r2, r3
+ 8000dd8:	d2e0      	bcs.n	8000d9c <Task_GetID+0x3c>
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:472
 			}
 
 		}
 
-		//check if the compare waas succefull:
+		//check if the compare waas successfull:
 		if(0 != LoopCntr)
- 8000de6:	7cfb      	ldrb	r3, [r7, #19]
- 8000de8:	2b00      	cmp	r3, #0
- 8000dea:	d002      	beq.n	8000df2 <Task_GetID+0x86>
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:356
+ 8000dda:	7cfb      	ldrb	r3, [r7, #19]
+ 8000ddc:	2b00      	cmp	r3, #0
+ 8000dde:	d002      	beq.n	8000de6 <Task_GetID+0x86>
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:477
 		{
-			//yep, then read the task ID of this TCB and return it:
+
+			//yep, then read the task ID
+			//of this TCB and return it:
 			return(TaskList->TaskID);
- 8000dec:	697b      	ldr	r3, [r7, #20]
- 8000dee:	7b1b      	ldrb	r3, [r3, #12]
- 8000df0:	e004      	b.n	8000dfc <Task_GetID+0x90>
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:361
+ 8000de0:	697b      	ldr	r3, [r7, #20]
+ 8000de2:	7b1b      	ldrb	r3, [r3, #12]
+ 8000de4:	e004      	b.n	8000df0 <Task_GetID+0x90>
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:483
+
 		}
 
-		//else restarts a new loop.
 
+	//if not, restarts the loop...
 	}while(END_LIST != TaskList);
- 8000df2:	697b      	ldr	r3, [r7, #20]
- 8000df4:	2b00      	cmp	r3, #0
- 8000df6:	d1f2      	bne.n	8000dde <Task_GetID+0x72>
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:364
+ 8000de6:	697b      	ldr	r3, [r7, #20]
+ 8000de8:	2b00      	cmp	r3, #0
+ 8000dea:	d1f2      	bne.n	8000dd2 <Task_GetID+0x72>
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:486
 
 	//if the task doesnt exist return a undefined ID
 	return(UNDEFINED_ID);
- 8000df8:	f04f 0309 	mov.w	r3, #9
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:366
+ 8000dec:	f04f 0309 	mov.w	r3, #9
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:488
 
 }
- 8000dfc:	4618      	mov	r0, r3
- 8000dfe:	f107 071c 	add.w	r7, r7, #28
- 8000e02:	46bd      	mov	sp, r7
- 8000e04:	bc80      	pop	{r7}
- 8000e06:	4770      	bx	lr
- 8000e08:	20000a8c 	.word	0x20000a8c
+ 8000df0:	4618      	mov	r0, r3
+ 8000df2:	f107 071c 	add.w	r7, r7, #28
+ 8000df6:	46bd      	mov	sp, r7
+ 8000df8:	bc80      	pop	{r7}
+ 8000dfa:	4770      	bx	lr
+ 8000dfc:	20000a8c 	.word	0x20000a8c
 
-08000e0c <Task_Query>:
+08000e00 <Task_Query>:
 Task_Query():
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:380
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:502
  	 return:	TODO
 
 
  ************************************************************************/
 taskTCB_t* 	Task_Query(os_taskID_t TaskID)
 {
- 8000e0c:	b480      	push	{r7}
- 8000e0e:	b085      	sub	sp, #20
- 8000e10:	af00      	add	r7, sp, #0
- 8000e12:	4603      	mov	r3, r0
- 8000e14:	71fb      	strb	r3, [r7, #7]
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:381
-	taskTCB_t *TaskList = &TaskBlockList[NUMBER_OF_TASK]; 	//a TCB that points to a registered tasklist
- 8000e16:	4b0e      	ldr	r3, [pc, #56]	; (8000e50 <Task_Query+0x44>)
- 8000e18:	60fb      	str	r3, [r7, #12]
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:384
+ 8000e00:	b480      	push	{r7}
+ 8000e02:	b085      	sub	sp, #20
+ 8000e04:	af00      	add	r7, sp, #0
+ 8000e06:	4603      	mov	r3, r0
+ 8000e08:	71fb      	strb	r3, [r7, #7]
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:503
+	taskTCB_t *TaskList = &TaskBlockList[NUMBER_OF_TASK];
+ 8000e0a:	4b0e      	ldr	r3, [pc, #56]	; (8000e44 <Task_Query+0x44>)
+ 8000e0c:	60fb      	str	r3, [r7, #12]
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:506
 
 	//check for a undefined ID:
 	if(UNDEFINED_ID == TaskID)
- 8000e1a:	79fb      	ldrb	r3, [r7, #7]
- 8000e1c:	2b09      	cmp	r3, #9
- 8000e1e:	d102      	bne.n	8000e26 <Task_Query+0x1a>
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:386
+ 8000e0e:	79fb      	ldrb	r3, [r7, #7]
+ 8000e10:	2b09      	cmp	r3, #9
+ 8000e12:	d102      	bne.n	8000e1a <Task_Query+0x1a>
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:509
 	{
-		return(NULL); //returns a null pointer
- 8000e20:	f04f 0300 	mov.w	r3, #0
- 8000e24:	e00e      	b.n	8000e44 <Task_Query+0x38>
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:393
+		//if yes, return a Null pointer
+		return(NULL);
+ 8000e14:	f04f 0300 	mov.w	r3, #0
+ 8000e18:	e00e      	b.n	8000e38 <Task_Query+0x38>
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:516
 
-	//the alghoritm i very simple:
+	//the alghoritm is very simple:
 	do
 	{
 		//go trhough tasklist and compares by ID:
 		if(TaskID == TaskList->TaskID)
- 8000e26:	68fb      	ldr	r3, [r7, #12]
- 8000e28:	7b1b      	ldrb	r3, [r3, #12]
- 8000e2a:	79fa      	ldrb	r2, [r7, #7]
- 8000e2c:	429a      	cmp	r2, r3
- 8000e2e:	d101      	bne.n	8000e34 <Task_Query+0x28>
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:396
+ 8000e1a:	68fb      	ldr	r3, [r7, #12]
+ 8000e1c:	7b1b      	ldrb	r3, [r3, #12]
+ 8000e1e:	79fa      	ldrb	r2, [r7, #7]
+ 8000e20:	429a      	cmp	r2, r3
+ 8000e22:	d101      	bne.n	8000e28 <Task_Query+0x28>
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:519
 		{
 			//if the IDs was matched, return this TCB
-			return (TaskList);
- 8000e30:	68fb      	ldr	r3, [r7, #12]
- 8000e32:	e007      	b.n	8000e44 <Task_Query+0x38>
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:400
+			return ((taskTCB_t *)TaskList);
+ 8000e24:	68fb      	ldr	r3, [r7, #12]
+ 8000e26:	e007      	b.n	8000e38 <Task_Query+0x38>
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:523
 		}
 
 		//if not, go to next task
 		TaskList = TaskList->NextTask;
- 8000e34:	68fb      	ldr	r3, [r7, #12]
- 8000e36:	6a1b      	ldr	r3, [r3, #32]
- 8000e38:	60fb      	str	r3, [r7, #12]
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:401
-	}while(END_LIST != TaskList);
- 8000e3a:	68fb      	ldr	r3, [r7, #12]
- 8000e3c:	2b00      	cmp	r3, #0
- 8000e3e:	d1f2      	bne.n	8000e26 <Task_Query+0x1a>
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:404
+ 8000e28:	68fb      	ldr	r3, [r7, #12]
+ 8000e2a:	6a1b      	ldr	r3, [r3, #32]
+ 8000e2c:	60fb      	str	r3, [r7, #12]
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:526
 
-	//if the ID is not match to any registered task, returns a null pointer
+	//until the list ends
+	}while(END_LIST != TaskList);
+ 8000e2e:	68fb      	ldr	r3, [r7, #12]
+ 8000e30:	2b00      	cmp	r3, #0
+ 8000e32:	d1f2      	bne.n	8000e1a <Task_Query+0x1a>
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:530
+
+	//if the ID is not match to any registered task,
+	//returns a null pointer
 	return(NULL);
- 8000e40:	f04f 0300 	mov.w	r3, #0
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:405
+ 8000e34:	f04f 0300 	mov.w	r3, #0
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:532
+
 }
- 8000e44:	4618      	mov	r0, r3
- 8000e46:	f107 0714 	add.w	r7, r7, #20
- 8000e4a:	46bd      	mov	sp, r7
- 8000e4c:	bc80      	pop	{r7}
- 8000e4e:	4770      	bx	lr
- 8000e50:	20000a8c 	.word	0x20000a8c
+ 8000e38:	4618      	mov	r0, r3
+ 8000e3a:	f107 0714 	add.w	r7, r7, #20
+ 8000e3e:	46bd      	mov	sp, r7
+ 8000e40:	bc80      	pop	{r7}
+ 8000e42:	4770      	bx	lr
+ 8000e44:	20000a8c 	.word	0x20000a8c
+
+08000e48 <Task_Idle>:
+Task_Idle():
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:656
+ 	 return:	TODO
+
+
+ ************************************************************************/
+void Task_Idle(void *TaskArgs)
+{
+ 8000e48:	b480      	push	{r7}
+ 8000e4a:	b083      	sub	sp, #12
+ 8000e4c:	af00      	add	r7, sp, #0
+ 8000e4e:	6078      	str	r0, [r7, #4]
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/Debug/../RTOS/uLipe_Task.c:657
+	while(1);
+ 8000e50:	e7fe      	b.n	8000e50 <Task_Idle+0x8>
+ 8000e52:	bf00      	nop
 
 08000e54 <memset>:
 memset():

@@ -30,9 +30,9 @@ src/main.d: ../src/main.c ../libs/CMSIS/include/stm32f4xx.h \
  ../libs/StdPeriph/include/stm32f4xx_dcmi.h \
  ../libs/StdPeriph/include/stm32f4xx_fsmc.h \
  /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/RTOS/uLipe_RTOS.h \
- /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/RTOS/uLipe_Task.h \
  /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/RTOS/AsmStuff.h \
  /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/RTOS/uLipe_RTOS.h \
+ /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/RTOS/uLipe_Task.h \
  ../src/Tasks.h
 
 ../libs/CMSIS/include/stm32f4xx.h:
@@ -103,10 +103,10 @@ src/main.d: ../src/main.c ../libs/CMSIS/include/stm32f4xx.h \
 
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/RTOS/uLipe_RTOS.h:
 
-/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/RTOS/uLipe_Task.h:
-
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/RTOS/AsmStuff.h:
 
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/RTOS/uLipe_RTOS.h:
+
+/Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/RTOS/uLipe_Task.h:
 
 ../src/Tasks.h:

@@ -22,12 +22,17 @@
 /************************************************************************
  	 	 	 	 	 Defines and Macros
  ************************************************************************/
-#define OS_TICKS 			1000 				//Tick timer in us
-#define OS_TIME_QUANTA		(OS_TICKS / 10) 	//Time quanta unity
+//Tick timer in us
+#define OS_TICKS 			1000
+
+//Time quanta unity
+#define OS_TIME_QUANTA		(OS_TICKS / 10)
 
 /************************************************************************
  	 	 	 	 	 Enumerations
  ************************************************************************/
+
+//OS possible errors enumerations
 typedef enum
 {
 	OS_OK = 0,
@@ -37,7 +42,7 @@ typedef enum
 	OS_TASK_IS_NOT_HERE,
 	OS_NAME_TOO_LONG,
 	OS_IS_NOT_STATE
-}errors_t;				//OS possible errors
+}errors_t;
 
 /***********************************************************************
  	 	 	 	 	 Personalized types
@@ -47,34 +52,43 @@ typedef void  		taskptr_t;
 typedef uint8_t  	os_taskname_t;
 typedef uint8_t		os_taskID_t;
 typedef uint8_t     os_error_t;
-typedef uint32_t 	os_stack_t; //stack type
+typedef uint32_t 	os_stack_t;
 
 /**********************************************************************
  	 	 	 	 	 OS include files
  **********************************************************************/
 
-#include "uLipe_Task.h" //tasks routines
+//todo
+//OS Kernel
+//#include "uLipe_Core.h"
+
+//Assembly resources, cpu port
+#include "AsmStuff.h"
+
+//Task management methods
+#include "uLipe_Task.h"
+
 
 //todo
-//#include "uLipe_Queue.h" //queue management
+//Queue managemete methods
+//#include "uLipe_Queue.h"
+
 
 //todo
-//#include "uLipe_Core.h" //OS Core
+//Semaphore resources
+//#include "uLipe_Semaphore.h"
 
 //todo
-#include "AsmStuff.h" //Assembly resources
+//Mutex resources
+//#include "uLipe_Mutex.h"
 
 //todo
-//#include "uLipe_Semaphore.h" //Semaphore resources
+//software timers and delays
+//#include "uLipe_Timers.h"
 
 //todo
-//#include "uLipe_Mutex.h"		//Mutex resource
-
-//todo
-//#include "uLipe_Timers.h"		//software timers
-
-//todo
-//#include "uLipe_MailBox.h"	//Mailbox resources
+//Mailbox resources
+//#include "uLipe_MailBox.h"
 
 /****************************************************************************
  	 	 	 	 	 End of file

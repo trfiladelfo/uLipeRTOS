@@ -45,12 +45,12 @@ Asm_LowLevelTickInit:
 
 
 		CPSID 	I				@Disable interrupts
-
-		LDR  R1, =0xE000ED14	@
+								@
+		LDR  R1, =0xE000ED14	@SCB->CCR
 		LDR  R2, [R1]			@
-		ORR  R2,R2,#0x200		@
+		ORR  R2,R2,#0x200		@Enable double word aling
 		STR	 R2,[R1]			@
-
+								@
 		LDR  R1, =0xE000E010    @Load the systick control register contents
 		MOVS R2, #0x00000000	@
 		STR	 R2, [R1], #0x04	@
@@ -82,7 +82,6 @@ Asm_LowLevelTickInit:
 @************************************************************************
 .thumb_func
 Asm_CriticalIn:
-
 		CPSID	I					@disables all interrupts
 		BX		LR					@Return from sub
 
@@ -151,8 +150,8 @@ Asm_TaskLevelContextChange:
 		STR		R1,[R0]				@
 		CPSIE	I					@Enable interrupts
 									@
-
-		BX 		LR 					@Should not get here
+									@
+		BX 		LR 					@Return from sub
 
 @************************************************************************
 @ 	 function:	PendSV_Handler()
@@ -169,27 +168,29 @@ Asm_TaskLevelContextChange:
 .thumb_func
 PendSV_Handler:
 		TST		LR,#4					@check the origin of interrupt
-		IT		EQ						@
-		BEQ		FIRST_CHANGE			@fisrt change
-		LDR		R0, =HighReadyTaskBlock @if not, check for second change
+		IT		EQ						@if, it from a MSP usage
+		BEQ		FIRST_CHANGE			@
+										@
+		LDR		R0, =HighReadyTaskBlock @if not,
 		LDR		R0,[R0]					@
 		LDR		R1,[R0]					@Check the current taskFLag
 		TST		R1,#1					@Check if first time flag is set
 		IT		NE						@
 		BNE 	SECOND_CHANGE			@Jump for first context switch
 										@
+										@if, not, runs context switch normally
 		LDR 	R0, =CurrentTaskBlock	@Get the current TCB
 		LDR		R0,[R0]					@
 		MRS		R1, PSP					@Get the current SP
 		STMDB	R1!,{R4 - R11}			@save R4 - R11 on the current stack
 										@
 		STR		R1,[R0,#0x00000018] 	@Save the current stack pointer
-										@								@
+										@
 		LDR		R0,=HighReadyTaskBlock  @Get the first task from de queue
 		LDR		R0,[R0]					@Get the new stack pointer
 		LDR		R1, [R0,#0x00000018]	@
 									    @
-		LDMIA	R1!,{R4 - R11}			@Change the context
+		LDMIA	R1!,{R4 - R11}			@Reload R4 -- R11
 		MSR		PSP , R1				@write the new stackpointer
 NO_SAVE:								@
 		ORR     LR,LR,#0x00000004		@ensures that return in PSP
@@ -212,9 +213,9 @@ SECOND_CHANGE:
 		LDR 	R0, =CurrentTaskBlock	@Get the current TCB
 		LDR		R0,[R0]					@
 		MRS		R1, PSP					@Get the current SP
-		STMDB	R1!,{R4 - R11}			@save R4 - R11 on the current stack									@
+		STMDB	R1!,{R4 - R11}			@save R4 - R11 on the current stack
 		STR		R1,[R0,#0x00000018] 	@Save the current stack pointer
-
+										@
 		LDR		R0,=HighReadyTaskBlock  @Get the newTCB
 		LDR		R0,[R0]					@Get the new stack pointer
 		LDR		R1,[R0]					@Get task flags
