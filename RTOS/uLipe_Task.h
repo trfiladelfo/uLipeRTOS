@@ -40,6 +40,9 @@
 //first time task flags!
 #define TASK_FLAG_IS_FIRST_TIME       (1 << 0)
 
+//Defines the end of linked list
+#define END_LIST		NULL
+
 /************************************************************************
  	 	 	 	 	 	 	Typedefs
  ************************************************************************/
@@ -98,6 +101,13 @@ extern taskTCB_t *CurrentTaskBlock;
 
 //This is the ready first TCB on queue
 extern taskTCB_t *HighReadyTaskBlock;
+
+//Stack of IDLE Task
+extern os_stack_t 			IdleTaskStack[64];
+
+//Name of TCB used for idle task
+extern os_taskname_t IdleName[8];
+
 
 /************************************************************************
  	 	 	 	 	 Function Prototypes

@@ -4,6 +4,7 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
+../RTOS/uLipe_Core.c \
 ../RTOS/uLipe_Task.c 
 
 S_UPPER_SRCS += \
@@ -11,9 +12,11 @@ S_UPPER_SRCS += \
 
 OBJS += \
 ./RTOS/AsmStuff.o \
+./RTOS/uLipe_Core.o \
 ./RTOS/uLipe_Task.o 
 
 C_DEPS += \
+./RTOS/uLipe_Core.d \
 ./RTOS/uLipe_Task.d 
 
 S_UPPER_DEPS += \

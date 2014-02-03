@@ -47,9 +47,6 @@
 //Defines that TCB is full
 #define FILLED			 0xFF
 
-//Defines the end of linked list
-#define END_LIST		NULL
-
 /************************************************************************
  	 	 	 	 	 Public variables
  ************************************************************************/
@@ -60,6 +57,12 @@ taskTCB_t *CurrentTaskBlock 	= NULL	,
 //This is the first ready TCB on queue
   		  *HighReadyTaskBlock   = NULL	;
 
+//Stack of IDLE Task
+os_stack_t 			IdleTaskStack[64];
+
+//Name of TCB used for idle task
+os_taskname_t IdleName[8] = {"TaskIdle"};
+
 /************************************************************************
  	 	 	 	 	 Module local variables
  ************************************************************************/
@@ -67,12 +70,6 @@ taskTCB_t *CurrentTaskBlock 	= NULL	,
 //This is the table of TCBs, its size is limited by the current
 //Number of tasks
 taskTCB_t TaskBlockList[NUMBER_OF_TASK + 1];
-
-//Stack of IDLE Task
-os_stack_t 			IdleTaskStack[64];
-
-//Name of TCB used for idle task
-const os_taskname_t IdleName[8] = {"TaskIdle"};
 
 /************************************************************************
  	 	 	 	 	 Module local Prototypes

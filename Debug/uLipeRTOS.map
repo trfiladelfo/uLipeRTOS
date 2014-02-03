@@ -11,6 +11,7 @@ Allocating common symbols
 Common symbol       size              file
 
 TaskTryStack8       0x100             ./src/tasks.o
+TaskMainCtl         0xc               ./RTOS/uLipe_Core.o
 TaskTryStack6       0x100             ./src/tasks.o
 ID                  0x1               ./src/main.o
 IdleTaskStack       0x100             ./RTOS/uLipe_Task.o
@@ -18,6 +19,7 @@ TaskTryStack7       0x100             ./src/tasks.o
 TaskTryStack2       0x100             ./src/tasks.o
 TaskTryStack4       0x100             ./src/tasks.o
 TaskBlockList       0x140             ./RTOS/uLipe_Task.o
+TaskMainQueue       0x80              ./RTOS/uLipe_Core.o
 TaskTryStack3       0x100             ./src/tasks.o
 TaskTryStack        0x100             ./src/main.o
 TaskTryStack5       0x100             ./src/tasks.o
@@ -103,7 +105,7 @@ Discarded input sections
  .data.Try8     0x0000000000000000        0x8 ./src/tasks.o
  .text.TaskTry8
                 0x0000000000000000       0x2c ./src/tasks.o
- .bss.counter.4243
+ .bss.counter.4250
                 0x0000000000000000        0x4 ./src/tasks.o
  .debug_macro   0x0000000000000000      0x820 ./src/tasks.o
  .debug_macro   0x0000000000000000       0x3a ./src/tasks.o
@@ -111,7 +113,7 @@ Discarded input sections
  .debug_macro   0x0000000000000000       0x2e ./src/tasks.o
  .debug_macro   0x0000000000000000       0xa3 ./src/tasks.o
  .debug_macro   0x0000000000000000      0x20e ./src/tasks.o
- .debug_macro   0x0000000000000000       0x1c ./src/tasks.o
+ .debug_macro   0x0000000000000000       0x22 ./src/tasks.o
  .group         0x0000000000000000        0x8 ./libs/misc/src/_sbrk.o
  .group         0x0000000000000000        0x8 ./libs/misc/src/_sbrk.o
  .group         0x0000000000000000        0x8 ./libs/misc/src/_sbrk.o
@@ -4942,6 +4944,89 @@ Discarded input sections
  .debug_macro   0x0000000000000000      0x820 ./libs/CMSIS/src/vectors_stm32f4xx.o
  .data          0x0000000000000000        0x0 ./RTOS/AsmStuff.o
  .bss           0x0000000000000000        0x0 ./RTOS/AsmStuff.o
+ .group         0x0000000000000000        0x8 ./RTOS/uLipe_Core.o
+ .group         0x0000000000000000        0x8 ./RTOS/uLipe_Core.o
+ .group         0x0000000000000000        0x8 ./RTOS/uLipe_Core.o
+ .group         0x0000000000000000        0x8 ./RTOS/uLipe_Core.o
+ .group         0x0000000000000000        0x8 ./RTOS/uLipe_Core.o
+ .group         0x0000000000000000        0x8 ./RTOS/uLipe_Core.o
+ .group         0x0000000000000000        0x8 ./RTOS/uLipe_Core.o
+ .group         0x0000000000000000        0x8 ./RTOS/uLipe_Core.o
+ .group         0x0000000000000000        0x8 ./RTOS/uLipe_Core.o
+ .group         0x0000000000000000        0x8 ./RTOS/uLipe_Core.o
+ .group         0x0000000000000000        0x8 ./RTOS/uLipe_Core.o
+ .group         0x0000000000000000        0x8 ./RTOS/uLipe_Core.o
+ .group         0x0000000000000000        0x8 ./RTOS/uLipe_Core.o
+ .group         0x0000000000000000        0x8 ./RTOS/uLipe_Core.o
+ .group         0x0000000000000000        0x8 ./RTOS/uLipe_Core.o
+ .group         0x0000000000000000        0x8 ./RTOS/uLipe_Core.o
+ .group         0x0000000000000000        0x8 ./RTOS/uLipe_Core.o
+ .group         0x0000000000000000        0x8 ./RTOS/uLipe_Core.o
+ .group         0x0000000000000000        0x8 ./RTOS/uLipe_Core.o
+ .group         0x0000000000000000        0x8 ./RTOS/uLipe_Core.o
+ .group         0x0000000000000000        0x8 ./RTOS/uLipe_Core.o
+ .group         0x0000000000000000        0x8 ./RTOS/uLipe_Core.o
+ .group         0x0000000000000000        0x8 ./RTOS/uLipe_Core.o
+ .group         0x0000000000000000        0x8 ./RTOS/uLipe_Core.o
+ .text          0x0000000000000000        0x0 ./RTOS/uLipe_Core.o
+ .data          0x0000000000000000        0x0 ./RTOS/uLipe_Core.o
+ .bss           0x0000000000000000        0x0 ./RTOS/uLipe_Core.o
+ .text.uLipe_StackFrameCreate
+                0x0000000000000000       0xcc ./RTOS/uLipe_Core.o
+ .text.uLipe_TaskQueueInit
+                0x0000000000000000      0x1b8 ./RTOS/uLipe_Core.o
+ .text.uLipe_TaskEnqueue
+                0x0000000000000000       0x6c ./RTOS/uLipe_Core.o
+ .text.uLipe_TaskDequeue
+                0x0000000000000000       0x6c ./RTOS/uLipe_Core.o
+ .text.uLipe_TaskQueryByIndex
+                0x0000000000000000       0x74 ./RTOS/uLipe_Core.o
+ .text.uLipe_TaskDropByIndex
+                0x0000000000000000       0xdc ./RTOS/uLipe_Core.o
+ .text.uLipe_Init
+                0x0000000000000000       0x10 ./RTOS/uLipe_Core.o
+ .text.uLipe_Schedule
+                0x0000000000000000        0xc ./RTOS/uLipe_Core.o
+ .text.uLipe_Start
+                0x0000000000000000        0xc ./RTOS/uLipe_Core.o
+ .debug_info    0x0000000000000000      0x4e3 ./RTOS/uLipe_Core.o
+ .debug_abbrev  0x0000000000000000      0x1b8 ./RTOS/uLipe_Core.o
+ .debug_loc     0x0000000000000000      0x1d4 ./RTOS/uLipe_Core.o
+ .debug_aranges
+                0x0000000000000000       0x60 ./RTOS/uLipe_Core.o
+ .debug_ranges  0x0000000000000000       0x50 ./RTOS/uLipe_Core.o
+ .debug_macro   0x0000000000000000      0x146 ./RTOS/uLipe_Core.o
+ .debug_macro   0x0000000000000000      0x820 ./RTOS/uLipe_Core.o
+ .debug_macro   0x0000000000000000       0x3a ./RTOS/uLipe_Core.o
+ .debug_macro   0x0000000000000000       0x10 ./RTOS/uLipe_Core.o
+ .debug_macro   0x0000000000000000       0x2e ./RTOS/uLipe_Core.o
+ .debug_macro   0x0000000000000000       0xa3 ./RTOS/uLipe_Core.o
+ .debug_macro   0x0000000000000000       0x10 ./RTOS/uLipe_Core.o
+ .debug_macro   0x0000000000000000       0x89 ./RTOS/uLipe_Core.o
+ .debug_macro   0x0000000000000000       0x10 ./RTOS/uLipe_Core.o
+ .debug_macro   0x0000000000000000       0x3a ./RTOS/uLipe_Core.o
+ .debug_macro   0x0000000000000000       0x52 ./RTOS/uLipe_Core.o
+ .debug_macro   0x0000000000000000       0x19 ./RTOS/uLipe_Core.o
+ .debug_macro   0x0000000000000000      0x16d ./RTOS/uLipe_Core.o
+ .debug_macro   0x0000000000000000       0x10 ./RTOS/uLipe_Core.o
+ .debug_macro   0x0000000000000000       0xfc ./RTOS/uLipe_Core.o
+ .debug_macro   0x0000000000000000       0x22 ./RTOS/uLipe_Core.o
+ .debug_macro   0x0000000000000000       0x91 ./RTOS/uLipe_Core.o
+ .debug_macro   0x0000000000000000       0x16 ./RTOS/uLipe_Core.o
+ .debug_macro   0x0000000000000000      0x16d ./RTOS/uLipe_Core.o
+ .debug_macro   0x0000000000000000       0x10 ./RTOS/uLipe_Core.o
+ .debug_macro   0x0000000000000000       0x35 ./RTOS/uLipe_Core.o
+ .debug_macro   0x0000000000000000       0x1c ./RTOS/uLipe_Core.o
+ .debug_macro   0x0000000000000000      0x214 ./RTOS/uLipe_Core.o
+ .debug_macro   0x0000000000000000       0x10 ./RTOS/uLipe_Core.o
+ .debug_macro   0x0000000000000000       0x22 ./RTOS/uLipe_Core.o
+ .debug_line    0x0000000000000000      0x431 ./RTOS/uLipe_Core.o
+ .debug_str     0x0000000000000000     0x5765 ./RTOS/uLipe_Core.o
+ .comment       0x0000000000000000       0x71 ./RTOS/uLipe_Core.o
+ .ARM.attributes
+                0x0000000000000000       0x33 ./RTOS/uLipe_Core.o
+ .debug_frame   0x0000000000000000      0x104 ./RTOS/uLipe_Core.o
+ COMMON         0x0000000000000000       0x8c ./RTOS/uLipe_Core.o
  .group         0x0000000000000000        0x8 ./RTOS/uLipe_Task.o
  .group         0x0000000000000000        0x8 ./RTOS/uLipe_Task.o
  .group         0x0000000000000000        0x8 ./RTOS/uLipe_Task.o
@@ -4996,7 +5081,11 @@ Discarded input sections
  .debug_macro   0x0000000000000000       0x16 ./RTOS/uLipe_Task.o
  .debug_macro   0x0000000000000000      0x16d ./RTOS/uLipe_Task.o
  .debug_macro   0x0000000000000000       0x10 ./RTOS/uLipe_Task.o
+ .debug_macro   0x0000000000000000       0x35 ./RTOS/uLipe_Task.o
  .debug_macro   0x0000000000000000       0x1c ./RTOS/uLipe_Task.o
+ .debug_macro   0x0000000000000000      0x214 ./RTOS/uLipe_Task.o
+ .debug_macro   0x0000000000000000       0x10 ./RTOS/uLipe_Task.o
+ .debug_macro   0x0000000000000000       0x22 ./RTOS/uLipe_Task.o
  .text          0x0000000000000000        0x0 /usr/local/gcc-arm-none-eabi-4_7-2013q3/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m/libg.a(lib_a-errno.o)
  .data          0x0000000000000000        0x0 /usr/local/gcc-arm-none-eabi-4_7-2013q3/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m/libg.a(lib_a-errno.o)
  .bss           0x0000000000000000        0x0 /usr/local/gcc-arm-none-eabi-4_7-2013q3/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m/libg.a(lib_a-errno.o)
@@ -5082,6 +5171,7 @@ LOAD ./libs/CMSIS/src/startup_stm32f4xx.o
 LOAD ./libs/CMSIS/src/system_stm32f4xx.o
 LOAD ./libs/CMSIS/src/vectors_stm32f4xx.o
 LOAD ./RTOS/AsmStuff.o
+LOAD ./RTOS/uLipe_Core.o
 LOAD ./RTOS/uLipe_Task.o
 START GROUP
 LOAD /usr/local/gcc-arm-none-eabi-4_7-2013q3/bin/../lib/gcc/arm-none-eabi/4.7.4/armv7e-m/libgcc.a
@@ -5102,7 +5192,7 @@ END GROUP
                 0x000000002001fc00                __Main_Stack_Limit = (__stack - __Main_Stack_Size)
                 0x000000002001fc00                PROVIDE (_Main_Stack_Limit, __Main_Stack_Limit)
                 0x0000000000000100                _Minimum_Stack_Size = 0x100
-                0x0000000020000ab4                PROVIDE (_Heap_Begin, _end_noinit)
+                0x0000000020000abc                PROVIDE (_Heap_Begin, _end_noinit)
                 0x000000002001fc00                PROVIDE (_Heap_Limit, (__stack - _Main_Stack_Size))
 
 .isr_vector     0x0000000008000000      0x284
@@ -5239,7 +5329,7 @@ END GROUP
  *(.flashtext .flashtext.*)
                 0x0000000008000288                . = ALIGN (0x4)
 
-.text           0x0000000008000288      0xd00
+.text           0x0000000008000288      0xcf8
                 0x0000000008000288                . = ALIGN (0x4)
  *(.text .text.*)
  .text.main     0x0000000008000288      0x354 ./src/main.o
@@ -5305,42 +5395,39 @@ END GROUP
  .text.memset   0x0000000008000e54      0x12c /usr/local/gcc-arm-none-eabi-4_7-2013q3/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m/libg.a(lib_a-memset.o)
                 0x0000000008000e54                memset
  *(.rodata .rodata.*)
- .rodata.IdleName
-                0x0000000008000f80        0x8 ./RTOS/uLipe_Task.o
-                0x0000000008000f80                IdleName
  *(.eh_frame*)
  *(.glue_7)
  .glue_7        0x0000000000000000        0x0 linker stubs
  *(.glue_7t)
  .glue_7t       0x0000000000000000        0x0 linker stubs
 
-.vfp11_veneer   0x0000000008000f88        0x0
+.vfp11_veneer   0x0000000008000f80        0x0
  .vfp11_veneer  0x0000000000000000        0x0 linker stubs
 
-.v4_bx          0x0000000008000f88        0x0
+.v4_bx          0x0000000008000f80        0x0
  .v4_bx         0x0000000000000000        0x0 linker stubs
 
-.iplt           0x0000000008000f88        0x0
+.iplt           0x0000000008000f80        0x0
  .iplt          0x0000000000000000        0x0 ./src/main.o
 
-.rel.dyn        0x0000000008000f88        0x0
+.rel.dyn        0x0000000008000f80        0x0
  .rel.iplt      0x0000000000000000        0x0 ./src/main.o
 
 .ARM.extab
  *(.ARM.extab* .gnu.linkonce.armextab.*)
-                0x0000000008000f88                __exidx_start = .
+                0x0000000008000f80                __exidx_start = .
 
 .ARM.exidx
  *(.ARM.exidx* .gnu.linkonce.armexidx.*)
-                0x0000000008000f88                __exidx_end = .
-                0x0000000008000f88                . = ALIGN (0x4)
-                0x0000000008000f88                _etext = .
-                0x0000000008000f88                _sidata = _etext
+                0x0000000008000f80                __exidx_end = .
+                0x0000000008000f80                . = ALIGN (0x4)
+                0x0000000008000f80                _etext = .
+                0x0000000008000f80                _sidata = _etext
 
 .ROarraySection
  *(.ROarraySection .ROarraySection.*)
 
-.data           0x0000000020000000       0x38 load address 0x0000000008000f88
+.data           0x0000000020000000       0x40 load address 0x0000000008000f80
                 0x0000000020000000                . = ALIGN (0x4)
                 0x0000000020000000                _sdata = .
                 0x0000000020000000                __data_start__ = .
@@ -5360,81 +5447,84 @@ END GROUP
                 0x0000000020000028                Try6
  .data.Try7     0x0000000020000030        0x8 ./src/tasks.o
                 0x0000000020000030                Try7
-                0x0000000020000038                . = ALIGN (0x4)
-                0x0000000020000038                _edata = .
-                0x0000000020000038                __data_end__ = .
+ .data.IdleName
+                0x0000000020000038        0x8 ./RTOS/uLipe_Task.o
+                0x0000000020000038                IdleName
+                0x0000000020000040                . = ALIGN (0x4)
+                0x0000000020000040                _edata = .
+                0x0000000020000040                __data_end__ = .
 
-.igot.plt       0x0000000020000038        0x0 load address 0x0000000008000fc0
+.igot.plt       0x0000000020000040        0x0 load address 0x0000000008000fc0
  .igot.plt      0x0000000000000000        0x0 ./src/main.o
 
-.bss            0x0000000020000038      0xa7c load address 0x0000000008000fc0
-                0x0000000020000038                . = ALIGN (0x4)
-                0x0000000020000038                __bss_start__ = .
-                0x0000000020000038                _sbss = .
+.bss            0x0000000020000040      0xa7c load address 0x0000000008000fc0
+                0x0000000020000040                . = ALIGN (0x4)
+                0x0000000020000040                __bss_start__ = .
+                0x0000000020000040                _sbss = .
  *(.bss .bss.*)
- .bss.TestTCB   0x0000000020000038        0x4 ./src/main.o
-                0x0000000020000038                TestTCB
- .bss.counter.4239
-                0x000000002000003c        0x4 ./src/tasks.o
- .bss.counter.4235
-                0x0000000020000040        0x4 ./src/tasks.o
- .bss.counter.4231
+ .bss.TestTCB   0x0000000020000040        0x4 ./src/main.o
+                0x0000000020000040                TestTCB
+ .bss.counter.4246
                 0x0000000020000044        0x4 ./src/tasks.o
- .bss.counter.4227
+ .bss.counter.4242
                 0x0000000020000048        0x4 ./src/tasks.o
- .bss.counter.4223
+ .bss.counter.4238
                 0x000000002000004c        0x4 ./src/tasks.o
- .bss.counter1.4216
+ .bss.counter.4234
                 0x0000000020000050        0x4 ./src/tasks.o
- .bss.counter2.4217
+ .bss.counter.4230
                 0x0000000020000054        0x4 ./src/tasks.o
- .bss.counter3.4218
+ .bss.counter1.4223
                 0x0000000020000058        0x4 ./src/tasks.o
- .bss.counter1.4209
+ .bss.counter2.4224
                 0x000000002000005c        0x4 ./src/tasks.o
- .bss.counter2.4210
+ .bss.counter3.4225
                 0x0000000020000060        0x4 ./src/tasks.o
- .bss.counter3.4211
+ .bss.counter1.4216
                 0x0000000020000064        0x4 ./src/tasks.o
+ .bss.counter2.4217
+                0x0000000020000068        0x4 ./src/tasks.o
+ .bss.counter3.4218
+                0x000000002000006c        0x4 ./src/tasks.o
  .bss.CurrentTaskBlock
-                0x0000000020000068        0x4 ./RTOS/uLipe_Task.o
-                0x0000000020000068                CurrentTaskBlock
+                0x0000000020000070        0x4 ./RTOS/uLipe_Task.o
+                0x0000000020000070                CurrentTaskBlock
  .bss.HighReadyTaskBlock
-                0x000000002000006c        0x4 ./RTOS/uLipe_Task.o
-                0x000000002000006c                HighReadyTaskBlock
+                0x0000000020000074        0x4 ./RTOS/uLipe_Task.o
+                0x0000000020000074                HighReadyTaskBlock
  *(COMMON)
- COMMON         0x0000000020000070      0x104 ./src/main.o
-                0x0000000020000070                ID
-                0x0000000020000074                TaskTryStack
- COMMON         0x0000000020000174      0x700 ./src/tasks.o
-                0x0000000020000174                TaskTryStack8
-                0x0000000020000274                TaskTryStack6
-                0x0000000020000374                TaskTryStack7
-                0x0000000020000474                TaskTryStack2
-                0x0000000020000574                TaskTryStack4
-                0x0000000020000674                TaskTryStack3
-                0x0000000020000774                TaskTryStack5
- COMMON         0x0000000020000874      0x240 ./RTOS/uLipe_Task.o
-                0x0000000020000874                IdleTaskStack
-                0x0000000020000974                TaskBlockList
-                0x0000000020000ab4                . = ALIGN (0x4)
-                0x0000000020000ab4                __bss_end__ = .
-                0x0000000020000ab4                _ebss = .
+ COMMON         0x0000000020000078      0x104 ./src/main.o
+                0x0000000020000078                ID
+                0x000000002000007c                TaskTryStack
+ COMMON         0x000000002000017c      0x700 ./src/tasks.o
+                0x000000002000017c                TaskTryStack8
+                0x000000002000027c                TaskTryStack6
+                0x000000002000037c                TaskTryStack7
+                0x000000002000047c                TaskTryStack2
+                0x000000002000057c                TaskTryStack4
+                0x000000002000067c                TaskTryStack3
+                0x000000002000077c                TaskTryStack5
+ COMMON         0x000000002000087c      0x240 ./RTOS/uLipe_Task.o
+                0x000000002000087c                IdleTaskStack
+                0x000000002000097c                TaskBlockList
+                0x0000000020000abc                . = ALIGN (0x4)
+                0x0000000020000abc                __bss_end__ = .
+                0x0000000020000abc                _ebss = .
 
-.noinit         0x0000000020000ab4        0x0
-                0x0000000020000ab4                . = ALIGN (0x4)
-                0x0000000020000ab4                _noinit = .
+.noinit         0x0000000020000abc        0x0
+                0x0000000020000abc                . = ALIGN (0x4)
+                0x0000000020000abc                _noinit = .
  *(.noinit .noinit.*)
-                0x0000000020000ab4                . = ALIGN (0x4)
-                0x0000000020000ab4                _end_noinit = .
-                0x0000000020000ab4                PROVIDE (end, _end_noinit)
-                0x0000000020000ab4                PROVIDE (_end, _end_noinit)
+                0x0000000020000abc                . = ALIGN (0x4)
+                0x0000000020000abc                _end_noinit = .
+                0x0000000020000abc                PROVIDE (end, _end_noinit)
+                0x0000000020000abc                PROVIDE (_end, _end_noinit)
 
-._check_stack   0x0000000020000ab4      0x100 load address 0x0000000008001a3c
-                0x0000000020000ab4                . = ALIGN (0x4)
-                0x0000000020000bb4                . = (. + _Minimum_Stack_Size)
- *fill*         0x0000000020000ab4      0x100 00
-                0x0000000020000bb4                . = ALIGN (0x4)
+._check_stack   0x0000000020000abc      0x100 load address 0x0000000008001a3c
+                0x0000000020000abc                . = ALIGN (0x4)
+                0x0000000020000bbc                . = (. + _Minimum_Stack_Size)
+ *fill*         0x0000000020000abc      0x100 00
+                0x0000000020000bbc                . = ALIGN (0x4)
 
 .bss_CCMRAM
  *(.bss.CCMRAM .bss.CCMRAM.*)
@@ -5548,18 +5638,18 @@ END GROUP
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x0000000000000000     0x19af
+.debug_info     0x0000000000000000     0x19da
  *(.debug_info .gnu.linkonce.wi.*)
- .debug_info    0x0000000000000000      0x41d ./src/main.o
- .debug_info    0x000000000000041d      0x40d ./src/tasks.o
- .debug_info    0x000000000000082a      0x2cf ./libs/CMSIS/src/startup_cm.o
- .debug_info    0x0000000000000af9       0xc0 ./libs/CMSIS/src/startup_stm32f4xx.o
- .debug_info    0x0000000000000bb9      0x62f ./libs/CMSIS/src/system_stm32f4xx.o
- .debug_info    0x00000000000011e8      0x1ba ./libs/CMSIS/src/vectors_stm32f4xx.o
- .debug_info    0x00000000000013a2       0x7a ./RTOS/AsmStuff.o
- .debug_info    0x000000000000141c      0x593 ./RTOS/uLipe_Task.o
+ .debug_info    0x0000000000000000      0x435 ./src/main.o
+ .debug_info    0x0000000000000435      0x40d ./src/tasks.o
+ .debug_info    0x0000000000000842      0x2cf ./libs/CMSIS/src/startup_cm.o
+ .debug_info    0x0000000000000b11       0xc0 ./libs/CMSIS/src/startup_stm32f4xx.o
+ .debug_info    0x0000000000000bd1      0x62f ./libs/CMSIS/src/system_stm32f4xx.o
+ .debug_info    0x0000000000001200      0x1ba ./libs/CMSIS/src/vectors_stm32f4xx.o
+ .debug_info    0x00000000000013ba       0x7a ./RTOS/AsmStuff.o
+ .debug_info    0x0000000000001434      0x5a6 ./RTOS/uLipe_Task.o
 
-.debug_abbrev   0x0000000000000000      0x793
+.debug_abbrev   0x0000000000000000      0x78c
  *(.debug_abbrev)
  .debug_abbrev  0x0000000000000000      0x176 ./src/main.o
  .debug_abbrev  0x0000000000000176       0xaf ./src/tasks.o
@@ -5568,7 +5658,7 @@ END GROUP
  .debug_abbrev  0x00000000000003cc      0x13d ./libs/CMSIS/src/system_stm32f4xx.o
  .debug_abbrev  0x0000000000000509       0xd9 ./libs/CMSIS/src/vectors_stm32f4xx.o
  .debug_abbrev  0x00000000000005e2       0x14 ./RTOS/AsmStuff.o
- .debug_abbrev  0x00000000000005f6      0x19d ./RTOS/uLipe_Task.o
+ .debug_abbrev  0x00000000000005f6      0x196 ./RTOS/uLipe_Task.o
 
 .debug_line     0x0000000000000000     0x1c9b
  *(.debug_line)
@@ -5592,22 +5682,22 @@ END GROUP
  .debug_frame   0x0000000000000394      0x118 ./RTOS/uLipe_Task.o
  .debug_frame   0x00000000000004ac       0x2c /usr/local/gcc-arm-none-eabi-4_7-2013q3/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m/libg.a(lib_a-memset.o)
 
-.debug_str      0x0000000000000000    0x5ff93
+.debug_str      0x0000000000000000    0x5ffd7
  *(.debug_str)
- .debug_str     0x0000000000000000    0x5f83f ./src/main.o
-                                      0x5fa53 (size before relaxing)
- .debug_str     0x000000000005f83f       0x90 ./src/tasks.o
-                                       0x314e (size before relaxing)
- .debug_str     0x000000000005f8cf      0x139 ./libs/CMSIS/src/startup_cm.o
+ .debug_str     0x0000000000000000    0x5f891 ./src/main.o
+                                      0x5faa5 (size before relaxing)
+ .debug_str     0x000000000005f891       0x90 ./src/tasks.o
+                                       0x315c (size before relaxing)
+ .debug_str     0x000000000005f921      0x139 ./libs/CMSIS/src/startup_cm.o
                                        0x320f (size before relaxing)
- .debug_str     0x000000000005fa08       0x2c ./libs/CMSIS/src/startup_stm32f4xx.o
+ .debug_str     0x000000000005fa5a       0x2c ./libs/CMSIS/src/startup_stm32f4xx.o
                                       0x5d34d (size before relaxing)
- .debug_str     0x000000000005fa34      0x278 ./libs/CMSIS/src/system_stm32f4xx.o
+ .debug_str     0x000000000005fa86      0x278 ./libs/CMSIS/src/system_stm32f4xx.o
                                       0x5d5b4 (size before relaxing)
- .debug_str     0x000000000005fcac       0xe3 ./libs/CMSIS/src/vectors_stm32f4xx.o
+ .debug_str     0x000000000005fcfe       0xe3 ./libs/CMSIS/src/vectors_stm32f4xx.o
                                        0x23e8 (size before relaxing)
- .debug_str     0x000000000005fd8f      0x204 ./RTOS/uLipe_Task.o
-                                       0x5724 (size before relaxing)
+ .debug_str     0x000000000005fde1      0x1f6 ./RTOS/uLipe_Task.o
+                                       0x5768 (size before relaxing)
 
 .debug_loc      0x0000000000000000      0x7ee
  *(.debug_loc)
@@ -5644,7 +5734,7 @@ OUTPUT(uLipeRTOS.elf elf32-littlearm)
  .debug_ranges  0x00000000000000c8       0x58 ./libs/CMSIS/src/vectors_stm32f4xx.o
  .debug_ranges  0x0000000000000120       0x50 ./RTOS/uLipe_Task.o
 
-.debug_macro    0x0000000000000000     0xf4ac
+.debug_macro    0x0000000000000000     0xf237
  .debug_macro   0x0000000000000000      0x29c ./src/main.o
  .debug_macro   0x000000000000029c      0x820 ./src/main.o
  .debug_macro   0x0000000000000abc       0x5e ./src/main.o
@@ -5698,15 +5788,11 @@ OUTPUT(uLipeRTOS.elf elf32-littlearm)
  .debug_macro   0x000000000000ea34       0x16 ./src/main.o
  .debug_macro   0x000000000000ea4a      0x16d ./src/main.o
  .debug_macro   0x000000000000ebb7       0x16 ./src/main.o
- .debug_macro   0x000000000000ebcd       0x1c ./src/main.o
- .debug_macro   0x000000000000ebe9       0x94 ./src/tasks.o
- .debug_macro   0x000000000000ec7d       0x10 ./src/tasks.o
- .debug_macro   0x000000000000ec8d       0xa7 ./libs/CMSIS/src/startup_cm.o
- .debug_macro   0x000000000000ed34      0x1b7 ./libs/CMSIS/src/startup_stm32f4xx.o
- .debug_macro   0x000000000000eeeb      0x1db ./libs/CMSIS/src/system_stm32f4xx.o
- .debug_macro   0x000000000000f0c6       0x11 ./libs/CMSIS/src/vectors_stm32f4xx.o
- .debug_macro   0x000000000000f0d7      0x160 ./RTOS/uLipe_Task.o
- .debug_macro   0x000000000000f237       0x10 ./RTOS/uLipe_Task.o
- .debug_macro   0x000000000000f247       0x35 ./RTOS/uLipe_Task.o
- .debug_macro   0x000000000000f27c       0x1c ./RTOS/uLipe_Task.o
- .debug_macro   0x000000000000f298      0x214 ./RTOS/uLipe_Task.o
+ .debug_macro   0x000000000000ebcd       0x22 ./src/main.o
+ .debug_macro   0x000000000000ebef       0x94 ./src/tasks.o
+ .debug_macro   0x000000000000ec83       0x10 ./src/tasks.o
+ .debug_macro   0x000000000000ec93       0xa7 ./libs/CMSIS/src/startup_cm.o
+ .debug_macro   0x000000000000ed3a      0x1b7 ./libs/CMSIS/src/startup_stm32f4xx.o
+ .debug_macro   0x000000000000eef1      0x1db ./libs/CMSIS/src/system_stm32f4xx.o
+ .debug_macro   0x000000000000f0cc       0x11 ./libs/CMSIS/src/vectors_stm32f4xx.o
+ .debug_macro   0x000000000000f0dd      0x15a ./RTOS/uLipe_Task.o
