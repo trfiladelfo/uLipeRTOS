@@ -50,13 +50,6 @@
 /************************************************************************
  	 	 	 	 	 Public variables
  ************************************************************************/
-
-//This is the current TCB in execution
-taskTCB_t *CurrentTaskBlock 	= NULL	,
-
-//This is the first ready TCB on queue
-  		  *HighReadyTaskBlock   = NULL	;
-
 //Stack of IDLE Task
 os_stack_t 			IdleTaskStack[64];
 
@@ -166,8 +159,7 @@ os_error_t 	Task_Create
 
 			//calculate its deadline, based on
 			//its priority
-			TaskList->TaskTime = OS_TICKS +
-								TaskPriority;
+			TaskList->TaskTime = 1;
 
 			//Put the initial TCB state
 			TaskList->TaskState   = TASK_READY;
@@ -227,8 +219,7 @@ os_error_t 	Task_Create
 		TaskList->TaskElapsedTime = 0;
 
 		//Assign its Deadline based on its priority
-		TaskList->TaskTime = OS_TICKS +
-							TaskList->TaskPriority;
+		TaskList->TaskTime = 1;
 
 		//Set the initial state
 		TaskList->TaskState   = TASK_READY;
@@ -637,6 +628,25 @@ os_error_t 	Task_Block(os_taskID_t TaskID)
 	//if task in another state the return error:
 	return(OS_ERROR);
 }
+/************************************************************************
+ 	 function:	Task_GetList()
+
+ 	 description: this function returns the tasklist head
+
+
+ 	 parameters: TODO
+
+ 	 return:	TODO
+
+
+ ************************************************************************/
+taskTCB_t* Task_GetList(void)
+{
+	//simply get the tasklist from idle task:
+	return((taskTCB_t *)&TaskBlockList[NUMBER_OF_TASK]);
+
+}
+
 /************************************************************************
  	 function:	Task_Idle()
 

@@ -36,8 +36,7 @@ Delay(__IO uint32_t nTime);
 static void
 TimingDelay_Decrement(void);
 
-void
-SysTick_Handler(void);
+
 
 /* ----- SysTick definitions ----------------------------------------------- */
 
@@ -58,9 +57,6 @@ SysTick_Handler(void);
 volatile int seconds = 0;
 volatile os_taskID_t ID;
 
-volatile taskTCB_t *TestTCB = NULL, *AnotherTCB = NULL;
-
-volatile os_error_t  Error = OS_OK; //cria um handles de erro
 
 int
 main(void)
@@ -68,7 +64,6 @@ main(void)
 
 
 
-	Task_InitBlocks();
 
 	Task_Create(&TaskTry, &TaskTryStack, 0 , &Try, sizeof(Try),sizeof(TaskTryStack));
 	Task_Create(&TaskTry2, &TaskTryStack2, 1 , &Try2, sizeof(Try2),sizeof(TaskTryStack));
@@ -82,50 +77,6 @@ main(void)
 
 
 
-	CurrentTaskBlock = Task_Query(Task_GetID(&Try2, sizeof(Try2)));
-	HighReadyTaskBlock = Task_Query(Task_GetID(&Try, sizeof(Try)));
-
-	TestTCB = HighReadyTaskBlock;
-
-	//os_stack_t *TempStack = (os_stack_t *)HighReadyTaskBlock->TaskStack;
-
-	//cria um stack frame para HighReady:
-	*--HighReadyTaskBlock->TaskStack = 0x01000000; //status registers
-	*--HighReadyTaskBlock->TaskStack = (taskptr_t *)HighReadyTaskBlock->TaskAction;//PC
-	*--HighReadyTaskBlock->TaskStack = 0xFFFFFFFD;
-	*--HighReadyTaskBlock->TaskStack = 0x00;
-	*--HighReadyTaskBlock->TaskStack = 0x00;
-	*--HighReadyTaskBlock->TaskStack = 0x00;
-	*--HighReadyTaskBlock->TaskStack = 0x00;
-	*--HighReadyTaskBlock->TaskStack = 0x00;
-/*	*--HighReadyTaskBlock->TaskStack = 0x00;
-	*--HighReadyTaskBlock->TaskStack = 0x00;
-	*--HighReadyTaskBlock->TaskStack = 0x00;
-	*--HighReadyTaskBlock->TaskStack = 0x00;
-	*--HighReadyTaskBlock->TaskStack = 0x00;
-	*--HighReadyTaskBlock->TaskStack = 0x00;
-	*--HighReadyTaskBlock->TaskStack = 0x00;
-	*--HighReadyTaskBlock->TaskStack = 0x12345678;
-*/
-
-    //outro stack frame
-	*--CurrentTaskBlock->TaskStack = 0x01000000; //status registers
-	*--CurrentTaskBlock->TaskStack = (taskptr_t *)CurrentTaskBlock->TaskAction;//PC
-	*--CurrentTaskBlock->TaskStack = 0xFFFFFFFD;
-	*--CurrentTaskBlock->TaskStack = 0x00;
-	*--CurrentTaskBlock->TaskStack = 0x00;
-	*--CurrentTaskBlock->TaskStack = 0x00;
-	*--CurrentTaskBlock->TaskStack = 0x00;
-	*--CurrentTaskBlock->TaskStack = 0x00;
-/*	*--CurrentTaskBlock->TaskStack = 0x00;
-	*--CurrentTaskBlock->TaskStack = 0x00;
-	*--CurrentTaskBlock->TaskStack = 0x00;
-	*--CurrentTaskBlock->TaskStack = 0x00;
-	*--CurrentTaskBlock->TaskStack = 0x00;
-	*--CurrentTaskBlock->TaskStack = 0x00;
-	*--CurrentTaskBlock->TaskStack = 0x00;
-	*--CurrentTaskBlock->TaskStack = 0x12345678;
-*/
 	Asm_LowLevelTickInit(16800); //vamos testar!
 
 	while (1);
@@ -170,7 +121,7 @@ TimingDelay_Decrement(void)
  * @brief  This function is the SysTick Handler.
  * @param  None
  * @retval None
- */
+
 void
 SysTick_Handler(void)
 {
@@ -181,7 +132,7 @@ SysTick_Handler(void)
 
 	Asm_TaskLevelContextChange(); //vamos testar?
 }
-
+*/
 
 
 // ----------------------------------------------------------------------------

@@ -45,6 +45,7 @@
 extern os_error_t uLipe_Init(void);
 extern void 	  uLipe_Schedule(void);
 extern void		  uLipe_Start(void);
+uint32_t uLipe_GetCurrentTick(void);
 extern void       Systick_Handler(void);
 
 

@@ -82,6 +82,7 @@ Asm_LowLevelTickInit:
 @************************************************************************
 .thumb_func
 Asm_CriticalIn:
+		MRS     R0, PRIMASK			@save status register
 		CPSID	I					@disables all interrupts
 		BX		LR					@Return from sub
 
@@ -99,6 +100,7 @@ Asm_CriticalIn:
 .thumb_func
 Asm_CriticalOut:
 
+		MSR	    PRIMASK,R0				@retrieve saved sr register
 		CPSIE	I					@enables all interrupts
 		BX		LR					@Return from sub
 

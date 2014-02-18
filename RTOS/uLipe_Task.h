@@ -94,14 +94,6 @@ typedef struct os_taskTCB_t
  	 	 	 	 	 Externs
  ***********************************************************************/
 
-//WARNING! Your application MUST NOT use this variables
-
-//This is the current TCB in execution
-extern taskTCB_t *CurrentTaskBlock;
-
-//This is the ready first TCB on queue
-extern taskTCB_t *HighReadyTaskBlock;
-
 //Stack of IDLE Task
 extern os_stack_t 			IdleTaskStack[64];
 
@@ -131,6 +123,8 @@ extern	os_error_t 	Task_ChangeState(os_taskID_t TaskID, taskstates_t State );
 extern  os_error_t  Task_Suspend(os_taskID_t TaskID);
 
 extern	os_error_t  Task_Block(os_taskID_t TaskID);
+
+taskTCB_t* Task_GetList(void);
 
 extern  void Task_Idle(void *TaskArgs);
 

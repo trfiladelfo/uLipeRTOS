@@ -23,8 +23,8 @@
  	 	 	 	 	 Function Prototypes
  ************************************************************************/
 extern void 	  Asm_LowLevelTickInit(uint32_t TickCount);
-extern void       Asm_CriticalIn(void);
-extern void       Asm_CriticalOut(void);
+extern uint32_t   Asm_CriticalIn(void);
+extern void       Asm_CriticalOut(uint32_t StatusRegister);
 extern void       Asm_IntLevelContextChange(void);
 extern void       Asm_TaskLevelContextChange(void);
 void 	  		  PendSV_Handler(void);

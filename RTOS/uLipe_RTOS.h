@@ -22,12 +22,11 @@
 /************************************************************************
  	 	 	 	 	 Defines and Macros
  ************************************************************************/
-//Tick timer in us
-#define OS_TICKS 			1000
+//Tick timer in Hz
+#define OS_TICK_RATE			1000
 
-//Time quanta unity
-#define OS_TIME_QUANTA		(OS_TICKS / 10)
-
+//Number of intertask ticks:
+#define OS_RATE					1
 /************************************************************************
  	 	 	 	 	 Enumerations
  ************************************************************************/
@@ -45,6 +44,8 @@ typedef enum
 	OS_QUEUE_FULL,
 	OS_QUEUE_EMPTY,
 	OS_QUEUE_OUT_OF_RANGE,
+	OS_QUEUE_NOT_EMPTY,
+	OS_INDEX_OUT_OF_RANGE,
 
 	OS_QTY_OF_ERRORS
 }errors_t;
