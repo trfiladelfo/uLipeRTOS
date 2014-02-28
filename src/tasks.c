@@ -70,50 +70,92 @@ taskptr_t TaskTry2(void *TaskArgs)
 taskptr_t TaskTry3(void *TaskArgs)
 {
 
-	static uint32_t counter = 0;
+	static uint32_t counter1 = 0,
+					counter2 = 0,
+					counter3 = 0;
 
-	counter++;
+	while(1)
+	{
+		counter1 = 100;
+		counter2 = 150;
+		counter3 = 175;
+	}
 }
 
 taskptr_t TaskTry4(void *TaskArgs)
 {
 
-	static uint32_t counter = 0;
+	static uint32_t counter1 = 0,
+					counter2 = 0,
+					counter3 = 0;
 
-	counter++;
+	while(1)
+	{
+		counter1 = 100;
+		counter2 = 150;
+		counter3 = 175;
+	}
 }
 
 
 taskptr_t TaskTry5(void *TaskArgs)
 {
 
-	static uint32_t counter = 0;
+	static uint32_t counter1 = 0,
+					counter2 = 0,
+					counter3 = 0;
 
-	counter++;
+	while(1)
+	{
+		counter1 = 100;
+		counter2 = 150;
+		counter3 = 175;
+	}
 }
 
 taskptr_t TaskTry6(void *TaskArgs)
 {
 
-	static uint32_t counter = 0;
+	static uint32_t counter1 = 0,
+					counter2 = 0,
+					counter3 = 0;
 
-	counter++;
+	while(1)
+	{
+		counter1 = 100;
+		counter2 = 150;
+		counter3 = 175;
+	}
 }
 
 
 taskptr_t TaskTry7(void *TaskArgs)
 {
 
-	static uint32_t counter = 0;
+	static uint32_t counter1 = 0,
+					counter2 = 0,
+					counter3 = 0;
 
-	counter++;
+	while(1)
+	{
+		counter1 = 100;
+		counter2 = 150;
+		counter3 = 175;
+	}
 }
 
 
 taskptr_t TaskTry8(void *TaskArgs)
 {
 
-	static uint32_t counter = 0;
+	static uint32_t counter1 = 0,
+					counter2 = 0,
+					counter3 = 0;
 
-	counter++;
+	while(1)
+	{
+		counter1 = 100;
+		counter2 = 150;
+		counter3 = 175;
+	}
 }

@@ -155,11 +155,11 @@ os_error_t 	Task_Create
 			TaskList->TaskID   = LoopCntr;
 
 			//reset the time elapsed counter
-			TaskList->TaskElapsedTime = 0;
+			TaskList->TaskElapsedTime = uLipe_GetCurrentTick();
 
 			//calculate its deadline, based on
 			//its priority
-			TaskList->TaskTime = 1;
+			TaskList->TaskTime = 0;
 
 			//Put the initial TCB state
 			TaskList->TaskState   = TASK_READY;
@@ -216,7 +216,7 @@ os_error_t 	Task_Create
 		TaskList->TaskID = NUMBER_OF_TASK + 1;
 
 		//Reset its time counter
-		TaskList->TaskElapsedTime = 0;
+		TaskList->TaskElapsedTime = uLipe_GetCurrentTick();
 
 		//Assign its Deadline based on its priority
 		TaskList->TaskTime = 1;

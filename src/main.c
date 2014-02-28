@@ -63,7 +63,7 @@ main(void)
 {
 
 
-
+	uLipe_Init();
 
 	Task_Create(&TaskTry, &TaskTryStack, 0 , &Try, sizeof(Try),sizeof(TaskTryStack));
 	Task_Create(&TaskTry2, &TaskTryStack2, 1 , &Try2, sizeof(Try2),sizeof(TaskTryStack));
@@ -73,11 +73,12 @@ main(void)
 	Task_Create(&TaskTry6, &TaskTryStack6, 2 , &Try6, sizeof(Try2),sizeof(TaskTryStack));
 	Task_Create(&TaskTry7, &TaskTryStack7, 12 , &Try7, sizeof(Try2),sizeof(TaskTryStack));
 
+	uLipe_Start();
 
 
 
 
-	Asm_LowLevelTickInit(16800); //vamos testar!
+
 
 	while (1);
 

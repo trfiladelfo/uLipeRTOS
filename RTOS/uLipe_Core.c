@@ -33,6 +33,19 @@
 /************************************************************************
   					Local Defines and Constants
  ************************************************************************/
+//Defines a quantity of time quanta that corresponds a tick
+#define TICK  (NUMBER_OF_TASK + 1)
+
+//Defines a time quanta unity:
+#define TIME_QUANTA      (OS_TICK_RATE/(NUMBER_OF_TASK+1))
+
+//Define the reload time value:
+#define TIMER_LOAD       (SYSCLK / TIME_QUANTA)
+
+//Defines for scheduling on or off:
+#define SCHED_EN		0
+
+#define SCHED_DIS       0xAA
 
 /************************************************************************
   					Local structs
@@ -93,6 +106,9 @@ TaskQueueCB_t TaskMainCtl;
 //Global tick counter:
 volatile uint32_t  TickCounter = 0;
 
+//Schedule flag:
+uint8_t  ScheduleFlag = SCHED_DIS;
+
 /************************************************************************
   					Local Prototypes
  ************************************************************************/
@@ -100,9 +116,9 @@ volatile uint32_t  TickCounter = 0;
 void uLipe_StackFrameCreate(taskTCB_t *CurrTask);
 os_error_t uLipe_TaskQueueInit(void);
 os_error_t uLipe_TaskEnqueue(taskTCB_t *CurrTask);
-os_error_t uLipe_TaskDequeue(taskTCB_t *CurrTask);
+taskTCB_t* uLipe_TaskDequeue(os_error_t *Err);
 os_error_t uLipe_EmptyQueue(void);
-os_error_t uLipe_TaskQueryByIndex(uint8_t Index, taskTCB_t *DesiredTask);
+taskTCB_t* uLipe_TaskQueryByIndex(uint8_t Index, os_error_t *Err);
 os_error_t uLipe_TaskDropByIndex(uint8_t Index);
 
 
@@ -209,7 +225,7 @@ os_error_t uLipe_TaskQueueInit(void)
 	//since queue is mounted, let take the tasklist:
 
 	//get the idle task address:
-	CurrTask = Task_Query(Task_GetID((os_taskname_t *)&IdleName, sizeof(IdleName)));
+	CurrTask = (taskTCB_t *)Task_GetList();
 
 	//searches the queue for ready tasks:
 	while(END_LIST != CurrTask)
@@ -225,6 +241,9 @@ os_error_t uLipe_TaskQueueInit(void)
 
 			//Increments the bottom queue current index:
 			TaskMainCtl.TailCurrIndex++;
+
+			//increments the queue size:
+			TaskMainCtl.QueueSize++;
 
 			/**THE QUEUE WILL NEVER OVERFLOWS**/
 		}
@@ -289,18 +308,25 @@ os_error_t uLipe_TaskEnqueue(taskTCB_t *CurrTask)
 
 
  ************************************************************************/
-os_error_t uLipe_TaskDequeue(taskTCB_t *CurrTask)
+taskTCB_t* uLipe_TaskDequeue(os_error_t *Err)
 {
+	//TemporaryTCB:
+	taskTCB_t* pTCB = (taskTCB_t *)
+			TaskMainCtl.Head->TaskQueueData;
+
 	//check if queue is empty first:
-	if(NULL >= TaskMainCtl.QueueSize)
+	if(NULL == TaskMainCtl.QueueSize)
 	{
+		//Assign the error:
+		*Err = OS_QUEUE_EMPTY;
+
 		//return the error:
-		return(OS_QUEUE_EMPTY);
+		return(NULL);
 	}
 
 	//if not lets remove the TCB is in
 	//top of queue:
-	CurrTask = (taskTCB_t *)TaskMainCtl.Head->TaskQueueData;
+	//CurrTask = (taskTCB_t *)&pTCB;
 
 	//Move Head for new top of queue:
 	TaskMainCtl.Head = (TaskQueue_t *)TaskMainCtl.Head->NextNode;
@@ -313,8 +339,11 @@ os_error_t uLipe_TaskDequeue(taskTCB_t *CurrTask)
 	TaskMainCtl.HeadCurrIndex = (TaskMainCtl.HeadCurrIndex + 1)
 			% (NUMBER_OF_TASK + 1);
 
+	//Assign no error:
+	*Err = OS_OK;
+
 	//return a ok:
-	return(OS_OK);
+	return(pTCB);
 }
 /************************************************************************
  	 function:	uLipe_EmptyQueue()
@@ -353,30 +382,34 @@ os_error_t  uLipe_EmptyQueue(void)
 
 
  ************************************************************************/
-os_error_t uLipe_TaskQueryByIndex(uint8_t Index, taskTCB_t *DesiredTask)
+taskTCB_t* uLipe_TaskQueryByIndex(uint8_t Index, os_error_t *Err)
 {
 
+	taskTCB_t * DesiredTask = NULL;
 
 	//check if the current index comports a
 	//ready task:
 	if((Index < TaskMainCtl.HeadCurrIndex ) &&
 			(Index > TaskMainCtl.TailCurrIndex ))
 	{
-		//put a null pointer on TCB:
-		DesiredTask = (taskTCB_t*)NULL;
+		//Assign error:
+		*Err = OS_QUEUE_OUT_OF_RANGE;
 
-		//and return error
-		return(OS_INDEX_OUT_OF_RANGE);
+		//and return Null pointer
+		return(NULL);
 	}
 
 	//since the index is in range and corresponds directly
 	//to ready list table only indexes it with the passed
 	//index.
 
-	DesiredTask = (taskTCB_t*)&TaskMainQueue[Index].TaskQueueData;
+	DesiredTask = (taskTCB_t*) TaskMainQueue[Index].TaskQueueData;
+
+	//Assign system ok:
+	*Err = OS_OK;
 
 	//return succefull action..
-	return(OS_OK);
+	return((taskTCB_t *)DesiredTask);
 }
 /************************************************************************
  	 function:	uLipe_TaskDropByIndex()
@@ -405,7 +438,7 @@ os_error_t uLipe_TaskDropByIndex(uint8_t Index)
 
 	//since the ready task exists, let remove it:
 	for(LoopCntr = Index; LoopCntr <= TaskMainCtl.TailCurrIndex;
-			LoopCntr = (LoopCntr + 1)% (NUMBER_OF_TASK + 1))
+			LoopCntr++, Index = (Index + 1)% (NUMBER_OF_TASK + 1))
 	{
 		//we simply overwrite the current tcbs in one previous position:
 		TaskMainQueue[LoopCntr].TaskQueueData =
@@ -483,112 +516,122 @@ void  uLipe_Schedule(void)
 	uint32_t StatusReg = 0;
 
 	//a auxiliar index for search tasks:
-	uint8_t  Index = 0, AuxiliarIndex = 0;
+	uint8_t  Index = 0, AuxiliarIndex = 0, Err = OS_OK;
+
+	//High priority task pointer must be 0 in first iteration:
+	HighReadyTaskBlock = (taskTCB_t*)0;
+
+	//check if scheduler is not locked:
+	if(SCHED_EN == ScheduleFlag)
+	{
+		//only schedule if queue is
+		//not empty
+		if(NULL != TaskMainCtl.QueueSize)
+		{
+			//if not empty search for ready tasks:
+
+			//make head queue as a start point
+			//to queury a queue:
+			Index = TaskMainCtl.HeadCurrIndex;
+
+			//perform a search:
+			while(Index < TaskMainCtl.TailCurrIndex)
+			{
+				//create a critical code section:
+				StatusReg = Asm_CriticalIn();
+
+				//query for current index task:
+				AuxiliarTcb = (taskTCB_t*)uLipe_TaskQueryByIndex(Index, &Err);
+
+				//check for invalid value in HighPriorityReady:
+				if((taskTCB_t *)NULL == HighReadyTaskBlock)
+				{
+					//assign a valid value on it
+					HighReadyTaskBlock = (taskTCB_t*)AuxiliarTcb;
+				}
+				else
+				{
+					//check which priority is higher, remember
+					//that less value of priority most high is it:
+
+					if(HighReadyTaskBlock->TaskPriority > AuxiliarTcb->TaskPriority)
+					{
+						//if a new high priority is appeared
+						//get it
+						HighReadyTaskBlock = (taskTCB_t *)AuxiliarTcb;
+
+						//Save the candidate of most priority task on queue index:
+						AuxiliarIndex = Index;
+
+					}
+				}
+
+				//go to next task in queue
+				Index++;
+
+				//end of critical section.
+				Asm_CriticalOut(StatusReg);
+
+			}
 
 
-    //only schedule if queue is
-	//not empty
-    if(NULL != TaskMainCtl.QueueSize)
-    {
-    	//if not empty search for ready tasks:
+			//check if the most priority task is in top of queue:
+			if(AuxiliarIndex == TaskMainCtl.TailCurrIndex)
+			{
+				//The only dequeues it:
+				AuxiliarTcb = (taskTCB_t*)uLipe_TaskDequeue(&Err);
+			}
+			else
+			{
+				//if task is other position inside of queue
+				//drop it
+				uLipe_TaskDropByIndex(AuxiliarIndex);
+			}
 
-    	//make head queue as a start point
-    	//to queury a queue:
-    	Index = TaskMainCtl.HeadCurrIndex;
+			//create a critical code section:
+			StatusReg = Asm_CriticalIn();
 
-    	//perform a search:
-    	while(Index < TaskMainCtl.TailCurrIndex)
-    	{
-    		//create a critical code section:
+			//Set task as running:
+			HighReadyTaskBlock->TaskState = TASK_RUNNING;
+
+			//Perform a context switching:
+			Asm_IntLevelContextChange();
+
+
+
+			//ends the critical section:
+			Asm_CriticalOut(StatusReg);
+
+		}
+		else
+		{
+
+			//if no tasks ready, execute again the current task
+			CurrentTaskBlock->TaskState = TASK_RUNNING;
+
+			//make HighPriorityReady = CurrentTaskBlock:
+			HighReadyTaskBlock = (taskTCB_t*)CurrentTaskBlock;
+
+
+			/*
+    		//enable a critical section
     		StatusReg = Asm_CriticalIn();
 
-    		//query for current index task:
-    		uLipe_TaskQueryByIndex(Index, AuxiliarTcb);
 
-    		//check for invalid value in HighPriorityReady:
-    		if((taskTCB_t *)NULL == HighReadyTaskBlock)
-    		{
-    			//assign a valid value on it
-    			HighReadyTaskBlock = (taskTCB_t*)AuxiliarTcb;
-    		}
-    		else
-    		{
-    			//check which priority is higher, remember
-    			//that less value of priority most high is it:
+    		//Set this task is in exectution:
+    		HighReadyTaskBlock->TaskState = TASK_RUNNING;
 
-    			if(HighReadyTaskBlock->TaskPriority > AuxiliarTcb->TaskPriority)
-    			{
-    				//if a new high priority is appeared
-    				//get it
-    				HighReadyTaskBlock = (taskTCB_t *)AuxiliarTcb;
-
-    				//Save the candidate of most priority task on queue index:
-    				AuxiliarIndex = Index;
-
-    			}
-    		}
-
-    		//go to next task in queue
-    		Index++;
-
-    		//end of critical section.
+    		//disable a critical section
     		Asm_CriticalOut(StatusReg);
 
-    	}
+    		//perform a context switch:
+    		Asm_TaskLevelContextChange();
+			 */
+		}
+	}
 
-
-    	//check if the most priority task is in top of queue:
-    	if(AuxiliarIndex == TaskMainCtl.TailCurrIndex)
-    	{
-    		//The only dequeues it:
-    		uLipe_TaskDequeue(AuxiliarTcb);
-    	}
-    	else
-    	{
-    		//if task is other position inside of queue
-    		//drop it
-    		uLipe_TaskDropByIndex(AuxiliarIndex);
-    	}
-
-    	//create a critical code section:
-    	StatusReg = Asm_CriticalIn();
-
-    	//Set task as running:
-    	HighReadyTaskBlock->TaskState = TASK_RUNNING;
-
-    	//Perform a context switching:
-    	Asm_IntLevelContextChange();
-
-    	//ends the critical section:
-    	Asm_CriticalOut(StatusReg);
-
-    }
-    else
-    {
-
-    	//if no tasks ready, execute again the current task
-    	CurrentTaskBlock->TaskState = TASK_RUNNING;
-
-       	//make HighPriorityReady = CurrentTaskBlock:
-        HighReadyTaskBlock = (taskTCB_t*)CurrentTaskBlock;
-
-
-    	/*
-    	//enable a critical section
-    	StatusReg = Asm_CriticalIn();
-
-
-    	//Set this task is in exectution:
-    	HighReadyTaskBlock->TaskState = TASK_RUNNING;
-
-    	//disable a critical section
-    	Asm_CriticalOut(StatusReg);
-
-    	//perform a context switch:
-    	Asm_TaskLevelContextChange();
-        */
-    }
-
+	//updates the current TCB:
+	//CurrentTaskBlock = (taskTCB_t *)HighReadyTaskBlock;
 }
 /************************************************************************
  	 function:	uLipe_Start()
@@ -607,6 +650,9 @@ void uLipe_Start(void)
 
 	//allocates a StatusRegister:
 //	uint32_t StatusReg = 0x100;
+
+	//Allocates a error variable:
+	uint8_t Err = OS_OK;
 
 	//pointer to task list:
 	taskTCB_t *TaskList = (taskTCB_t *)NULL;
@@ -632,7 +678,13 @@ void uLipe_Start(void)
 	uLipe_TaskQueueInit();
 
 	//the system is ready to execute, get the first task in current task:
-	uLipe_TaskDequeue((taskTCB_t*)CurrentTaskBlock);
+	CurrentTaskBlock = (taskTCB_t*)uLipe_TaskDequeue(&Err);
+
+	//Init Tick counter system (low-Level)
+	Asm_LowLevelTickInit(TIMER_LOAD);
+
+	//Unlock scheduler:
+	ScheduleFlag = SCHED_EN;
 
 	//and finally schedule at first time:
 	uLipe_Schedule();
@@ -667,6 +719,9 @@ void SysTick_Handler(void)
 	//Enable critical section:
 	StatusReg = Asm_CriticalIn();
 
+	//Disable scheduling:
+	ScheduleFlag = SCHED_DIS;
+
 	//First of all, update the current Tick:
 	TickCounter++;
 
@@ -674,13 +729,20 @@ void SysTick_Handler(void)
 	Asm_CriticalOut(StatusReg);
 
 	//Get the head of tasklist:
-	TaskList = (taskTCB_t*)Task_GetList;
+	TaskList = (taskTCB_t*)Task_GetList();
 
-	//Suspend the current task:
-	CurrentTaskBlock->TaskState = TASK_SUSPEND;
+	//Check for a time quanta expiration:
+	if(TICK <= TickCounter - CurrentTaskBlock->TaskElapsedTime)
+	{
+		//Suspend the current task:
+		CurrentTaskBlock->TaskState = TASK_SUSPEND;
 
-	//Store the current tick counter:
-	CurrentTaskBlock->TaskElapsedTime = TickCounter;
+		//Store the current tick counter:
+		CurrentTaskBlock->TaskElapsedTime = TickCounter;
+
+		//Enable Scheduling:
+		ScheduleFlag = SCHED_EN;
+	}
 
 	//go trhough task list and executes
 	//the admission control:
@@ -691,13 +753,27 @@ void SysTick_Handler(void)
 		if(TASK_READY != TaskList->TaskState)
 		{
 			//search if a tick already occurred:
-			if(OS_RATE <= (TickCounter - TaskList->TaskElapsedTime))
+			if(TICK <= (TickCounter - TaskList->TaskElapsedTime))
 			{
 				//then set this task as a ready:
 				TaskList->TaskState = TASK_READY;
 
 				//Read current tick counter:
 				TaskList->TaskElapsedTime = TickCounter;
+
+				//check if this task has more priority than current task:
+				if((TaskList->TaskPriority > CurrentTaskBlock->TaskPriority)&&
+					CurrentTaskBlock->TaskState  != TASK_SUSPEND	)
+				{
+					//Suspend current task execution
+					CurrentTaskBlock->TaskState = TASK_SUSPEND;
+
+					//Get current current tick counter:
+					CurrentTaskBlock->TaskElapsedTime = TickCounter;
+
+					//Enable scheduling in order to preempt current task:
+					ScheduleFlag = SCHED_EN;
+				}
 
 				//Put this task control block on
 				//ready list:
@@ -729,6 +805,46 @@ uint32_t uLipe_GetCurrentTick(void)
 {
 	//return the current count:
 	return(TickCounter);
+}
+/************************************************************************
+ 	 function:	uLipe_EnableSchedule()
+
+ 	 description: Enable schedule allowing next task execution
+ 	 	 	 	  selection
+
+ 	 parameters: TODO
+
+ 	 return:	TODO
+
+
+ ************************************************************************/
+void uLipe_EnableSchedule(void)
+{
+	//check if scheduler is already enabled:
+	if(SCHED_DIS != ScheduleFlag)
+	{
+		ScheduleFlag = SCHED_EN;
+	}
+}
+/************************************************************************
+ 	 function:	uLipe_DisableSchedule()
+
+ 	 description: Disable schedule, not allowing next task execution
+ 	 	 	 	  selection
+
+ 	 parameters: TODO
+
+ 	 return:	TODO
+
+
+ ************************************************************************/
+void uLipe_DisableSchedule(void)
+{
+	//check if scheduler is already disabled:
+	if(SCHED_EN != ScheduleFlag)
+	{
+		ScheduleFlag = SCHED_DIS;
+	}
 }
 /************************************************************************
   					End of File

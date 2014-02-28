@@ -22,11 +22,13 @@
 /************************************************************************
  	 	 	 	 	 Defines and Macros
  ************************************************************************/
-//Tick timer in Hz
+
+//Tick timer in us
 #define OS_TICK_RATE			1000
 
-//Number of intertask ticks:
-#define OS_RATE					1
+//Defines the current clock rate:
+#define SYSCLK					168000000
+
 /************************************************************************
  	 	 	 	 	 Enumerations
  ************************************************************************/
@@ -65,10 +67,10 @@ typedef uint8_t		os_queue_t;
  	 	 	 	 	 OS include files
  **********************************************************************/
 
-#ifdef __TEST_CORE
+//#ifdef __TEST_CORE
 //OS Kernel
 #include "uLipe_Core.h"
-#endif
+//#endif
 //Assembly resources, cpu port
 #include "AsmStuff.h"
 

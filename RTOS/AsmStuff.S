@@ -195,6 +195,11 @@ PendSV_Handler:
 		LDMIA	R1!,{R4 - R11}			@Reload R4 -- R11
 		MSR		PSP , R1				@write the new stackpointer
 NO_SAVE:								@
+										@update the new current tcb
+		LDR     R0, =HighReadyTaskBlock	@
+		LDR		R0, [R0]				@
+		LDR		R1,=CurrentTaskBlock	@
+		STR		R0, [R1]				@
 		ORR     LR,LR,#0x00000004		@ensures that return in PSP
 		BX		LR						@Return from sub
 										@
