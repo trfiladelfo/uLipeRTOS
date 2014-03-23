@@ -29,6 +29,9 @@
 //Defines the current clock rate:
 #define SYSCLK					168000000
 
+//Defines the current number of tasks:
+#define NUMBER_OF_TASKS			8
+
 /************************************************************************
  	 	 	 	 	 Enumerations
  ************************************************************************/
@@ -48,6 +51,7 @@ typedef enum
 	OS_QUEUE_OUT_OF_RANGE,
 	OS_QUEUE_NOT_EMPTY,
 	OS_INDEX_OUT_OF_RANGE,
+	OS_INVALID_POINTER,
 
 	OS_QTY_OF_ERRORS
 }errors_t;
@@ -62,21 +66,23 @@ typedef uint8_t		os_taskID_t;
 typedef uint8_t     os_error_t;
 typedef uint32_t 	os_stack_t;
 typedef uint8_t		os_queue_t;
+typedef uint32_t    base_t;
 
 /**********************************************************************
  	 	 	 	 	 OS include files
  **********************************************************************/
 
-//#ifdef __TEST_CORE
+
 //OS Kernel
 #include "uLipe_Core.h"
-//#endif
+
 //Assembly resources, cpu port
 #include "AsmStuff.h"
 
 //Task management methods
 #include "uLipe_Task.h"
 
+//todo
 //Queue managemete methods
 //#include "uLipe_Queue.h"
 

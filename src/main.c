@@ -72,6 +72,7 @@ main(void)
 	Task_Create(&TaskTry5, &TaskTryStack5, 7 , &Try5, sizeof(Try2),sizeof(TaskTryStack));
 	Task_Create(&TaskTry6, &TaskTryStack6, 2 , &Try6, sizeof(Try2),sizeof(TaskTryStack));
 	Task_Create(&TaskTry7, &TaskTryStack7, 12 , &Try7, sizeof(Try2),sizeof(TaskTryStack));
+	Task_Create(&TaskTry8, &TaskTryStack8, 8 , &Try8, sizeof(Try2),sizeof(TaskTryStack));
 
 	uLipe_Start();
 

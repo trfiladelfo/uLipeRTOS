@@ -36,7 +36,7 @@
 //Defines a maximum number of tasks
 #define MAX_TASK_NUMBER  32
 
-//Defies the least priority number
+//Defines the least priority number
 #define LESS_PRIORITY	 31
 //Defines the most proirity number
 #define MAX_PRIORITY	 0
@@ -61,8 +61,11 @@ os_taskname_t IdleName[8] = {"TaskIdle"};
  ************************************************************************/
 
 //This is the table of TCBs, its size is limited by the current
-//Number of tasks
+//Number of tasks plus 1 (tcb for idle task)
 taskTCB_t TaskBlockList[NUMBER_OF_TASK + 1];
+
+//Holds the current installed tasks:
+uint8_t  TaskInstalledCounter = 0;
 
 /************************************************************************
  	 	 	 	 	 Module local Prototypes
@@ -79,9 +82,9 @@ taskTCB_t TaskBlockList[NUMBER_OF_TASK + 1];
  	 description: this function,fills zero on all memory block
  	 	 	 	  reserved for tasks TCB.
 
- 	 parameters: TODO
+ 	 parameters: N/A
 
- 	 return:	TODO
+ 	 return:	N/A
 
 
  ************************************************************************/
@@ -97,9 +100,40 @@ void Task_InitBlocks(void)
  	 description: this function,reserves, fill and attach a task
  	 	 	 	  TCB on the task linked list
 
- 	 parameters: TODO
+ 	 parameters: TaskAction - Address to task used function
 
- 	 return:	TODO
+ 	  	  	  	 TaskStack  - Points to a vector used as a task
+ 	  	  	  	  	  	  	  function stack.
+
+ 	  	  	  	 TaskPriority - A priority given by user to the task
+ 	  	  	  	  	  	  	    its range is limited by number of tasks
+ 	  	  	  	  	  	  	    plus 1 , remember that less this number
+ 	  	  	  	  	  	  	    higher the task priority.
+
+ 	  	  	  	 TaskName - Points to a vector allocated by user that
+ 	  	  	  	 	 	 	contains in ASCII form the name of task
+ 	  	  	  	 	 	 	this name can be used also to get task ID
+
+				 NameSize - Size of name given to task.
+
+				 StackSize - Size of task stack, it must be specifies in
+				 	 	 	 os_stack_t units, all other units may cause
+				 	 	 	 unpredictable behaviour
+
+
+ 	 return:	OS_OK - Task succesfull created.
+
+ 	  	  	    OS_NAME_TOO_LONG - Task name is grater than supported.
+
+ 	  	  	    OS_PRIORITY_OUT_OF_RANGE - Since priority is limited
+ 	  	  	    						   by number of tasks others
+ 	  	  	    						   values out this band will
+ 	  	  	    						   generate this error.
+
+ 	  	  	    OS_TASKLIST_FULL - This error means the current tasklist
+ 	  	  	    				   is full, so you can increment the
+ 	  	  	    				   number of tasks changing NUMBER_OF_TASKS
+ 	  	  	    				   in uLipe_RTOS.h
 
 
  ************************************************************************/
@@ -159,7 +193,7 @@ os_error_t 	Task_Create
 
 			//calculate its deadline, based on
 			//its priority
-			TaskList->TaskTime = 0;
+			TaskList->TaskTime = TICKS;
 
 			//Put the initial TCB state
 			TaskList->TaskState   = TASK_READY;
@@ -219,7 +253,7 @@ os_error_t 	Task_Create
 		TaskList->TaskElapsedTime = uLipe_GetCurrentTick();
 
 		//Assign its Deadline based on its priority
-		TaskList->TaskTime = 1;
+		TaskList->TaskTime = TICKS;
 
 		//Set the initial state
 		TaskList->TaskState   = TASK_READY;
@@ -274,19 +308,28 @@ os_error_t 	Task_Create
 
 	}
 
+	//Increment task installed counter:
+	TaskInstalledCounter++;
+
 	//return a ok, if all gone well :)
 	return(OS_OK);
 }
 /************************************************************************
  	 function:	Task_Delete()
 
- 	 description: this function,removes a taskTCB of tasklist
- 	 	 	 	  and unfill it freeing the TCB
+ 	 description: this function removes a taskTCB of tasklist
+ 	 	 	 	  and unfill it, freeing the TCB
 
- 	 parameters: TODO
+ 	 parameters: TaskID - Unique ID given to TCB when was created,
+ 	 	 	 	 	 	  its recommended to use the task GetID first
+ 	 	 	 	 	 	  using the known name of task in order to avoid
+ 	 	 	 	 	 	  remove undesired task
 
- 	 return:	TODO
+ 	 return:	OS_OK - System ok, task was removed from list
 
+				OS_TASK_IS_NOT_HERE - Means the current passed ID
+									  doesn't exists, no task will
+									  removed.
 
  ************************************************************************/
 os_error_t 	Task_Delete(os_taskID_t TaskID)
@@ -362,6 +405,9 @@ os_error_t 	Task_Delete(os_taskID_t TaskID)
 			//Sinalizes as a empty block:
 			TaskToBeDeleted->EmptyTCB = EMPTY;
 
+			//Decrement task counters:
+			if(TaskInstalledCounter != 0) TaskInstalledCounter--;
+
 			//return succefull action:
 			return(OS_OK);
 		}
@@ -386,9 +432,13 @@ os_error_t 	Task_Delete(os_taskID_t TaskID)
  	 description: this function returns the ID that corresponds
  	 	 	 	  a task name
 
- 	 parameters: TODO
+ 	 parameters: TaskName - Pointer to vector that contains the the desired
+ 	 	 	 	 	 	 	name to find
 
- 	 return:	TODO
+ 	 	 	 	 NameSize - Indicates the size of vector that passed in
+ 	 	 	 	 	 	 	TaskName
+
+ 	 return:	 os_taskID_t - desired task name ID in list.
 
 
  ************************************************************************/
@@ -480,9 +530,13 @@ os_taskID_t Task_GetID(os_taskname_t *TaskName, uint8_t NameSize)
  	 description: this function returns a pointer to a TCB
  	 	 	 	  that corresponds to a passed ID
 
- 	 parameters: TODO
+ 	 parameters:  TaskID - ID of desired task, must be in
+ 	 	 	 	 	 	   allowed range
 
- 	 return:	TODO
+ 	 return:	  taskTCB_t* - A pointer to a tcb that corresponds
+ 	 	 	 	 	 	 	   to passed TaskID if it exists
+
+ 	 	 	 	  	  	  	 - If not, returns a Null pointer.
 
 
  ************************************************************************/
@@ -519,44 +573,18 @@ taskTCB_t* 	Task_Query(os_taskID_t TaskID)
 
 }
 /************************************************************************
- 	 function:	Task_ChangeState()
-
- 	 description: this function change task for a different state
-
- 	 parameters: TODO
-
- 	 return:	TODO
-
-
- ************************************************************************/
-os_error_t 	Task_ChangeState(os_taskID_t TaskID, taskstates_t State )
-{
-	taskTCB_t *TaskList = &TaskBlockList[NUMBER_OF_TASK];
-
-	//check if desired state exists:
-	if((State < TASK_READY) || (State > TASK_DELETED))
-	{
-		return(OS_IS_NOT_STATE);
-	}
-
-	//else, search for a task:
-	TaskList = TaskQuery(TaskID);
-
-	//change it state:
-	TaskList->TaskState = State;
-
-	//return the succefull action:
-	return(OS_OK);
-}
-/************************************************************************
  	 function:	Task_Suspend()
 
- 	 description: this function suspend a task execution
+ 	 description: this function suspend a task execution changing it
+ 	 	 	 	  to suspend state.
 
- 	 parameters: TODO
+ 	 parameters: TaskID - ID of desired task to change it state.
 
- 	 return:	TODO
+ 	 return:	 OS_OK - System ok, task will be suspended.
 
+ 	 	 	 	 OS_TASK_IS_NOT_HERE - The passed ID returned a
+ 	 	 	 	 	 	 	 	 	   null pointer and task is not
+ 	 	 	 	 	 	 	 	 	   in list
 
  ************************************************************************/
 os_error_t 	Task_Suspend(os_taskID_t TaskID)
@@ -581,6 +609,14 @@ os_error_t 	Task_Suspend(os_taskID_t TaskID)
 		//change it state
 		TaskList->TaskState = TASK_SUSPEND;
 
+		//reeschedule next ready task:
+
+		//Unlock Scheduler:
+		uLipe_EnableSchedule();
+
+		//schedule next task:
+		uLipe_Schedule();
+
 		//return the succefull action:
 		return(OS_OK);
 	}
@@ -590,13 +626,18 @@ os_error_t 	Task_Suspend(os_taskID_t TaskID)
 }
 
 /************************************************************************
- 	 function:	Task_Suspend()
+ 	 function:	Task_Block()
 
- 	 description: this function Blocks a task execution
+	 description: this function suspend a task execution changing it
+ 	 	 	 	  to block state.
 
- 	 parameters: TODO
+ 	 parameters: TaskID - ID of desired task to change it state.
 
- 	 return:	TODO
+ 	 return:	 OS_OK - System ok, task will be suspended.
+
+ 	 	 	 	 OS_TASK_IS_NOT_HERE - The passed ID returned a
+ 	 	 	 	 	 	 	 	 	   null pointer and task is not
+ 	 	 	 	 	 	 	 	 	   in list
 
 
  ************************************************************************/
@@ -621,6 +662,12 @@ os_error_t 	Task_Block(os_taskID_t TaskID)
 		//change it state
 		TaskList->TaskState = TASK_BLOCKED;
 
+		//Unlock Scheduler:
+		uLipe_EnableSchedule();
+
+		//schedule next task:
+		uLipe_Schedule();
+
 		//return the succefull action:
 		return(OS_OK);
 	}
@@ -631,12 +678,17 @@ os_error_t 	Task_Block(os_taskID_t TaskID)
 /************************************************************************
  	 function:	Task_GetList()
 
- 	 description: this function returns the tasklist head
+ 	 description: this function returns the tasklist's head, the
+ 	 	 	 	  IdleTask tcb.
 
 
- 	 parameters: TODO
+ 	 parameters:  N/A
 
- 	 return:	TODO
+ 	 return:	  taskTCB_t* - A pointer to tcb that contais all
+ 	 	 	 	 	 	 	   informations from Idle task, this
+ 	 	 	 	 	 	 	   can be used as start point during
+ 	 	 	 	 	 	 	   tasklist query since its position
+ 	 	 	 	 	 	 	   never change in list.
 
 
  ************************************************************************/
@@ -647,21 +699,38 @@ taskTCB_t* Task_GetList(void)
 
 }
 
+
 /************************************************************************
  	 function:	Task_Idle()
 
  	 description: The task idle function, will be used for debug
  	 	 	 	  or statisticall
 
- 	 parameters: TODO
+ 	 parameters:  TaskArgs - A generic pointer with any content,
+ 	 	 	 	 	 	 	 not used here
 
- 	 return:	TODO
+ 	 return:	  N/A
 
 
  ************************************************************************/
 void Task_Idle(void *TaskArgs)
 {
-	while(1);
+	//Execution counter, used for statistical
+	uint32_t ExecutionCounter = 0;
+
+	//Allocates a status register:
+	uint32_t StatusReg = 0;
+
+	while(1)
+	{
+
+		StatusReg = Asm_CriticalIn();
+
+		//each task execution this counter is incremented
+		ExecutionCounter++;
+
+		Asm_CriticalOut(StatusReg);
+	}
 
 }
 /************************************************************************

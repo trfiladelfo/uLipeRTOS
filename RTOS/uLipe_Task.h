@@ -32,7 +32,7 @@
  ************************************************************************/
 
 //Number of used tasks in RTOS
-#define NUMBER_OF_TASK  7
+#define NUMBER_OF_TASK  NUMBER_OF_TASKS
 
 //undefined task ID
 #define UNDEFINED_ID   (NUMBER_OF_TASK + 2)
@@ -95,7 +95,7 @@ typedef struct os_taskTCB_t
  ***********************************************************************/
 
 //Stack of IDLE Task
-extern os_stack_t 			IdleTaskStack[64];
+extern os_stack_t IdleTaskStack[64];
 
 //Name of TCB used for idle task
 extern os_taskname_t IdleName[8];
@@ -117,8 +117,6 @@ extern  os_error_t 	Task_Delete(os_taskID_t TaskID);
 extern	os_taskID_t Task_GetID(os_taskname_t *TaskName, uint8_t NameSize);
 
 extern	taskTCB_t* 	Task_Query(os_taskID_t TaskID);
-
-extern	os_error_t 	Task_ChangeState(os_taskID_t TaskID, taskstates_t State );
 
 extern  os_error_t  Task_Suspend(os_taskID_t TaskID);
 

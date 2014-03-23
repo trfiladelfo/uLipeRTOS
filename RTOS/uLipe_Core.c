@@ -127,9 +127,11 @@ os_error_t uLipe_TaskDropByIndex(uint8_t Index);
 
  	 description: this method create a initial stack Frame.
 
- 	 parameters: TODO
+ 	 parameters:  CurrTask - A task control block pointer, from it
+ 	 	 	 	 	 	 	 the taskStack field is acessed and filled
+ 	 	 	 	 	 	 	 with initial values for task stack
 
- 	 return:	TODO
+ 	 return:	N/A
 
 
  ************************************************************************/
@@ -157,11 +159,12 @@ void uLipe_StackFrameCreate(taskTCB_t *CurrTask)
 /************************************************************************
  	 function:	uLipe_TaskQueueInit()
 
- 	 description: Initializes the task queue list
+ 	 description: Initializes the task queue list, filling
+ 	 	 	      with the installed tasks
 
- 	 parameters: TODO
+ 	 parameters:  N/A
 
- 	 return:	TODO
+ 	 return:	N/A
 
 
  ************************************************************************/
@@ -261,16 +264,30 @@ os_error_t uLipe_TaskQueueInit(void)
 /************************************************************************
  	 function:	uLipe_TaskEnqueue()
 
- 	 description: Put a ready TCB on Bottom of queue
+ 	 description: Put a task control block in the back (the last
+ 	 	 	 	  position) of the ready tasks queue.
 
- 	 parameters: TODO
+ 	 parameters: CurrTask - A pointer to a task control block which
+ 	 	 	 	 	 	 	is desired to put on queue, null pointers
+ 	 	 	 	 	 	 	will be checked
 
- 	 return:	TODO
+ 	 return:	 OS_OK - System ok, the tcb was inserted
 
+ 	             OS_QUEUE_FULL - The queue is current full, and was
+ 	             	 	 	 	 not possible to insert the TCB
+
+				 OS_INVALID_POINTER - A null pointer was passed and
+				 	 	 	 	 	 will not inserted.
 
  ************************************************************************/
 os_error_t uLipe_TaskEnqueue(taskTCB_t *CurrTask)
 {
+	//check for a null pointer:
+	if((taskTCB_t *)NULL == CurrTask)
+	{
+		return(OS_INVALID_POINTER);
+	}
+
 	//check for queue full:
 	if((NUMBER_OF_TASK + 1) <= TaskMainCtl.QueueSize)
 	{
@@ -300,12 +317,18 @@ os_error_t uLipe_TaskEnqueue(taskTCB_t *CurrTask)
 /************************************************************************
  	 function:	uLipe_TaskDequeue()
 
- 	 description: Removes a task TCB from top of queue
+ 	 description: Remove a task control block from the front
+ 	 	 	 	  (first position) of the ready task queue.
 
- 	 parameters: TODO
+ 	 parameters:  Err - A variable where a possible error will
+ 	 	 	 	 	    deposited to be later asserted, the possible
+ 	 	 	 	 	    values are: OS_QUEUE_EMPTY - No item is present
+ 	 	 	 	 	    on queue; OS_OK - A item was correctly retrieved.
 
- 	 return:	TODO
-
+ 	 return:	  *taskTCB_t - A pointer to a task control block which
+							   currently occupies the front of queue, a
+							   null pointer will returned if queue is
+							   empty.
 
  ************************************************************************/
 taskTCB_t* uLipe_TaskDequeue(os_error_t *Err)
@@ -350,9 +373,14 @@ taskTCB_t* uLipe_TaskDequeue(os_error_t *Err)
 
  	 description: Check if ready task queue is empty
 
- 	 parameters: TODO
+ 	 parameters: N/A
 
- 	 return:	TODO
+ 	 return:	 OS_QUEUE_EMPTY - Means the ready task queue, contains
+ 	 	 	 	 	 	 	 	  any item.
+
+ 	 	 	 	 OS_QUEUE_NOT_EMPTY - Means the ready task queue
+ 	 	 	 	 	 	 	 	 	  contains one or more itens which
+ 	 	 	 	 	 	 	 	 	  can be retrieved.
 
 
  ************************************************************************/
@@ -373,12 +401,26 @@ os_error_t  uLipe_EmptyQueue(void)
 /************************************************************************
  	 function:	uLipe_TaskQueryByIndex()
 
- 	 description: Searches for a task on the queue without
+ 	 description: Searches for a task on the ready task queue without
  	 	 	 	  remove it from.
 
- 	 parameters: TODO
+ 	 parameters:  Index - Desired index means the which entry that is
+ 	 	 	 	 	 	  between 0 and queue maximum number of entries
+ 	 	 	 	 	 	  minus 1 will be acessed.
 
- 	 return:	TODO
+ 	 	 	 	  Err - A pointer to a error variable, where a possible
+ 	 	 	 	   	 	error will be deposited for further assertment.
+ 	 	 	 	   	 	The possible values are: OS_OK - the TCB was
+ 	 	 	 	   	 	succefull accessed; OS_QUEUE_OUT_OF_RANGE -
+ 	 	 	 	   	 	The current Index; OS_QUEUE_EMPTY - the queue
+ 	 	 	 	   	 	is current empty and no comports any entry.
+
+ 	 return:	 *taskTCB_t - A pointer to a task control block that
+ 	 	 	 	 	 	 	  resides in current Index (or entry) of
+ 	 	 	 	 	 	 	  ready tasks queue, if Index was not foundor
+ 	 	 	 	 	 	 	  if queue is empty a null pointer will be
+ 	 	 	 	 	 	 	  returned.
+
 
 
  ************************************************************************/
@@ -387,6 +429,15 @@ taskTCB_t* uLipe_TaskQueryByIndex(uint8_t Index, os_error_t *Err)
 
 	taskTCB_t * DesiredTask = NULL;
 
+	//check if queue is empty:
+	if(OS_QUEUE_EMPTY == uLipe_EmptyQueue())
+	{
+		//Assign error
+		*Err = OS_QUEUE_EMPTY;
+
+		//return a null pointer:
+		return(NULL);
+	}
 	//check if the current index comports a
 	//ready task:
 	if((Index < TaskMainCtl.HeadCurrIndex ) &&
@@ -414,12 +465,23 @@ taskTCB_t* uLipe_TaskQueryByIndex(uint8_t Index, os_error_t *Err)
 /************************************************************************
  	 function:	uLipe_TaskDropByIndex()
 
- 	 description: Searches for a task on the queue and remove it
- 	 	 	 	  from
+ 	 description: Searches for a task on the ready tasks queue
+ 	 	 	 	  then if finds it remove from queue.
 
- 	 parameters: TODO
+ 	 parameters:  Index - Desired index means the which entry that is
+ 	 	 	 	 	 	  between 0 and queue maximum number of entries
+ 	 	 	 	 	 	  minus 1 will be acessed.
 
- 	 return:	TODO
+ 	 return:	  OS_OK - System ok, the task control block was
+ 	 	 	 	 	 	  removed from ready tasks queue;
+
+ 	 	 	 	  OS_QUEUE_OUT_OF_RANGE - The current Index is out
+ 	 	 	 	 	 	 	 	 	 	  of current range used by queue
+ 	 	 	 	 	 	 	 	 	 	  then, no tcb will be removed;
+
+ 	 	 	 	  OS_QUEUE_EMPTY - The ready tasks queue contains no items
+ 	 	 	 	  	  	  	  	   (or entries) so, no item exists to be
+ 	 	 	 	  	  	  	  	   removed.
 
 
  ************************************************************************/
@@ -427,6 +489,14 @@ os_error_t uLipe_TaskDropByIndex(uint8_t Index)
 {
 	//Auxiliaries:
 	uint8_t LoopCntr = 0;
+
+	//check if queue is empty:
+	if(OS_QUEUE_EMPTY == uLipe_EmptyQueue())
+	{
+
+		//return error:
+		return(OS_QUEUE_EMPTY);
+	}
 
 	//check if index corresponds to a ready task:
 	if((Index < TaskMainCtl.HeadCurrIndex ) &&
@@ -469,9 +539,9 @@ os_error_t uLipe_TaskDropByIndex(uint8_t Index)
 
  	 description: Initializes the OS and all kernel objects
 
- 	 parameters: TODO
+ 	 parameters: N/A
 
- 	 return:	TODO
+ 	 return:	 OS_OK - System ok, all objects were initialized.
 
 
  ************************************************************************/
@@ -499,11 +569,14 @@ os_error_t uLipe_Init(void)
 /************************************************************************
  	 function:	uLipe_Schedule()
 
- 	 description: This rountines executes the scheduling alghoritm
+ 	 description: This function schedules the next high priority
+ 	 	 	 	  ready task for execution, and requests a context
+ 	 	 	 	  switching. Uses a simple search and subistitute
+ 	 	 	 	  alghoritm.
 
- 	 parameters: TODO
+ 	 parameters: N/A
 
- 	 return:	TODO
+ 	 return:	 N/A
 
 
  ************************************************************************/
@@ -576,7 +649,7 @@ void  uLipe_Schedule(void)
 
 
 			//check if the most priority task is in top of queue:
-			if(AuxiliarIndex == TaskMainCtl.TailCurrIndex)
+			if(AuxiliarIndex == TaskMainCtl.HeadCurrIndex)
 			{
 				//The only dequeues it:
 				AuxiliarTcb = (taskTCB_t*)uLipe_TaskDequeue(&Err);
@@ -590,6 +663,9 @@ void  uLipe_Schedule(void)
 
 			//create a critical code section:
 			StatusReg = Asm_CriticalIn();
+
+			//Disable scheduler:
+			ScheduleFlag = SCHED_DIS;
 
 			//Set task as running:
 			HighReadyTaskBlock->TaskState = TASK_RUNNING;
@@ -637,12 +713,17 @@ void  uLipe_Schedule(void)
  	 function:	uLipe_Start()
 
  	 description: This function starts the OS performing the first
- 	 	 	 	  task execution.
+ 	 	 	 	  task execution, this routines gives the system control
+ 	 	 	 	  to OS, so when executed and if OS was correctly configured
+ 	 	 	 	  it will never returns.
 
- 	 parameters: TODO
+ 	 parameters: N/A
 
- 	 return:	TODO
+ 	 return:	 N/A
 
+	 OBS.: This routine must be called for user application in order
+	 	   to give its control to OS, but also it MUST be called after
+	 	   all tasks were instaled and after a uLipe_Init().
 
  ************************************************************************/
 void uLipe_Start(void)
@@ -697,18 +778,22 @@ void uLipe_Start(void)
 
 }
 /************************************************************************
- 	 function:	Systick_Handler()
+ 	 function:	uLipe_TimeTick()
 
- 	 description: This function managers the time of OS and
- 	 	 	 	  interrupts tasks execution if needed
+ 	 description: This handler is called after a timeout generated
+ 	 	 	      by hardware timer of target processor. Its primary
+ 	 	 	      function is to increment the global tick counter
+ 	 	 	      the go trhough installed tasks and check for a TICK
+ 	 	 	      timer event, if yes set task as ready for execution
+ 	 	 	      and put its on ready tasks queue.
 
- 	 parameters: TODO
+ 	 parameters:  N/A
 
- 	 return:	TODO
+ 	 return:	  N/A
 
 
  ************************************************************************/
-void SysTick_Handler(void)
+void uLipe_TimeTick(void)
 {
 	//points to tasklist:
 	taskTCB_t *TaskList = (taskTCB_t *) NULL;
@@ -753,7 +838,7 @@ void SysTick_Handler(void)
 		if(TASK_READY != TaskList->TaskState)
 		{
 			//search if a tick already occurred:
-			if(TICK <= (TickCounter - TaskList->TaskElapsedTime))
+			if(TaskList->TaskTime <= (TickCounter - TaskList->TaskElapsedTime))
 			{
 				//then set this task as a ready:
 				TaskList->TaskState = TASK_READY;
@@ -795,9 +880,9 @@ void SysTick_Handler(void)
 
  	 description: Gets the current tick counter value
 
- 	 parameters: TODO
+ 	 parameters: N/A
 
- 	 return:	TODO
+ 	 return:	 - Current tick counter value.
 
 
  ************************************************************************/
@@ -812,9 +897,9 @@ uint32_t uLipe_GetCurrentTick(void)
  	 description: Enable schedule allowing next task execution
  	 	 	 	  selection
 
- 	 parameters: TODO
+ 	 parameters: N/A
 
- 	 return:	TODO
+ 	 return:	 N/A
 
 
  ************************************************************************/
@@ -832,9 +917,9 @@ void uLipe_EnableSchedule(void)
  	 description: Disable schedule, not allowing next task execution
  	 	 	 	  selection
 
- 	 parameters: TODO
+ 	 parameters:  N/A
 
- 	 return:	TODO
+ 	 return:	  N/A
 
 
  ************************************************************************/
@@ -845,6 +930,26 @@ void uLipe_DisableSchedule(void)
 	{
 		ScheduleFlag = SCHED_DIS;
 	}
+}
+/************************************************************************
+ 	 function:	Systick_Handler()
+
+ 	 description: This handler is called after a timeout generated
+ 	 	 	      by hardware timer of target processor. Its primary
+ 	 	 	      function is to increment the global tick counter
+ 	 	 	      the go trhough installed tasks and check for a TICK
+ 	 	 	      timer event, if yes set task as ready for execution
+ 	 	 	      and put its on ready tasks queue.
+
+ 	 parameters:  N/A
+
+ 	 return:	  N/A
+
+
+ ************************************************************************/
+void Systick_Handler(void)
+{
+	uLipe_TimeTick();
 }
 /************************************************************************
   					End of File

@@ -34,8 +34,8 @@
 @	 description: this Initializes the tick counter and its
 @				  interrupts
 @
-@ 	 parameters: TODO
-@
+@ 	 parameters:  TickCount - Contains the reload value for ticktimer
+@							  In CM4 arch, we use the systick timer
 @ 	 return:	N/A
 @
 @
@@ -72,12 +72,13 @@ Asm_LowLevelTickInit:
 @************************************************************************
 @ 	 function:	Asm_CriticalIn()
 @
-@	 description: Disables all interrupts
+@	 description: Disables all interrupts and saves current status
+@				  register
 @
-@ 	 parameters: TODO
+@ 	 parameters: N/A
 @
-@ 	 return:	N/A
-@
+@ 	 return:	 StatusReg - A variable which contains the current
+@							 APSR value
 @
 @************************************************************************
 .thumb_func
@@ -89,9 +90,10 @@ Asm_CriticalIn:
 @************************************************************************
 @ 	 function:	Asm_CriticalIn()
 @
-@	 description: Enables all interrupts
+@	 description: Enables all interrupts, and restore back a previous
+@				  Saved status register
 @
-@ 	 parameters: TODO
+@ 	 parameters:  StatusRegister - A saved APSR value to be restored
 @
 @ 	 return:	N/A
 @
@@ -108,9 +110,10 @@ Asm_CriticalOut:
 @ 	 function:	Asm_IntLevelContextChange()
 @
 @	 description: This function performs a request to PEND SV
-@				  in order tochange a context
+@				  in order to perform a task context from interrupt
+@				  level
 @
-@ 	 parameters: TODO
+@ 	 parameters: N/A
 @
 @ 	 return:	N/A
 @
@@ -133,9 +136,10 @@ Asm_IntLevelContextChange:
 @ 	 function:	Asm_TaskLevelContextChange()
 @
 @	 description: This function performs a request to PEND SV
-@				  in order tochange a context
+@				  in order to perform a task context from task
+@				  level
 @
-@ 	 parameters: TODO
+@ 	 parameters: N/A
 @
 @ 	 return:	N/A
 @
@@ -158,10 +162,12 @@ Asm_TaskLevelContextChange:
 @************************************************************************
 @ 	 function:	PendSV_Handler()
 @
-@	 description: performs a context switch
+@	 description: This handler performs the context switch, is
+@				  executed after all interrupts handlers have been
+@				  executed
 @
 @
-@ 	 parameters: TODO
+@ 	 parameters: N/A
 @
 @ 	 return:	N/A
 @

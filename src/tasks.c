@@ -10,7 +10,7 @@
 #include "tasks.h"
 
 
-os_stack_t TaskTryStack[64];
+os_stack_t TaskTryStcack[64];
 os_taskname_t Try[7] = {"TaskTry"};
 
 
@@ -39,30 +39,30 @@ os_taskname_t Try8[8] = {"TaskTry8"};
 taskptr_t TaskTry(void *TaskArgs)
 {
 
-	static uint32_t counter1 = 0,
-					counter2 = 0,
-					counter3 = 0;
+	//Execution counter, used for statistical
+	uint32_t ExecutionCounter = 0;
 
 	while(1)
 	{
-		counter1 = 250;
-		counter2 = 225;
-		counter3 = 350;
+
+		//each task execution this counter is incremented
+		ExecutionCounter++;
+
 	}
 
 }
 
 taskptr_t TaskTry2(void *TaskArgs)
 {
-	static uint32_t counter1 = 0,
-					counter2 = 0,
-					counter3 = 0;
+	//Execution counter, used for statistical
+	uint32_t ExecutionCounter = 0;
 
 	while(1)
 	{
-		counter1 = 100;
-		counter2 = 150;
-		counter3 = 175;
+
+		//each task execution this counter is incremented
+		ExecutionCounter++;
+
 	}
 }
 
@@ -70,30 +70,30 @@ taskptr_t TaskTry2(void *TaskArgs)
 taskptr_t TaskTry3(void *TaskArgs)
 {
 
-	static uint32_t counter1 = 0,
-					counter2 = 0,
-					counter3 = 0;
+	//Execution counter, used for statistical
+	uint32_t ExecutionCounter = 0;
 
 	while(1)
 	{
-		counter1 = 100;
-		counter2 = 150;
-		counter3 = 175;
+
+		//each task execution this counter is incremented
+		ExecutionCounter++;
+
 	}
 }
 
 taskptr_t TaskTry4(void *TaskArgs)
 {
 
-	static uint32_t counter1 = 0,
-					counter2 = 0,
-					counter3 = 0;
+	//Execution counter, used for statistical
+	uint32_t ExecutionCounter = 0;
 
 	while(1)
 	{
-		counter1 = 100;
-		counter2 = 150;
-		counter3 = 175;
+
+		//each task execution this counter is incremented
+		ExecutionCounter++;
+
 	}
 }
 
@@ -101,30 +101,30 @@ taskptr_t TaskTry4(void *TaskArgs)
 taskptr_t TaskTry5(void *TaskArgs)
 {
 
-	static uint32_t counter1 = 0,
-					counter2 = 0,
-					counter3 = 0;
+	//Execution counter, used for statistical
+	uint32_t ExecutionCounter = 0;
 
 	while(1)
 	{
-		counter1 = 100;
-		counter2 = 150;
-		counter3 = 175;
+
+		//each task execution this counter is incremented
+		ExecutionCounter++;
+
 	}
 }
 
 taskptr_t TaskTry6(void *TaskArgs)
 {
 
-	static uint32_t counter1 = 0,
-					counter2 = 0,
-					counter3 = 0;
+	//Execution counter, used for statistical
+	uint32_t ExecutionCounter = 0;
 
 	while(1)
 	{
-		counter1 = 100;
-		counter2 = 150;
-		counter3 = 175;
+
+		//each task execution this counter is incremented
+		ExecutionCounter++;
+
 	}
 }
 
@@ -132,15 +132,15 @@ taskptr_t TaskTry6(void *TaskArgs)
 taskptr_t TaskTry7(void *TaskArgs)
 {
 
-	static uint32_t counter1 = 0,
-					counter2 = 0,
-					counter3 = 0;
+	//Execution counter, used for statistical
+	uint32_t ExecutionCounter = 0;
 
 	while(1)
 	{
-		counter1 = 100;
-		counter2 = 150;
-		counter3 = 175;
+
+		//each task execution this counter is incremented
+		ExecutionCounter++;
+
 	}
 }
 
@@ -148,14 +148,14 @@ taskptr_t TaskTry7(void *TaskArgs)
 taskptr_t TaskTry8(void *TaskArgs)
 {
 
-	static uint32_t counter1 = 0,
-					counter2 = 0,
-					counter3 = 0;
+	//Execution counter, used for statistical
+	uint32_t ExecutionCounter = 0;
 
 	while(1)
 	{
-		counter1 = 100;
-		counter2 = 150;
-		counter3 = 175;
+
+		//each task execution this counter is incremented
+		ExecutionCounter++;
+
 	}
 }

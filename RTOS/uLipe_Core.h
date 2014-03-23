@@ -27,7 +27,8 @@
 /************************************************************************
  							Defines
  ************************************************************************/
-
+//defines the tick current value
+#define TICKS (NUMBER_OF_TASK + 1)
 /************************************************************************
  							Macros
  ************************************************************************/
@@ -48,6 +49,7 @@ extern void		  uLipe_Start(void);
 uint32_t uLipe_GetCurrentTick(void);
 void 	   uLipe_EnableSchedule(void);
 void       uLipe_DisableSchedule(void);
+extern void uLipe_TimeTick(void);
 extern void       Systick_Handler(void);
 
 
