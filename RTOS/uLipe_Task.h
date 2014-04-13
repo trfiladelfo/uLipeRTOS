@@ -69,7 +69,7 @@ extern  void Task_InitBlocks(void);
 
 extern  os_error_t 	Task_Create	(taskptr_t (*TaskAction),
 								 os_stack_t *TaskStack,
-								 uint8_t StackSize,
+								 uint32_t StackSize,
 								 uint8_t TaskPriority,
 								 os_taskname_t *TaskName);
 

@@ -36,10 +36,10 @@
 #define TICK  64
 
 //Defines a time quanta unity:
-#define TIME_QUANTA      (OS_TICK_RATE/ TICK)
+#define TIME_QUANTA      (SYSCLK/ OS_TICK_RATE)
 
 //Define the reload time value:
-#define TIMER_LOAD       (SYSCLK / TIME_QUANTA)
+#define TIMER_LOAD       (TIME_QUANTA / TICK)
 
 //Defines for scheduling on or off:
 #define SCHED_EN		0
@@ -81,6 +81,10 @@ uint8_t bReadyGroup  = 0;
 
 //Map table:
 uint8_t abReadyListGrp[8];
+
+//Idle task stack:
+os_stack_t axIdleTaskStack[64];
+
 
 /************************************************************************
   					Constants
@@ -230,7 +234,7 @@ void  Core_Schedule(void)
 	uint32_t Sreg = 0;
 
 	//only schedule if:
-	if(SCHED_EN != bScheduleFlag)
+	if(SCHED_EN == bScheduleFlag)
 	{
 		//create a critical section:
 		Sreg = Asm_CriticalIn();
@@ -324,6 +328,9 @@ void Core_StackFrameCreate(taskTCB_t *pxCurrTask)
  ************************************************************************/
 os_error_t Core_Init(void)
 {
+	//Error variable:
+	os_error_t xErr;
+
 	//Initialize the tasks control blocks:
 	Task_InitBlocks();
 
@@ -342,6 +349,20 @@ os_error_t Core_Init(void)
 
 	//reset the tick counter:
 	dTickCounter = 0;
+
+	//create Idle task:
+	//Install tasks:
+	xErr = Task_Create	((taskptr_t *) &Core_IdleTask,
+						 (os_stack_t *)&axIdleTaskStack,
+						 sizeof(axIdleTaskStack),
+						 63,
+						 (os_taskname_t *) "uLipeIdleTask");
+
+	//check if all gone well:
+	if(OS_OK != xErr)
+	{
+		return(OS_ERROR);
+	}
 
 	//return ok
 	return(OS_OK);
@@ -372,12 +393,12 @@ void Core_Start(void)
 	//Enable the scheduler:
 	Core_EnableSchedule();
 
-	//Schedule the highest priority task:
-	Core_Schedule();
-
 	//Since all gone well, gives the control to
 	//kernel:
 	bOsEnable = OS_EN;
+
+	//Schedule the highest priority task:
+	Core_Schedule();
 
 	//should not return from here:
 	while(1);
@@ -412,11 +433,7 @@ uint32_t Core_GetCurrentTick(void)
  ************************************************************************/
 void Core_EnableSchedule(void)
 {
-	//check if scheduler is already enabled:
-	if(SCHED_DIS != bScheduleFlag)
-	{
-		bScheduleFlag = SCHED_EN;
-	}
+	bScheduleFlag = SCHED_EN;
 }
 /************************************************************************
  	 function:	Core_DisableSchedule()
@@ -432,11 +449,7 @@ void Core_EnableSchedule(void)
  ************************************************************************/
 void Core_DisableSchedule(void)
 {
-	//check if scheduler is already disabled:
-	if(SCHED_EN != bScheduleFlag)
-	{
-		bScheduleFlag = SCHED_DIS;
-	}
+	bScheduleFlag = SCHED_DIS;
 }
 
 /************************************************************************
@@ -558,7 +571,7 @@ void Core_TimeTick(void)
 
 		//points to head of tasklist
 		//always will be the lowest priority task:
-		pTCB = (taskTCB_t *) &axTaskList[MAX_TASK_NUMBER];
+		pTCB = (taskTCB_t *) &axTaskList[MAX_TASK_NUMBER - 1];
 
 		//go trhough task list:
 		while((taskTCB_t *)END_LIST != pTCB)

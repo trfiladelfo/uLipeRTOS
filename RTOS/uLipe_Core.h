@@ -69,7 +69,7 @@ extern void Core_IdleTask(void *pxTaskArgs);
 
 extern void Core_TimeTick(void);
 
-extern void Systick_Handler(void);
+//extern void Systick_Handler(void);
 /****************************************************************************
  	 	 	 	 	 End of file
  ****************************************************************************/

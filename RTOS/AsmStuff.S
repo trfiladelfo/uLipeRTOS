@@ -217,7 +217,7 @@ FIRST_CHANGE:							@
 		LDR		R0,[R0]					@Get the new stack pointer
 		LDR		R1,[R0, #+16]			@Get task flags
 		BIC		R1,R1,#1				@clear first time flag
-		STR		R1,[R0]					@
+		STR		R1,[R0, #+16]			@
 		LDR		R1, [R0,#0]	            @
 		MSR     PSP,R1					@Load the first stack pointer
 		B		NO_SAVE					@
@@ -233,7 +233,7 @@ SECOND_CHANGE:
 		LDR		R0,[R0]					@Get the new stack pointer
 		LDR		R1,[R0, #+16]			@Get task flags
 		BIC		R1,R1,#1				@clear first time flag
-		STR		R1,[R0]					@
+		STR		R1,[R0, #+16]			@
 		LDR		R1, [R0,#0]	            @
 		MSR     PSP,R1					@Load the first stack pointer
 		B		NO_SAVE					@

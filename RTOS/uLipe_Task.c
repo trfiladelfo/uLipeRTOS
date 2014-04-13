@@ -83,7 +83,7 @@ void Task_InitBlocks(void)
 	//clears all TCBs first:
 	for(bI = 0; bI < MAX_TASK_NUMBER; bI++)
 	{
-		memset((char *)&axTaskList, 0 , sizeof(taskTCB_t));
+		memset((char *)&axTaskList[bI], 0 , sizeof(taskTCB_t));
 
 		//set the TCB as free
 		axTaskList[bI].EmptyTCB = EMPTY;
@@ -130,7 +130,7 @@ void Task_InitBlocks(void)
  ************************************************************************/
 os_error_t 	Task_Create	(taskptr_t (*TaskAction),
 							os_stack_t *TaskStack,
-							uint8_t StackSize,
+							uint32_t StackSize,
 							uint8_t TaskPriority,
 							os_taskname_t *TaskName)
 {
@@ -183,7 +183,7 @@ os_error_t 	Task_Create	(taskptr_t (*TaskAction),
 
 	//task stack first:
 	axTaskList[TaskPriority].TaskStack =
-			(os_stack_t *)(TaskStack + StackSize);
+			(os_stack_t *)(TaskStack + (StackSize>>2));
 
 	//The task action:
 	axTaskList[TaskPriority].TaskAction =
@@ -203,7 +203,10 @@ os_error_t 	Task_Create	(taskptr_t (*TaskAction),
 	//Elapsed time between executions:
 	axTaskList[TaskPriority].TaskElapsedTime = 0;
 
-	//Put task in suspend state:
+	//Unfree this TCB:
+	axTaskList[TaskPriority].EmptyTCB = FILLED;
+
+	//Put task in ready state:
 	axTaskList[TaskPriority].TaskState = TASK_READY;
 
 	//create it initial stack frame:

@@ -9,6 +9,8 @@ extern "C"
 {
 #endif
 
+#include "uLipe_RTOS.h"
+
 //*****************************************************************************
 //
 // Forward declaration of the default handlers. These are aliased.
@@ -34,9 +36,6 @@ void __attribute__((weak))
 DebugMon_Handler(void);
 void __attribute__((weak))
 PendSV_Handler(void);
-void __attribute__((weak))
-SysTick_Handler(void);
-
 void __attribute__((weak))
 Default_Handler(void);
 
@@ -274,7 +273,7 @@ pfn g_pfnVectors[] =
       DebugMon_Handler,                         // Debug monitor handler
       0,                                        // Reserved
       PendSV_Handler,                           // The PendSV handler
-      SysTick_Handler,                          // The SysTick handler
+      Core_TimeTick,                          // The SysTick handler
 
       // Chip Level - STM32F4xx
       WWDG_IRQHandler,                          // Window WatchDog
@@ -453,9 +452,6 @@ HardFault_Handler(void)
 {
   //debuggers:
 
- unsigned long  FaultStack[64];
- unsigned long *StackPointer;
- unsigned long  i= 0;
 
  while (1)
     {
@@ -511,11 +507,4 @@ PendSV_Handler(void)
     }
 }
 
-void __attribute__ ((section(".after_vectors")))
-SysTick_Handler(void)
-{
-  while (1)
-    {
-    }
-}
 
