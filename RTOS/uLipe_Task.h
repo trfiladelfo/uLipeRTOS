@@ -34,14 +34,11 @@
 //Number of used tasks in RTOS
 #define NUMBER_OF_TASK  NUMBER_OF_TASKS
 
-//undefined task ID
-#define UNDEFINED_ID   (NUMBER_OF_TASK + 2)
-
 //first time task flags!
 #define TASK_FLAG_IS_FIRST_TIME       (1 << 0)
 
-//Defines the end of linked list
-#define END_LIST		NULL
+//Defines a list terminator:
+#define END_LIST 		 0xFFAAFFAA
 
 /************************************************************************
  	 	 	 	 	 	 	Typedefs
@@ -57,49 +54,12 @@ typedef enum
 	TASK_DELETED
 }taskstates_t;
 
-//The task control block
-typedef struct os_taskTCB_t
-{
-	//Task flags register
-	uint32_t		TaskFlags;
-	//Task periodic deadline
-	uint32_t 		TaskTime;
-	//Current time elapsed
-	uint32_t 		TaskElapsedTime;
-	//Task unique Identifier
-	uint8_t  		TaskID;
-	//Task priority of execution
-	uint8_t	 		TaskPriority;
-	//Will be used further
-	uint8_t			TaskDelayed;
-	//Current task state of execution
-	uint8_t			TaskState;
-	//flag of occupied (or not) TCB
-	uint32_t		EmptyTCB;
-	//Name of task in ASCII
-	os_taskname_t	*TaskName;
-	//Is the current stackpointer of task
-	os_stack_t 		*TaskStack;
-	//The task function properly
-	taskptr_t   	(*TaskAction)(void *TaskArgs);
-	//the attachment for next TCB
-	struct os_taskTCB_t	*NextTask;
-	//the attachment of Previous TCB
-	struct os_taskTCB_t	*PrevTask;
-
-}taskTCB_t;
-
-
 /***********************************************************************
  	 	 	 	 	 Externs
  ***********************************************************************/
 
-//Stack of IDLE Task
-extern os_stack_t IdleTaskStack[64];
-
-//Name of TCB used for idle task
-extern os_taskname_t IdleName[8];
-
+//Table of task control blocks
+extern taskTCB_t axTaskList[];
 
 /************************************************************************
  	 	 	 	 	 Function Prototypes
@@ -107,24 +67,19 @@ extern os_taskname_t IdleName[8];
 
 extern  void Task_InitBlocks(void);
 
-extern  os_error_t 	Task_Create
-					(taskptr_t (*TaskAction), os_stack_t *TaskStack,
-					uint8_t TaskPriority, os_taskname_t *TaskName,
-					uint8_t NameSize,os_stack_t StackSize);
+extern  os_error_t 	Task_Create	(taskptr_t (*TaskAction),
+								 os_stack_t *TaskStack,
+								 uint8_t StackSize,
+								 uint8_t TaskPriority,
+								 os_taskname_t *TaskName);
 
-extern  os_error_t 	Task_Delete(os_taskID_t TaskID);
+extern  os_error_t 	Task_Delete(uint8_t OsPrio);
 
-extern	os_taskID_t Task_GetID(os_taskname_t *TaskName, uint8_t NameSize);
+taskTCB_t* 	Task_Query(uint8_t OsPrio, os_error_t *Err);
 
-extern	taskTCB_t* 	Task_Query(os_taskID_t TaskID);
+extern	os_error_t  Task_Stop(uint8_t OsPrio);
 
-extern  os_error_t  Task_Suspend(os_taskID_t TaskID);
-
-extern	os_error_t  Task_Block(os_taskID_t TaskID);
-
-taskTCB_t* Task_GetList(void);
-
-extern  void Task_Idle(void *TaskArgs);
+extern  os_error_t  Task_Resume(uint8_t OsPrio);
 
 /************************************************************************
  	 	 	 	 	 End of File

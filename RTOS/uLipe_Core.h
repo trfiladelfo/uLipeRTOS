@@ -28,11 +28,11 @@
  							Defines
  ************************************************************************/
 //defines the tick current value
-#define TICKS (NUMBER_OF_TASK + 1)
+#define TICKS  64
+
 /************************************************************************
  							Macros
  ************************************************************************/
-
 
 
 /************************************************************************
@@ -43,17 +43,33 @@
 /************************************************************************
  	 	 	 	 	 Function Prototypes
  ************************************************************************/
-extern os_error_t uLipe_Init(void);
-extern void 	  uLipe_Schedule(void);
-extern void		  uLipe_Start(void);
-uint32_t uLipe_GetCurrentTick(void);
-void 	   uLipe_EnableSchedule(void);
-void       uLipe_DisableSchedule(void);
-extern void uLipe_TimeTick(void);
-extern void       Systick_Handler(void);
+extern void Core_StackFrameCreate(taskTCB_t *pxCurrTask);
 
+extern os_error_t Core_Init(void);
 
+extern void	Core_Start(void);
 
+extern void	Core_Schedule(void);
+
+extern void Core_ReadyTask(uint8_t OsPrio);
+
+extern void Core_UnreadyTask(uint8_t OsPrio);
+
+extern void Core_OSEnable(void);
+
+extern void Core_OSDisable(void);
+
+uint32_t Core_GetCurrentTick(void);
+
+extern void Core_EnableSchedule(void);
+
+extern void Core_DisableSchedule(void);
+
+extern void Core_IdleTask(void *pxTaskArgs);
+
+extern void Core_TimeTick(void);
+
+extern void Systick_Handler(void);
 /****************************************************************************
  	 	 	 	 	 End of file
  ****************************************************************************/

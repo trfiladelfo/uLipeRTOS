@@ -26,18 +26,17 @@
 #include <stdio.h>
 #include <string.h>
 #include "uLipe_RTOS.h"
-#include "uLipe_Task.h"
-
 
 #endif
 /************************************************************************
   					Local Defines and Constants
  ************************************************************************/
 //Defines a maximum number of tasks
-#define MAX_TASK_NUMBER  32
+#define MAX_TASK_NUMBER  64
 
 //Defines the least priority number
-#define LESS_PRIORITY	 31
+#define LESS_PRIORITY	 MAX_TASK_NUMBER - 1
+
 //Defines the most proirity number
 #define MAX_PRIORITY	 0
 
@@ -50,28 +49,17 @@
 /************************************************************************
  	 	 	 	 	 Public variables
  ************************************************************************/
-//Stack of IDLE Task
-os_stack_t 			IdleTaskStack[64];
 
-//Name of TCB used for idle task
-os_taskname_t IdleName[8] = {"TaskIdle"};
+//Table of task control blocks
+taskTCB_t axTaskList[MAX_TASK_NUMBER];
 
 /************************************************************************
  	 	 	 	 	 Module local variables
  ************************************************************************/
 
-//This is the table of TCBs, its size is limited by the current
-//Number of tasks plus 1 (tcb for idle task)
-taskTCB_t TaskBlockList[NUMBER_OF_TASK + 1];
-
-//Holds the current installed tasks:
-uint8_t  TaskInstalledCounter = 0;
-
 /************************************************************************
  	 	 	 	 	 Module local Prototypes
  ************************************************************************/
-
-
 
 /************************************************************************
  	 	 	 	 	 Functions
@@ -90,8 +78,25 @@ uint8_t  TaskInstalledCounter = 0;
  ************************************************************************/
 void Task_InitBlocks(void)
 {
-	//fill with zeros all TCBS!
-	memset(&TaskBlockList, NULL, sizeof(TaskBlockList));
+	uint8_t bI;
+
+	//clears all TCBs first:
+	for(bI = 0; bI < MAX_TASK_NUMBER; bI++)
+	{
+		memset((char *)&axTaskList, 0 , sizeof(taskTCB_t));
+
+		//set the TCB as free
+		axTaskList[bI].EmptyTCB = EMPTY;
+
+		//set the TCB as task deleted:
+		axTaskList[bI].TaskState = TASK_DELETED;
+
+
+	}
+
+	//The Idle task is the first end terminator:
+	axTaskList[MAX_TASK_NUMBER - 1].NextTask = (taskTCB_t *)END_LIST;
+
 }
 
 /************************************************************************
@@ -100,216 +105,169 @@ void Task_InitBlocks(void)
  	 description: this function,reserves, fill and attach a task
  	 	 	 	  TCB on the task linked list
 
- 	 parameters: TaskAction - Address to task used function
+ 	 parameters: -TaskAction: The function pointer to task
 
- 	  	  	  	 TaskStack  - Points to a vector used as a task
- 	  	  	  	  	  	  	  function stack.
+ 	 	 	 	 -TaskStack: A pointer to a array which will
+ 	 	 	 	 	 	     used as task stack.
 
- 	  	  	  	 TaskPriority - A priority given by user to the task
- 	  	  	  	  	  	  	    its range is limited by number of tasks
- 	  	  	  	  	  	  	    plus 1 , remember that less this number
- 	  	  	  	  	  	  	    higher the task priority.
+ 	 	 	 	 -StackSize: Size of stack in bytes, it
+ 	 	 	 	 	 	     MUST be specified in BYTES!
 
- 	  	  	  	 TaskName - Points to a vector allocated by user that
- 	  	  	  	 	 	 	contains in ASCII form the name of task
- 	  	  	  	 	 	 	this name can be used also to get task ID
+ 	 	 	 	 -TaskPriority: The priority given to task,
+ 	 	 	 	 	 	 	 	how less the number higher the priority,
+ 	 	 	 	 	 	 	 	each task has a unique priority number.
 
-				 NameSize - Size of name given to task.
-
-				 StackSize - Size of task stack, it must be specifies in
-				 	 	 	 os_stack_t units, all other units may cause
-				 	 	 	 unpredictable behaviour
+ 	 	 	 	 -TaskName: A name that can be given to task, it
+ 	 	 	 	 	 	    can be null, if it null a '?' is set as
+ 	 	 	 	 	 	    name.
 
 
- 	 return:	OS_OK - Task succesfull created.
-
- 	  	  	    OS_NAME_TOO_LONG - Task name is grater than supported.
-
- 	  	  	    OS_PRIORITY_OUT_OF_RANGE - Since priority is limited
- 	  	  	    						   by number of tasks others
- 	  	  	    						   values out this band will
- 	  	  	    						   generate this error.
-
- 	  	  	    OS_TASKLIST_FULL - This error means the current tasklist
- 	  	  	    				   is full, so you can increment the
- 	  	  	    				   number of tasks changing NUMBER_OF_TASKS
- 	  	  	    				   in uLipe_RTOS.h
+ 	 return:	 -OS_OK: System ok, or can be one of errors, please
+ 	  	  	      	     refer the uLipe_RTOS.h to view the possible
+ 	  	  	      	     errors
 
 
  ************************************************************************/
-os_error_t 	Task_Create
-			(taskptr_t (*TaskAction), os_stack_t *TaskStack,
-			uint8_t TaskPriority, os_taskname_t *TaskName,
-			uint8_t NameSize,os_stack_t StackSize)
+os_error_t 	Task_Create	(taskptr_t (*TaskAction),
+							os_stack_t *TaskStack,
+							uint8_t StackSize,
+							uint8_t TaskPriority,
+							os_taskname_t *TaskName)
 {
-	taskTCB_t *TaskList 		= &TaskBlockList,
-			  *TaskToBeLinked	= &TaskBlockList;
+	//auxiliary pointer to tcbs:
+	taskTCB_t *pTCB;
 
-	uint8_t    LoopCntr = 0;
+	//allocates a temporary sREG:
+	uint32_t Sreg;
 
-	//check for size of taskname:
-	if(NameSize > 32)
+	//Auxiliary counter:
+	uint8_t bI = 0;
+
+	//check parameters:
+
+	//The task method:
+	if((taskptr_t *)NULL == TaskAction)
 	{
-		//return error if too long
-		return(OS_NAME_TOO_LONG);
+		//null pointer is not accepted
+		return(OS_INVALID_PARAMETER);
 	}
 
-	//first check for a empty task block
-	for(LoopCntr = 0; LoopCntr <= NUMBER_OF_TASK ; LoopCntr++)
+	//check the task stack:
+	if((os_stack_t *)NULL == TaskStack)
 	{
-		//check if current TCB is empty
-		if(EMPTY == TaskList->EmptyTCB)
-		{
-			//if yes,fill the task TCB
-
-			//put the task function
-			TaskList->TaskAction =(taskptr_t *)TaskAction;
-
-			//put the task stack, and points to its top.
-			TaskList->TaskStack  =(os_stack_t* )(TaskStack +
-								  (StackSize>>2) - 1);
-
-			//check for priority given
-			if(TaskPriority < MAX_PRIORITY || TaskPriority > LESS_PRIORITY)
-			{
-				//return if the priority is invalid
-				return(OS_PRIORITY_OUT_OF_RANGE);
-			}
-
-			//if priority is ok, continues to fill
-			//the TCB
-
-			//mask, and put the priority
-			TaskList->TaskPriority = TaskPriority & 0x1F;
-
-			//Points to the task name
-			TaskList->TaskName = TaskName;
-
-			//puts the calculated ID
-			TaskList->TaskID   = LoopCntr;
-
-			//reset the time elapsed counter
-			TaskList->TaskElapsedTime = uLipe_GetCurrentTick();
-
-			//calculate its deadline, based on
-			//its priority
-			TaskList->TaskTime = TICKS;
-
-			//Put the initial TCB state
-			TaskList->TaskState   = TASK_READY;
-
-			//if all gone well, occupies the TCB
-			TaskList->EmptyTCB    =  FILLED;
-
-			//Set the first time execution flag.
-			TaskList->TaskFlags  |= TASK_FLAG_IS_FIRST_TIME;
-
-			//filled TCB, break this loop
-			break;
-
-		}
-		else
-		{
-			//else, try next TCB
-			TaskList = &TaskBlockList[LoopCntr];
-
-			//check for tasklist full
-			if(NUMBER_OF_TASK - 1  <  LoopCntr)
-			{
-				//if yes, return error
-				return(OS_TASKLIST_FULL);
-			}
-		}
-
-	}
-	//after fill the taskblock is time to insert it on the
-	//tasklist linked list
-
-	//Points first to the last TCB in Table(is head)
-	TaskList = &TaskBlockList[NUMBER_OF_TASK];
-
-	//check if Idle TCB was already initialized:
-	if(EMPTY == TaskList->EmptyTCB)
-	{
-		//if not, initialize it.
-
-		//Put the task function (Task Idle)
-		TaskList->TaskAction = (taskptr_t *)& Task_Idle;
-
-		//Points to task stack
-		TaskList->TaskStack  = (os_stack_t *)(IdleTaskStack +
-							   (sizeof(IdleTaskStack) >> 2) - 1);
-
-		//Assign its priority(is the least)
-		TaskList->TaskPriority = LESS_PRIORITY + 1;
-
-		//Assign its name pointing to it
-		TaskList->TaskName = (os_taskname_t *) &IdleName;
-
-		//Its ID is always the greater on tasklist
-		TaskList->TaskID = NUMBER_OF_TASK + 1;
-
-		//Reset its time counter
-		TaskList->TaskElapsedTime = uLipe_GetCurrentTick();
-
-		//Assign its Deadline based on its priority
-		TaskList->TaskTime = TICKS;
-
-		//Set the initial state
-		TaskList->TaskState   = TASK_READY;
-
-		//Occupie its TCB
-		TaskList->EmptyTCB    =  FILLED;
-
-		//Additionally, attach its as head of tasklist
-		TaskList->NextTask    = &TaskBlockList[LoopCntr];
-
-		//attach next task...
-		TaskList = TaskList->NextTask;
-
-		//...and the previous task
-		TaskList->PrevTask = &TaskBlockList[NUMBER_OF_TASK];
-
-		//marks the end of list
-		TaskList->NextTask = END_LIST;
-
-		//Declare that task has never executed
-		TaskList->TaskFlags |= TASK_FLAG_IS_FIRST_TIME;
-
+		//null stackpointer not, too
+		return(OS_INVALID_PARAMETER);
 	}
 
-	//if Head of list exists, then attach the
-	//TCB desired on it.
+
+	//check stack size
+	if(StackSize == 0x00)
+	{
+		//stack size null is not accepted.
+		return(OS_INVALID_PARAMETER);
+	}
+
+	//check for priority:
+	if(0x00 != axTaskList[TaskPriority].EmptyTCB)
+	{
+		//the priority already exists
+		return(OS_PRIORITY_INVALID);
+	}
+
+	//taskname is not checked since it can be null
+
+	//create a critical section:
+	Sreg = Asm_CriticalIn();
+
+	//fill the free tcb:
+
+	//task stack first:
+	axTaskList[TaskPriority].TaskStack =
+			(os_stack_t *)(TaskStack + StackSize);
+
+	//The task action:
+	axTaskList[TaskPriority].TaskAction =
+			(taskptr_t *)TaskAction;
+
+	//Priority:
+	axTaskList[TaskPriority].TaskPriority =
+			TaskPriority;
+
+	//TaskFlags:
+	axTaskList[TaskPriority].TaskFlags  =
+			TASK_FLAG_IS_FIRST_TIME ;
+
+	//Task time:
+	axTaskList[TaskPriority].TaskTime = TICKS;
+
+	//Elapsed time between executions:
+	axTaskList[TaskPriority].TaskElapsedTime = 0;
+
+	//Put task in suspend state:
+	axTaskList[TaskPriority].TaskState = TASK_READY;
+
+	//create it initial stack frame:
+	Core_StackFrameCreate((taskTCB_t*) &axTaskList[TaskPriority]);
+
+	//Put this TCB on ready list:
+	Core_ReadyTask(TaskPriority);
+
+	//check if task name is a null pointer:
+	if((os_taskname_t *)NULL == TaskName)
+	{
+		//then put a '?' as a name:
+		axTaskList[TaskPriority].TaskName[0] = '?';
+	}
 	else
 	{
-
-		while(END_LIST != TaskList->NextTask)
+		//Copy the task name to the tcb vector
+		for(bI = 0; bI < 20; bI++)
 		{
-			//goes trhough the linked list:
-			TaskList = TaskList->NextTask;
+			axTaskList[TaskPriority].TaskName[bI] =
+					*TaskName++;
+
+			//if the name is less than the tcb field
+			//interrupt the loop
+			if('\0' == *TaskName)
+			{
+				break;
+			}
 		}
-
-		//when the end of list is found
-
-		//The last item of list points to our new TCB
-		TaskList->NextTask = &TaskBlockList[LoopCntr - 1];
-
-		//and our new TCB...
-		TaskToBeLinked     = TaskList->NextTask;
-
-		//...points to the ex-last item as previous task
-		TaskToBeLinked->PrevTask = TaskList;
-
-		//marks the new end of list
-		TaskList = TaskList->NextTask;
-
-
-		TaskList->NextTask = END_LIST;
-
 	}
 
-	//Increment task installed counter:
-	TaskInstalledCounter++;
+	//Link the TCB:
+
+	//check if the task is the IdleTask:
+	if((LESS_PRIORITY) == TaskPriority)
+	{
+		//then puts the list terminator on its next task:
+		axTaskList[TaskPriority].NextTask =
+				(taskTCB_t *)END_LIST;
+	}
+	//else, lets link on task list:
+	else
+	{
+		pTCB = (taskTCB_t*)&axTaskList[LESS_PRIORITY];
+
+		//search for task list terminator:
+		while((taskTCB_t *)END_LIST != pTCB->NextTask)
+		{
+			pTCB = (taskTCB_t *)pTCB->NextTask;
+		}
+
+		//when find, attach the tcb on list:
+		pTCB->NextTask = (taskTCB_t *)&axTaskList[TaskPriority];
+
+		//attach previous task:
+		axTaskList[TaskPriority].PrevTask = (taskTCB_t *)pTCB;
+
+		//puts the terminator on the current position:
+		axTaskList[TaskPriority].NextTask = (taskTCB_t *)END_LIST;
+	}
+
+
+	//finishes the critical section:
+	Asm_CriticalOut(Sreg);
 
 	//return a ok, if all gone well :)
 	return(OS_OK);
@@ -320,209 +278,67 @@ os_error_t 	Task_Create
  	 description: this function removes a taskTCB of tasklist
  	 	 	 	  and unfill it, freeing the TCB
 
- 	 parameters: TaskID - Unique ID given to TCB when was created,
- 	 	 	 	 	 	  its recommended to use the task GetID first
- 	 	 	 	 	 	  using the known name of task in order to avoid
- 	 	 	 	 	 	  remove undesired task
+ 	 parameters: -OsPrio -The priority of the desired task, the priori
+ 	 	 	 	 	 	 ty is used as a unique Task ID.
 
- 	 return:	OS_OK - System ok, task was removed from list
 
-				OS_TASK_IS_NOT_HERE - Means the current passed ID
-									  doesn't exists, no task will
-									  removed.
-
- ************************************************************************/
-os_error_t 	Task_Delete(os_taskID_t TaskID)
-{
-	taskTCB_t *TaskList = &TaskBlockList[NUMBER_OF_TASK],
-			  *TaskToBeDeleted = NULL;
-
-	//Go trhough the linked list
-	do
-	{
-		//if ID matches
-		if(TaskID == TaskList->TaskID)
-		{
-			//check for end of list
-			if(END_LIST != TaskList->NextTask)
-			{
-				//Task found, lets remove it
-
-				//first save the TCB to be deleted
-				TaskToBeDeleted = TaskList;
-
-				//Detach its from previous task
-				TaskList = TaskList->PrevTask;
-
-				//the previous task now points to the task after the TCB
-				//will be deteled
-				TaskList->NextTask = TaskToBeDeleted->NextTask;
-
-				//Now, points the next task previous task to current task
-				TaskList = TaskList->NextTask;
-
-				TaskList->PrevTask = TaskToBeDeleted->PrevTask;
-			}
-
-			//if this task is the end of list, delete it is quite simple:
-			else
-			{
-				//Lets remove the TCB
-
-				//Save the TCB will be deleted
-				TaskToBeDeleted = TaskList;
-
-				//points to previous TasK
-				TaskList = TaskList->PrevTask;
-
-				//marks the new end list
-				TaskList->NextTask = END_LIST;
-
-			}
-
-			//Since the task is detached from list,
-			//reset all the fields
-
-			//Reset its position on linked list
-			TaskToBeDeleted->NextTask = NULL;
-			TaskToBeDeleted->PrevTask = NULL;
-
-			//Delete its task fuction
-			TaskToBeDeleted->TaskAction = NULL;
-
-			//Delete its task stack
-			TaskToBeDeleted->TaskStack = NULL;
-
-			//Delete the task ID
-			TaskToBeDeleted->TaskID    = NULL;
-
-			//Delete the task Name
-			TaskToBeDeleted->TaskName  = NULL;
-
-			//Reset its execution mode...
-			TaskToBeDeleted->TaskState = TASK_DELETED;
-
-			//Sinalizes as a empty block:
-			TaskToBeDeleted->EmptyTCB = EMPTY;
-
-			//Decrement task counters:
-			if(TaskInstalledCounter != 0) TaskInstalledCounter--;
-
-			//return succefull action:
-			return(OS_OK);
-		}
-
-		//if not this TCB...
-		else
-		{
-			//...try next TCB
-			TaskList = TaskList->NextTask;
-		}
-
-	//until the list ends...
-	}while(END_LIST != TaskList);
-
-	//if got here, the TCB doesnot exist,
-	//return error
-	return(OS_TASK_IS_NOT_HERE);
-}
-/************************************************************************
- 	 function:	Task_GetID()
-
- 	 description: this function returns the ID that corresponds
- 	 	 	 	  a task name
-
- 	 parameters: TaskName - Pointer to vector that contains the the desired
- 	 	 	 	 	 	 	name to find
-
- 	 	 	 	 NameSize - Indicates the size of vector that passed in
- 	 	 	 	 	 	 	TaskName
-
- 	 return:	 os_taskID_t - desired task name ID in list.
+ 	 return: 	-OS_OK: System ok, or can be one of errors, please
+ 	  	  	      	     refer the uLipe_RTOS.h to view the possible
+ 	  	  	      	     errors
 
 
  ************************************************************************/
-os_taskID_t Task_GetID(os_taskname_t *TaskName, uint8_t NameSize)
+os_error_t 	Task_Delete(uint8_t OsPrio)
 {
-	taskTCB_t *TaskList = &TaskBlockList[NUMBER_OF_TASK];
+	//pointer to TCB.
+	taskTCB_t *pTCB;
 
-	uint8_t LoopCntr = 0;
+	//allocates a temporary status reg:
+	uint32_t Sreg;
 
-	os_taskname_t *ReferenceName = NULL;
+	//check parameter:
 
-	//check name size:
-	if(NameSize > 32)
+	//if the task is installed:
+	if(FILLED != axTaskList[OsPrio].EmptyTCB)
 	{
-
-		//if too long, return the error
-		return(OS_NAME_TOO_LONG);
-
+		//if this task is not installed, return
+		return(OS_PRIORITY_INVALID);
 	}
 
-	//The current TCB is the idle block, well points to next:
-	TaskList = TaskList->NextTask;
+	//create a critical section:
+	Sreg = Asm_CriticalIn();
 
-	//start the loopcounter:
-	LoopCntr = 0;
+	//Uninstall task:
 
-	//receive the pointer to name:
-	ReferenceName = TaskList->TaskName;
+	//free block:
+	axTaskList[OsPrio].EmptyTCB = EMPTY;
 
-	//go through the tasklist:
-	do
+	//set task as deleted:
+	axTaskList[OsPrio].TaskState = TASK_DELETED;
+
+	//initialize ptcb:
+	pTCB = (taskTCB_t *) axTaskList[OsPrio].PrevTask;
+
+	//attach the previous task on next task:
+	if((taskTCB_t *)END_LIST != axTaskList[OsPrio].NextTask)
 	{
+		pTCB->NextTask = (taskTCB_t *)axTaskList[OsPrio].NextTask;
 
-		//compare their names
-		while(NameSize >= LoopCntr)
-		{
-			//then, compare with reference
-			//char by char
-			if(TaskName == ReferenceName)
-			{
-				//if matches, goes to next char
-				TaskName++;
+		axTaskList[OsPrio].NextTask->PrevTask =
+				(taskTCB_t *)pTCB;
+	}
+	//if the next task is END_LIST
+	else
+	{
+		//the current terminator is inserted on new next task
+		pTCB->NextTask = (taskTCB_t *)END_LIST;
+	}
 
-				//Reference advances too
-				ReferenceName++;
+	//end critical section:
+	Asm_CriticalOut(Sreg);
 
-				//increments the loop counter:
-				LoopCntr++;
-
-			}
-			else
-			{
-				//well, try the next task
-				TaskList = TaskList->NextTask;
-
-				//restarts the counter:
-				LoopCntr = 0;
-
-				//re-initialize the name pointer:
-				ReferenceName = TaskList->TaskName;
-
-				//breaks the loop
-				break;
-			}
-
-		}
-
-		//check if the compare waas successfull:
-		if(0 != LoopCntr)
-		{
-
-			//yep, then read the task ID
-			//of this TCB and return it:
-			return(TaskList->TaskID);
-
-		}
-
-
-	//if not, restarts the loop...
-	}while(END_LIST != TaskList);
-
-	//if the task doesnt exist return a undefined ID
-	return(UNDEFINED_ID);
-
+	//return system ok:
+	return(OS_OK);
 }
 /************************************************************************
  	 function:	Task_Query()
@@ -530,207 +346,135 @@ os_taskID_t Task_GetID(os_taskname_t *TaskName, uint8_t NameSize)
  	 description: this function returns a pointer to a TCB
  	 	 	 	  that corresponds to a passed ID
 
- 	 parameters:  TaskID - ID of desired task, must be in
- 	 	 	 	 	 	   allowed range
+ 	 parameters:  -OsPrio: The priority of the task desired.
 
- 	 return:	  taskTCB_t* - A pointer to a tcb that corresponds
- 	 	 	 	 	 	 	   to passed TaskID if it exists
+ 	 	 	 	  -Err:  Pointer to error variable to store a
+ 	 	 	 	  	  	 System ok, or can be one of errors, please
+ 	  	  	      	     refer the uLipe_RTOS.h to view the possible
+ 	  	  	      	     errors
 
- 	 	 	 	  	  	  	 - If not, returns a Null pointer.
 
+
+ 	 return:  - TCB pointer of the desired task, or a null pointer
+ 	 	 	    if the task is not installed.
 
  ************************************************************************/
-taskTCB_t* 	Task_Query(os_taskID_t TaskID)
+taskTCB_t* 	Task_Query(uint8_t OsPrio, os_error_t *Err)
 {
-	taskTCB_t *TaskList = &TaskBlockList[NUMBER_OF_TASK];
+	//check parameters:
 
-	//check for a undefined ID:
-	if(UNDEFINED_ID == TaskID)
+	//if the task is installed:
+	if(FILLED != axTaskList[OsPrio].EmptyTCB)
 	{
-		//if yes, return a Null pointer
+		//deposit error:
+		*Err = OS_PRIORITY_INVALID;
+
+		//if this task is not installed, return
 		return(NULL);
 	}
 
-	//the alghoritm is very simple:
-	do
-	{
-		//go trhough tasklist and compares by ID:
-		if(TaskID == TaskList->TaskID)
-		{
-			//if the IDs was matched, return this TCB
-			return ((taskTCB_t *)TaskList);
-		}
+	//if installed proceed.
 
-		//if not, go to next task
-		TaskList = TaskList->NextTask;
+	//simply return the tcb of table:
+	return((taskTCB_t*) &axTaskList[OsPrio]);
 
-	//until the list ends
-	}while(END_LIST != TaskList);
-
-	//if the ID is not match to any registered task,
-	//returns a null pointer
-	return(NULL);
-
-}
-/************************************************************************
- 	 function:	Task_Suspend()
-
- 	 description: this function suspend a task execution changing it
- 	 	 	 	  to suspend state.
-
- 	 parameters: TaskID - ID of desired task to change it state.
-
- 	 return:	 OS_OK - System ok, task will be suspended.
-
- 	 	 	 	 OS_TASK_IS_NOT_HERE - The passed ID returned a
- 	 	 	 	 	 	 	 	 	   null pointer and task is not
- 	 	 	 	 	 	 	 	 	   in list
-
- ************************************************************************/
-os_error_t 	Task_Suspend(os_taskID_t TaskID)
-{
-	taskTCB_t *TaskList = &TaskBlockList[NUMBER_OF_TASK];
-
-
-	//search for a task:
-	TaskList = TaskQuery(TaskID);
-
-	//check for null pointer:
-	if(TaskList == NULL)
-	{
-		//if yes, return a system error
-		return(OS_TASK_IS_NOT_HERE);
-	}
-
-	//check for running task
-	if(TaskList->TaskState == TASK_RUNNING)
-	{
-
-		//change it state
-		TaskList->TaskState = TASK_SUSPEND;
-
-		//reeschedule next ready task:
-
-		//Unlock Scheduler:
-		uLipe_EnableSchedule();
-
-		//schedule next task:
-		uLipe_Schedule();
-
-		//return the succefull action:
-		return(OS_OK);
-	}
-
-	//if task in another state the return error:
-	return(OS_ERROR);
 }
 
 /************************************************************************
- 	 function:	Task_Block()
+ 	 function:	Task_Stop()
 
 	 description: this function suspend a task execution changing it
  	 	 	 	  to block state.
 
- 	 parameters: TaskID - ID of desired task to change it state.
-
- 	 return:	 OS_OK - System ok, task will be suspended.
-
- 	 	 	 	 OS_TASK_IS_NOT_HERE - The passed ID returned a
- 	 	 	 	 	 	 	 	 	   null pointer and task is not
- 	 	 	 	 	 	 	 	 	   in list
+ 	 parameters: -OsPrio: The priority of the task desired.
 
 
- ************************************************************************/
-os_error_t 	Task_Block(os_taskID_t TaskID)
+ 	 return: 	 -OS_OK: System ok, or can be one of errors, please
+ 	  	  	      	     refer the uLipe_RTOS.h to view the possible
+ 	  	  	      	     errors
+
+
+************************************************************************/
+os_error_t  Task_Stop(uint8_t OsPrio)
 {
-	taskTCB_t *TaskList = &TaskBlockList[NUMBER_OF_TASK];
+	//Needs of a temporary status register:
+	uint32_t Sreg = 0;
 
-	//search for a task:
-	TaskList = TaskQuery(TaskID);
+	//check parameter:
 
-	//check for null pointer:
-	if(TaskList == NULL)
+	//if the task is installed:
+	if(FILLED != axTaskList[OsPrio].EmptyTCB)
 	{
-		//if yes, return a system error
-		return(OS_TASK_IS_NOT_HERE);
+		//if this task is not installed, return
+		return(OS_PRIORITY_INVALID);
 	}
 
-	//check for running task
-	if(TaskList->TaskState == TASK_RUNNING)
+	//Enable Scheduler:
+	Core_EnableSchedule();
+
+	//check if task running:
+	if(TASK_RUNNING == axTaskList[OsPrio].TaskState)
 	{
+		//only set task as Blocked
+		axTaskList[OsPrio].TaskState = TASK_BLOCKED;
 
-		//change it state
-		TaskList->TaskState = TASK_BLOCKED;
+		//Reeschedule system
+		Core_Schedule();
+	}
+	else
+	{
+		//create a critical section:
+		Sreg = Asm_CriticalIn();
 
-		//Unlock Scheduler:
-		uLipe_EnableSchedule();
+		//remove task from list if in ready list
+		Core_UnreadyTask(OsPrio);
 
-		//schedule next task:
-		uLipe_Schedule();
+		//only set task as Blocked
+		axTaskList[OsPrio].TaskState = TASK_BLOCKED;
 
-		//return the succefull action:
-		return(OS_OK);
+		//Removes the critical section:
+		Asm_CriticalOut(Sreg);
+
+		//Reeschedule system
+		Core_Schedule();
 	}
 
-	//if task in another state the return error:
-	return(OS_ERROR);
+	//set system ok:
+	return(OS_OK);
+
 }
 /************************************************************************
- 	 function:	Task_GetList()
+ 	 function:	Task_Resume()
 
- 	 description: this function returns the tasklist's head, the
- 	 	 	 	  IdleTask tcb.
+	 description: this function suspend a task execution changing it
+ 	 	 	 	  to block state.
 
+ 	 parameters: -OsPrio: The priority of the task desired.
 
- 	 parameters:  N/A
-
- 	 return:	  taskTCB_t* - A pointer to tcb that contais all
- 	 	 	 	 	 	 	   informations from Idle task, this
- 	 	 	 	 	 	 	   can be used as start point during
- 	 	 	 	 	 	 	   tasklist query since its position
- 	 	 	 	 	 	 	   never change in list.
+ 	 return:	 -OS_OK: System ok, or can be one of errors, please
+ 	  	  	      	     refer the uLipe_RTOS.h to view the possible
+ 	  	  	      	     errors
 
 
  ************************************************************************/
-taskTCB_t* Task_GetList(void)
+os_error_t  Task_Resume(uint8_t OsPrio)
 {
-	//simply get the tasklist from idle task:
-	return((taskTCB_t *)&TaskBlockList[NUMBER_OF_TASK]);
+	//check parameter:
 
-}
-
-
-/************************************************************************
- 	 function:	Task_Idle()
-
- 	 description: The task idle function, will be used for debug
- 	 	 	 	  or statisticall
-
- 	 parameters:  TaskArgs - A generic pointer with any content,
- 	 	 	 	 	 	 	 not used here
-
- 	 return:	  N/A
-
-
- ************************************************************************/
-void Task_Idle(void *TaskArgs)
-{
-	//Execution counter, used for statistical
-	uint32_t ExecutionCounter = 0;
-
-	//Allocates a status register:
-	uint32_t StatusReg = 0;
-
-	while(1)
+	//if the task is installed:
+	if(FILLED != axTaskList[OsPrio].EmptyTCB)
 	{
-
-		StatusReg = Asm_CriticalIn();
-
-		//each task execution this counter is incremented
-		ExecutionCounter++;
-
-		Asm_CriticalOut(StatusReg);
+		//if this task is not installed, return
+		return(OS_PRIORITY_INVALID);
 	}
+
+	//only set task as Suspend
+	axTaskList[OsPrio].TaskState = TASK_SUSPEND;
+
+	//reeschedule is not needed here.
+
+	//set system ok:
+	return(OS_OK);
 
 }
 /************************************************************************

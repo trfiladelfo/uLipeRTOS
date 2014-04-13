@@ -42,7 +42,7 @@ typedef enum
 	OS_OK = 0,
 	OS_ERROR,
 	OS_TASKLIST_FULL,
-	OS_PRIORITY_OUT_OF_RANGE,
+	OS_PRIORITY_INVALID,
 	OS_TASK_IS_NOT_HERE,
 	OS_NAME_TOO_LONG,
 	OS_IS_NOT_STATE,
@@ -52,6 +52,7 @@ typedef enum
 	OS_QUEUE_NOT_EMPTY,
 	OS_INDEX_OUT_OF_RANGE,
 	OS_INVALID_POINTER,
+	OS_INVALID_PARAMETER,
 
 	OS_QTY_OF_ERRORS
 }errors_t;
@@ -68,16 +69,43 @@ typedef uint32_t 	os_stack_t;
 typedef uint8_t		os_queue_t;
 typedef uint32_t    base_t;
 
+//The task control block
+typedef struct os_taskTCB_t
+{
+	//Is the current stackpointer of task
+	os_stack_t 		*TaskStack;
+	//The task function properly
+	taskptr_t   	(*TaskAction)(void *TaskArgs);
+	//the attachment for next TCB
+	struct os_taskTCB_t	*NextTask;
+	//the attachment of Previous TCB
+	struct os_taskTCB_t	*PrevTask;
+	//Name of task in ASCII
+	uint32_t		TaskFlags;
+	//Task periodic deadline
+	uint32_t 		TaskTime;
+	//Current time elapsed
+	uint32_t 		TaskElapsedTime;
+	//Task priority of execution
+	uint8_t	 		TaskPriority;
+	//Current task state of execution
+	uint8_t			TaskState;
+	//Vector that contains task name
+	os_taskname_t	TaskName[16];
+	//flag of occupied (or not) TCB
+	uint8_t		EmptyTCB;
+}taskTCB_t;
+
+
 /**********************************************************************
  	 	 	 	 	 OS include files
  **********************************************************************/
 
+//Assembly resources, cpu port
+#include "AsmStuff.h"
 
 //OS Kernel
 #include "uLipe_Core.h"
-
-//Assembly resources, cpu port
-#include "AsmStuff.h"
 
 //Task management methods
 #include "uLipe_Task.h"

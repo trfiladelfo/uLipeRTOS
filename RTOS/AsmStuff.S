@@ -16,8 +16,8 @@
 .syntax unified		@ual assembly standart
 
 
-.extern CurrentTaskBlock   @the current task TCB in execution
-.extern HighReadyTaskBlock @the high priority ready task
+.extern pxCurrentTask    @the current task TCB in execution
+.extern pxHighReadyTask  @the high priority ready task
 
 .global Asm_LowLevelTickInit
 .global Asm_CriticalIn
@@ -179,32 +179,32 @@ PendSV_Handler:
 		IT		EQ						@if, it from a MSP usage
 		BEQ		FIRST_CHANGE			@
 										@
-		LDR		R0, =HighReadyTaskBlock @if not,
+		LDR		R0, =pxHighReadyTask      @if not,
 		LDR		R0,[R0]					@
-		LDR		R1,[R0]					@Check the current taskFLag
+		LDR		R1,[R0, #+16]			@Check the current taskFLag
 		TST		R1,#1					@Check if first time flag is set
 		IT		NE						@
 		BNE 	SECOND_CHANGE			@Jump for first context switch
 										@
 										@if, not, runs context switch normally
-		LDR 	R0, =CurrentTaskBlock	@Get the current TCB
+		LDR 	R0, =pxCurrentTask    	@Get the current TCB
 		LDR		R0,[R0]					@
 		MRS		R1, PSP					@Get the current SP
 		STMDB	R1!,{R4 - R11}			@save R4 - R11 on the current stack
 										@
-		STR		R1,[R0,#0x00000018] 	@Save the current stack pointer
+		STR		R1,[R0,#0]           	@Save the current stack pointer
 										@
-		LDR		R0,=HighReadyTaskBlock  @Get the first task from de queue
+		LDR		R0,=pxHighReadyTask       @Get the first task from de queue
 		LDR		R0,[R0]					@Get the new stack pointer
-		LDR		R1, [R0,#0x00000018]	@
+		LDR		R1, [R0,#0]          	@
 									    @
 		LDMIA	R1!,{R4 - R11}			@Reload R4 -- R11
 		MSR		PSP , R1				@write the new stackpointer
 NO_SAVE:								@
 										@update the new current tcb
-		LDR     R0, =HighReadyTaskBlock	@
+		LDR     R0, =pxHighReadyTask   	@
 		LDR		R0, [R0]				@
-		LDR		R1,=CurrentTaskBlock	@
+		LDR		R1,=pxCurrentTask     	@
 		STR		R0, [R1]				@
 		ORR     LR,LR,#0x00000004		@ensures that return in PSP
 		BX		LR						@Return from sub
@@ -213,28 +213,28 @@ FIRST_CHANGE:							@
 		MOVS    R4, #0x02				@if the first run
 		MSR	    CONTROL, R4				@uses PSP always
 		ISB								@recommended after write control
-		LDR		R0,=HighReadyTaskBlock  @Get the newTCB
+		LDR		R0,=pxHighReadyTask       @Get the newTCB
 		LDR		R0,[R0]					@Get the new stack pointer
-		LDR		R1,[R0]					@Get task flags
+		LDR		R1,[R0, #+16]			@Get task flags
 		BIC		R1,R1,#1				@clear first time flag
 		STR		R1,[R0]					@
-		LDR		R1, [R0,#0x00000018]	@
+		LDR		R1, [R0,#0]	            @
 		MSR     PSP,R1					@Load the first stack pointer
 		B		NO_SAVE					@
 
 SECOND_CHANGE:
-		LDR 	R0, =CurrentTaskBlock	@Get the current TCB
+		LDR 	R0, =pxCurrentTask    	@Get the current TCB
 		LDR		R0,[R0]					@
 		MRS		R1, PSP					@Get the current SP
 		STMDB	R1!,{R4 - R11}			@save R4 - R11 on the current stack
-		STR		R1,[R0,#0x00000018] 	@Save the current stack pointer
+		STR		R1,[R0,#0x00] 	        @Save the current stack pointer
 										@
-		LDR		R0,=HighReadyTaskBlock  @Get the newTCB
+		LDR		R0,=pxHighReadyTask      @Get the newTCB
 		LDR		R0,[R0]					@Get the new stack pointer
-		LDR		R1,[R0]					@Get task flags
+		LDR		R1,[R0, #+16]			@Get task flags
 		BIC		R1,R1,#1				@clear first time flag
 		STR		R1,[R0]					@
-		LDR		R1, [R0,#0x00000018]	@
+		LDR		R1, [R0,#0]	            @
 		MSR     PSP,R1					@Load the first stack pointer
 		B		NO_SAVE					@
 
