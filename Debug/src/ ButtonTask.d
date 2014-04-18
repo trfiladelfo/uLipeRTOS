@@ -1,6 +1,6 @@
-src/main.d: ../src/main.c ../libs/CMSIS/include/stm32f4xx.h \
- ../libs/CMSIS/include/core_cm4.h ../libs/CMSIS/include/core_cmInstr.h \
- ../libs/CMSIS/include/core_cmFunc.h \
+src/\ ButtonTask.d: ../src/\ ButtonTask.c \
+ ../libs/CMSIS/include/stm32f4xx.h ../libs/CMSIS/include/core_cm4.h \
+ ../libs/CMSIS/include/core_cmInstr.h ../libs/CMSIS/include/core_cmFunc.h \
  ../libs/CMSIS/include/core_cm4_simd.h \
  ../libs/CMSIS/include/system_stm32f4xx.h ../include/stm32f4xx_conf.h \
  ../libs/StdPeriph/include/stm32f4xx_adc.h \
@@ -34,7 +34,7 @@ src/main.d: ../src/main.c ../libs/CMSIS/include/stm32f4xx.h \
  /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/RTOS/uLipe_RTOS.h \
  /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/RTOS/uLipe_Core.h \
  /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/RTOS/uLipe_Task.h \
- ../src/LedTask.h ../src/ButtonTask.h
+ ../src/ButtonTask.h
 
 ../libs/CMSIS/include/stm32f4xx.h:
 
@@ -111,7 +111,5 @@ src/main.d: ../src/main.c ../libs/CMSIS/include/stm32f4xx.h \
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/RTOS/uLipe_Core.h:
 
 /Users/felipeneves/Documents/Projects/Embedded/uLipeRTOS/RTOS/uLipe_Task.h:
-
-../src/LedTask.h:
 
 ../src/ButtonTask.h:

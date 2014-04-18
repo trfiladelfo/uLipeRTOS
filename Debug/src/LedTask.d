@@ -1,4 +1,4 @@
-src/main.d: ../src/main.c ../libs/CMSIS/include/stm32f4xx.h \
+src/LedTask.d: ../src/LedTask.c ../libs/CMSIS/include/stm32f4xx.h \
  ../libs/CMSIS/include/core_cm4.h ../libs/CMSIS/include/core_cmInstr.h \
  ../libs/CMSIS/include/core_cmFunc.h \
  ../libs/CMSIS/include/core_cm4_simd.h \

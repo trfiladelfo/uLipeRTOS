@@ -196,13 +196,20 @@ void Core_UnreadyTask(uint8_t bOsPrio)
 	//Low part now:
 	bPrioL = (uint8_t)(bOsPrio & 0x07);
 
-	//clar the bit thats match of prio in
-	//ready group:
-	bReadyGroup &= ~(abBitPrioMask[bPrioH]);
-
 	//Now, maps the table of ready group
 	//which contains this task:
 	abReadyListGrp[bPrioH] &= ~(abBitPrioMask[bPrioL]);
+
+	//check if this group have more tasks:
+	if(0 == abReadyListGrp[bPrioH] )
+	{
+		//clear the bit thats match of prio in
+		//ready group:
+		bReadyGroup &= ~(abBitPrioMask[bPrioH]);
+	}
+
+	//if not, means this group have more tasks to execute
+	//so unmodify the ready group
 
 }
 
@@ -234,8 +241,13 @@ void  Core_Schedule(void)
 	uint32_t Sreg = 0;
 
 	//only schedule if:
-	if(SCHED_EN == bScheduleFlag)
+
+	//Scheduler enabled and haves ready tasks:
+	if((SCHED_EN == bScheduleFlag) && (0 != bReadyGroup))
 	{
+		//Suspend the current task:
+		pxCurrentTask->TaskState = TASK_SUSPEND;
+
 		//create a critical section:
 		Sreg = Asm_CriticalIn();
 
@@ -278,6 +290,11 @@ void  Core_Schedule(void)
 			//removes the critical section
 			Asm_CriticalOut(Sreg);
 		}
+	}
+	else
+	{
+		//and keep the current task in execution:
+		pxCurrentTask->TaskState = TASK_RUNNING;
 	}
 
 }
@@ -555,7 +572,7 @@ void Core_TimeTick(void)
 	{
 
 		//check if the tick period of current task is expired
-		if((dTickCounter - pxCurrentTask->TaskElapsedTime) >= TICKS)
+		if((int32_t)(dTickCounter - pxCurrentTask->TaskElapsedTime) >= (int32_t)(pxCurrentTask->TaskTime))
 		{
 			//Suspend the current task:
 			pxCurrentTask->TaskState = TASK_SUSPEND;
@@ -585,7 +602,7 @@ void Core_TimeTick(void)
 				if(TASK_SUSPEND == pTCB->TaskState)
 				{
 					//check the current pTCB is ready:
-					if(dTickCounter - pTCB->TaskElapsedTime >= pTCB->TaskTime)
+					if((int32_t)(dTickCounter - pTCB->TaskElapsedTime) >= (int32_t)(pTCB->TaskTime))
 					{
 						//if is ready put on ready list:
 						pTCB->TaskState = TASK_READY;

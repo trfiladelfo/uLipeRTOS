@@ -1,8 +1,12 @@
 #include "stm32f4xx.h"
 #include <stdio.h>
 #include "uLipe_RTOS.h"
-#include "Tasks.h"
 
+//Led tasks includes:
+#include "LedTask.h"
+
+//ButtonTask includes:
+#include "ButtonTask.h"
 
 
 int main(void)
@@ -21,12 +25,12 @@ int main(void)
 		while(1);
 	}
 
-	//Install tasks:
-	bErr = Task_Create	((taskptr_t *) &TaskTry,
-						 (os_stack_t *)&TaskTryStack,
-						 sizeof(TaskTryStack),
-						 0,
-						 (os_taskname_t *)&Try);
+	//Install led tasks:
+	bErr = Task_Create	((taskptr_t *) &vLedMainTask,
+						 (os_stack_t *)&axLedTaskStack,
+						 sizeof(axLedTaskStack),
+						 10,
+						 (os_taskname_t *)"LedTask");
 
 	//check if all gone well:
 	if(OS_OK != bErr)
@@ -35,13 +39,12 @@ int main(void)
 		while(1);
 	}
 
-
-	//Install tasks:
-	bErr = Task_Create	((taskptr_t *) &TaskTry2,
-						 (os_stack_t *)&TaskTryStack2,
-						 sizeof(TaskTryStack2),
-						 47,
-						 (os_taskname_t *)&Try2);
+	//Install button task:
+	bErr = Task_Create	((taskptr_t *) &vButtonMainTask,
+						 (os_stack_t *)&axButtonTaskStack,
+						 sizeof(axButtonTaskStack),
+						 9,
+						 (os_taskname_t *)"ButtonTask");
 
 	//check if all gone well:
 	if(OS_OK != bErr)
@@ -49,7 +52,6 @@ int main(void)
 		//traps
 		while(1);
 	}
-
 
 	//Then, start the kernel:
 	Core_Start();
